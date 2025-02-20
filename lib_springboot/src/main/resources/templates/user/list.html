@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍查询</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <script>
+        $(function() {
+            var cp = parseInt($("#curPage").val());
+            var tp = parseInt($("#tolPage").val());
+            $("#pagination2").pagination({
+                currentPage: cp,
+                totalPage: tp,
+                isShow: false,
+                count: 5,
+                prevPageText: "< 上一页",
+                nextPageText: "下一页 >",
+                callback: function(current) {
+                    location.href = '/book/list/' + current;
+                }
+            });
+        });
+    </script>
+    <style>
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 80px; /* 限制最大宽度 */
+            max-height: 100px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+
+        /* 调整表格单元格内边距 */
+        .table td, .table th {
+            padding: 16px; /* 增加内边距，使内容更宽松 */
+            vertical-align: middle; /* 垂直居中 */
+            font-size: 18px; /* 字体放大一倍 */
+        }
+
+        /* 表格行悬停效果 */
+        .table tbody tr {
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .table tbody tr:hover {
+            transform: scale(1.05); /* 放大效果 */
+            background-color: #ffc0cb; /* 粉红色 */
+        }
+
+        /* 分页控件基础样式 */
+        .ui-pagination-container a {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 4px;
+            transition: all 0.3s ease; /* 添加过渡效果 */
+            transform-origin: center; /* 设置缩放中心 */
+        }
+
+        /* 鼠标悬停效果 */
+        .ui-pagination-container a:hover {
+            color: #fff;
+            background-color: #ad1457;
+            border-color: #ad1457;
+        }
+
+        /* 当前页码样式 */
+        .ui-pagination-container a.active {
+            background-color: #c2185b !important;
+            border-color: #c2185b !important;
+            color: #fff !important;
+            transform: scale(1.1); /* 略微放大 */
+        }
+
+        /* 上一页/下一页 按钮样式 */
+        .ui-pagination-container a:contains("上一页"),
+        .ui-pagination-container a:contains("下一页") {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+        }
+
+        .ui-pagination-container a:contains("上一页"):hover,
+        .ui-pagination-container a:contains("下一页"):hover {
+            color: #fff;
+            background-color: #ad1457;
+            border-color: #ad1457;
+        }
+
+        /* 点击时的填充动画 */
+        .ui-pagination-container a:active {
+            background-color: #f48fb1; /* 淡粉色 */
+            transition: background-color 0.5s ease; /* 0.5秒的过渡效果 */
+        }
+
+        /* 表格悬停效果 */
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* 按钮样式 */
+        .btn-success {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #4cae4c;
+            border-color: #398439;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<form id="form" class="form-inline definewidth m20"
+      action="/book/search" method="post">
+    书籍关键字： <input type="text" name="keyWord" id="username"
+                       class="abc input-default" placeholder="书籍关键字">&nbsp;&nbsp;
+    <input type="hidden" value="1" name="current"/>
+    书籍类别:<select class="form-control" name="sid">
+    <option value="0">---请选择类别---</option>
+    <option th:each="sort:${sortList}" th:text="${sort.name}" th:value="${sort.id}"></option>
+</select>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>
+    &nbsp;&nbsp;
+    <input id="CurrentPage" type="hidden" name="currentPage" value="1" />
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍封面</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book:${page.data}">
+        <td th:text="${book.name}"></td>
+        <td>
+            <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Book Image" class="book-image"/>
+        </td>
+        <td th:text="${book.sname}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publish}"></td>
+        <td th:text="${book.edition}"></td>
+        <td><a type="button" class="btn btn-success" th:href="'/borrow/add?bookId='+${book.id}">借阅</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<input th:value="${page.currentPage}" type="hidden" id="curPage"/>
+<input th:value="${page.totalPage}" type="hidden" id="tolPage"/>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>

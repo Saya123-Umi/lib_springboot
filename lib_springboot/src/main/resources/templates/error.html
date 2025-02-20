@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 头部元信息保持不变 -->
+    <meta charset="utf-8" />
+    <title>您访问的网页出错啦！</title>
+    <meta name="description" content="404 页面未找到" />
+    <meta name="keywords" content="404, 页面未找到" />
+    <meta name="author" content="Your Name" />
+    <link th:href="@{/img/15.0904011.ico}" rel="shortcut icon" type="image/x-icon" />
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.beattext.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easying.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/button.css}" />
+    <link rel="stylesheet" th:href="@{/css/reset.css}" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // 原有JavaScript逻辑保持不变
+            $('p#roloadText').beatText({
+                isAuth: true,
+                beatHeight: "1em",
+                isRotate: false,
+                upTime: 100,
+                downTime: 100
+            });
+
+            const randomNum = Math.floor(Math.random() * 6) + 1;
+            const paddedNum = randomNum.toString().padStart(2, '0');
+            const bgUrl = `https://bang-dream.com/img/error/bgd_404_${paddedNum}.jpg`;
+            $('body').css({
+                'background': `url('${bgUrl}') no-repeat center center fixed`,
+                'background-size': 'cover'
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 保持原有结构 -->
+<div class="logo" id="a" onclick="a();" title="点击我有惊喜！">
+    <img th:src="@{/img/20171216094159_QaLXP.jpeg}">
+</div>
+<br /><br />
+<div class="container">
+    <p id="roloadText">404！网页君找不到这个网页了哦...</p>
+</div>
+
+<!-- 修改按钮容器样式 -->
+<div class="box bg-1" style="display: flex; justify-content: center; align-items: center;">
+    <!-- 新增登录状态判断 -->
+    <a th:if="${userType == null || userType == 'guest'}"
+       href="/login"
+       class="button button--antiman button--round-l button--text-medium"
+       style="display: inline-flex; align-items: center; justify-content: center; width: 200px;">
+        <span>返回登录</span>
+    </a>
+    <a th:unless="${userType == null || userType == 'guest'}"
+       th:href="${userType == 'user' ? '/user/index' :
+                userType == 'admin' ? '/admin/index' :
+                userType == 'sysadmin' ? '/sysadmin/index' : '/login'}"
+       class="button button--antiman button--round-l button--text-medium"
+       style="display: inline-flex; align-items: center; justify-content: center; width: 200px;">
+        <span>返回首页</span>
+    </a>
+</div>
+
+<div class="body_buttom">
+    <audio autoplay loop id="music">
+        <source th:src="@{/music/music.mp3}" type="audio/mpeg">
+    </audio>
+    <script>
+        function a() {
+            var audio = document.getElementById('music');
+            audio.paused ? audio.play() : audio.pause();
+        }
+    </script>
+</div>
+
+<!-- 修改后的样式 -->
+<style>
+    /* 原有全局样式保持不变 */
+    body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+    }
+    .container p {
+        text-align: center;
+        padding: 10px auto;
+        font-size: 30px;
+        color: darksalmon;
+    }
+    .beat-char {
+        line-height: 3.4em;
+        position: relative;
+        display: inline-block;
+        background: transparent;
+    }
+    .rotate {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -webkit-transition-duration: 0.7s;
+    }
+    .logo {
+        width: 200px;
+        height: 200px;
+        margin: 120px auto 0px;
+        border-radius: 200px;
+        border: 5px solid;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        transition: 1s all;
+    }
+    .logo img {
+        width: 200px;
+        height: 200px;
+        margin: 0px auto 0px;
+        background: #fff;
+        border-radius: 200px;
+    }
+    .logo:hover {
+        transform: rotate(360deg);
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+    }
+    .body_buttom {
+        width: 100%;
+        height: 290px;
+        position: fixed;
+        bottom: 0px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* 新增按钮居中样式 */
+    .box.bg-1 {
+        padding: 20px 0;
+    }
+    .button--antiman {
+        margin: 0 10px;
+        padding: 15px 30px;
+        text-align: center;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        height: 50px;
+        transition: all 0.3s ease;
+    }
+    .button--antiman span {
+        position: relative;
+        z-index: 2;
+        padding: 0 10px;
+    }
+    a.button--antiman {
+        text-decoration: none;
+        margin-left: 0 !important; /* 移除原有左边距 */
+    }
+</style>
+</body>
+</html>

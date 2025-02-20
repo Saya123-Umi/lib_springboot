@@ -1,0 +1,2980 @@
+﻿C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\compiler.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lib_springboot" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="lib_springboot" options="-parameters" />
+    </option>
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\encodings.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\jarRepositories.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\jsLibraryMappings.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{@popperjs/core, bootstrap, buijs, jquery-3.3.1.slim, jquery-3.5.1.slim, jquery-3.6.0, popper.js, twbs-pagination}" />
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\misc.xml:
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\modules.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/lib_springboot.iml" filepath="$PROJECT_DIR$/.idea/lib_springboot.iml" />
+    </modules>
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\uiDesigner.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Palette2">
+    <group name="Swing">
+      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
+      </item>
+      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
+      </item>
+      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
+        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
+        <initial-values>
+          <property name="text" value="Button" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="RadioButton" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="CheckBox" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="Label" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
+          <preferred-size width="200" height="200" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
+          <preferred-size width="200" height="200" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
+      </item>
+      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
+          <preferred-size width="-1" height="20" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
+      </item>
+      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
+      </item>
+    </group>
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\.idea\workspace.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e1d3ca6b-b0ae-4e53-a038-5e89d87dd4f5" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2MdbIr6f8VeFQpsgU6A5j8kf1WT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FileUploadPropertiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.test.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;Spring Boot.FileUploadPropertiesTest.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LibSpringbootApplication.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/work/副本/lib_springboot/辅副本/lib_springboot/src/main/java/com/southwind&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/work/副本/lib_springboot/辅副本/lib_springboot/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates" />
+      <recent name="C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\static" />
+      <recent name="C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\static\assets\img" />
+      <recent name="C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user" />
+      <recent name="C:\work\副本\lib_springboot\lib_springboot\src\main\resources" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.southwind.controller" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.southwind" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LibSpringbootApplication">
+    <configuration name="FileUploadPropertiesTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.southwind.FileUploadPropertiesTest" />
+      <module name="lib_springboot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.southwind.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.southwind.Main" />
+      <module name="lib_springboot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.southwind.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test" />
+      <module name="lib_springboot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileUploadPropertiesTest" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="lib_springboot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.southwind.FileUploadPropertiesTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.southwind.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibSpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="lib_springboot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.southwind.LibSpringbootApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.FileUploadPropertiesTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e1d3ca6b-b0ae-4e53-a038-5e89d87dd4f5" name="Default Changelist" comment="" />
+      <created>1678100329937</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678100329937</updated>
+      <workItem from="1678100334450" duration="1705000" />
+      <workItem from="1678164096345" duration="3653000" />
+      <workItem from="1678363360530" duration="288000" />
+      <workItem from="1678364563829" duration="13000" />
+      <workItem from="1678959573117" duration="4365000" />
+      <workItem from="1679207638253" duration="7020000" />
+      <workItem from="1679292883771" duration="6825000" />
+      <workItem from="1679313679643" duration="517000" />
+      <workItem from="1679470332021" duration="6950000" />
+      <workItem from="1679645099064" duration="6869000" />
+      <workItem from="1679659380051" duration="5000" />
+      <workItem from="1679660955292" duration="52000" />
+      <workItem from="1680008871355" duration="4135000" />
+      <workItem from="1680074028566" duration="9714000" />
+      <workItem from="1738857599928" duration="548000" />
+      <workItem from="1738907297857" duration="389000" />
+      <workItem from="1738909982876" duration="341000" />
+      <workItem from="1738916606318" duration="20241000" />
+      <workItem from="1738984425390" duration="23156000" />
+      <workItem from="1739075221324" duration="3278000" />
+      <workItem from="1739934713500" duration="4606000" />
+      <workItem from="1739949175256" duration="4431000" />
+      <workItem from="1739955382052" duration="4984000" />
+      <workItem from="1739964636647" duration="5492000" />
+      <workItem from="1740025009927" duration="2163000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\configuration\PageConfiguration.java:
+package com.southwind.configuration;
+
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class PageConfiguration {
+
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+        return new PaginationInterceptor();
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\AdminController.java:
+package com.southwind.controller;
+
+
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.vo.AdminBorrowVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+    @Autowired
+    private BorrowService borrowService;
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url){
+        return "/admin/"+url;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
+    }
+
+    @GetMapping("/borrowList")
+    public String borrowList(Model model){
+        List<AdminBorrowVO> adminBorrowVOList = this.borrowService.adminBorrowList();
+        model.addAttribute("list", adminBorrowVOList);
+        return "/admin/borrow";
+    }
+
+    @GetMapping("/allow")
+    public String allow(Integer id){
+        Borrow borrow = this.borrowService.getById(id);
+        borrow.setStatus(1);
+        this.borrowService.updateById(borrow);
+        return "redirect:/admin/borrowList";
+    }
+
+    @GetMapping("/notAllow")
+    public String notAllow(Integer id){
+        Borrow borrow = this.borrowService.getById(id);
+        borrow.setStatus(2);
+        this.borrowService.updateById(borrow);
+        Book book = this.bookService.getById(borrow.getBid());
+        book.setNumber(book.getNumber()+1);
+        this.bookService.updateById(book);
+        return "redirect:/admin/borrowList";
+    }
+
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\BackController.java:
+package com.southwind.controller;
+
+
+import com.southwind.entity.Back;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.User;
+import com.southwind.service.BackService;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.service.SortService;
+import com.southwind.vo.BackVO;
+import com.southwind.vo.BorrowVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/back")
+public class BackController {
+
+    @Autowired
+    private BorrowService borrowService;
+    @Autowired
+    private BackService backService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private SortService sortService;
+
+    @GetMapping("/list")
+    public String list(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        List<BorrowVO> backList = this.borrowService.backList(user.getId());
+        model.addAttribute("list", backList);
+        return "/user/back";
+    }
+
+    @GetMapping("/add")
+    public String add(Integer id){
+        Back back = new Back();
+        back.setBrid(id);
+        this.backService.save(back);
+        Borrow borrow = this.borrowService.getById(id);
+        borrow.setStatus(3);
+        this.borrowService.updateById(borrow);
+        return "redirect:/back/list";
+    }
+
+    @GetMapping("/adminList")
+    public String adminList(Model model){
+        List<BackVO> backVOList = this.backService.backList();
+        model.addAttribute("list", backVOList);
+        return "/admin/back";
+    }
+
+    @GetMapping("/allow")
+    public String allow(Integer id){
+        Back back = this.backService.getById(id);
+        back.setStatus(1);
+        this.backService.updateById(back);
+        Borrow borrow = this.borrowService.getById(back.getBrid());
+        Book book = this.bookService.getById(borrow.getBid());
+        book.setNumber(book.getNumber()+1);
+        this.bookService.updateById(book);
+        return "redirect:/back/adminList";
+    }
+
+
+
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\BookController.java:
+package com.southwind.controller;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.Sort;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.service.SortService;
+import com.southwind.vo.BookVO;
+import com.southwind.vo.PageVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/book")
+public class BookController {
+
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private SortService sortService;
+    @Autowired
+    private BorrowService borrowService;
+
+    // 相对路径配置
+    private final String tempPath = "static/temp";
+    private final String uploadPath = "static/images";
+
+    @GetMapping("/list/{current}")
+    public String list(@PathVariable("current") Integer current, Model model){
+        PageVO pageVO = this.bookService.pageList(current);
+        model.addAttribute("page", pageVO);
+        model.addAttribute("sortList", this.sortService.list());
+        return "/user/list";
+    }
+
+    @PostMapping("/search")
+    public String search(String keyWord,Integer current,Integer sid,Model model){
+        PageVO pageVO = null;
+        //类别检索
+        if(!sid.equals(0)){
+            pageVO = this.bookService.searchBySort(sid, current);
+        } else {
+            //关键字检索带分页
+            pageVO = this.bookService.searchByKeyWord(keyWord, current);
+        }
+        model.addAttribute("page", pageVO);
+        model.addAttribute("sortList", this.sortService.list());
+        return "/user/list";
+    }
+
+    @PostMapping("/findByKey")
+    public String findByKey(String key,Model model){
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(key), "name", key)
+                .or()
+                .like(StringUtils.isNotBlank(key), "author", key)
+                .or()
+                .like(StringUtils.isNotBlank(key), "publish", key);
+        List<Book> list = this.bookService.list(queryWrapper);
+        List<BookVO> bookVOList = new ArrayList<>();
+        for (Book book : list) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            Sort sort = this.sortService.getById(book.getSid());
+            bookVO.setSname(sort.getName());
+            bookVO.setImagePath(book.getImagePath()); // 确保 imagePath 被复制
+            bookVOList.add(bookVO);
+        }
+        model.addAttribute("list", bookVOList);
+        return "/sysadmin/book";
+    }
+
+    @PostMapping("/add")
+    public String add(Book book, @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request) throws IOException {
+        // 1. 获取临时目录和上传目录的绝对路径
+        String tempDir = request.getServletContext().getRealPath(tempPath);
+        String uploadDir = request.getServletContext().getRealPath(uploadPath);
+
+        // 2. 文件上传到临时目录
+        String tempFileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+        Path tempFile = Paths.get(tempDir, tempFileName);
+        if (!Files.exists(Paths.get(tempDir))) {
+            Files.createDirectories(Paths.get(tempDir));
+        }
+        imageFile.transferTo(tempFile.toFile());
+
+        // 3. 从临时目录移动到目标目录
+        Path targetFile = Paths.get(uploadDir, tempFileName);
+        if (!Files.exists(Paths.get(uploadDir))) {
+            Files.createDirectories(Paths.get(uploadDir));
+        }
+        Files.move(tempFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+
+        // 4. 设置图书的imagePath属性
+        book.setImagePath(tempFileName);
+
+        // 5. 保存图书信息到数据库
+        this.bookService.save(book);
+        return "redirect:/sysadmin/bookList";
+    }
+
+    @GetMapping("/findById/{id}")
+    public String findById(@PathVariable("id") Integer id, Model model){
+        Book book = this.bookService.getById(id);
+        model.addAttribute("book", book);
+        model.addAttribute("list", this.sortService.list());
+        return "/sysadmin/updateBook";
+    }
+
+    @PostMapping("/update")
+    public String update(Book book, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile, HttpServletRequest request) throws IOException {
+        // 1. 获取临时目录和上传目录的绝对路径
+        String tempDir = request.getServletContext().getRealPath(tempPath);
+        String uploadDir = request.getServletContext().getRealPath(uploadPath);
+
+        // 2. 如果有新的图片上传
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // 生成唯一文件名
+            String tempFileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+            Path tempFile = Paths.get(tempDir, tempFileName);
+
+            // 确保临时目录存在
+            if (!Files.exists(Paths.get(tempDir))) {
+                Files.createDirectories(Paths.get(tempDir));
+            }
+
+            // 保存到临时目录
+            imageFile.transferTo(tempFile.toFile());
+
+            // 移动到目标目录
+            Path targetFile = Paths.get(uploadDir, tempFileName);
+
+            // 确保目标目录存在
+            if (!Files.exists(Paths.get(uploadDir))) {
+                Files.createDirectories(Paths.get(uploadDir));
+            }
+
+            Files.move(tempFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+
+            // 设置图书的imagePath属性
+            book.setImagePath(tempFileName);
+        }
+
+        // 3. 更新图书信息到数据库
+        this.bookService.updateById(book);
+        return "redirect:/sysadmin/bookList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("bid", id);
+        this.borrowService.remove(queryWrapper);
+        this.bookService.removeById(id);
+        return "redirect:/sysadmin/bookList";
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\BorrowController.java:
+package com.southwind.controller;
+
+
+import com.southwind.entity.User;
+import com.southwind.service.BorrowService;
+import com.southwind.vo.BorrowVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/borrow")
+public class BorrowController {
+
+    @Autowired
+    private BorrowService borrowService;
+
+    @GetMapping("/add")
+    public String add(Integer bookId, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        this.borrowService.add(user.getId(), bookId);
+        return "redirect:/borrow/list";
+    }
+
+    @GetMapping("/list")
+    public String list(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        List<BorrowVO> borrowVOList = this.borrowService.borrowList(user.getId());
+        model.addAttribute("list", borrowVOList);
+        return "/user/borrow";
+    }
+
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\CustomErrorController.java:
+package com.southwind.controller;
+
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+@Controller
+public class CustomErrorController implements ErrorController {
+
+    @RequestMapping("/error")
+    public String handleError(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        String userType = "guest";
+
+        if (session != null) {
+            if (session.getAttribute("user") != null) {
+                userType = "user";
+            } else if (session.getAttribute("admin") != null) {
+                userType = "admin";
+            } else if (session.getAttribute("sysadmin") != null) {
+                userType = "sysadmin";
+            }
+        }
+
+        model.addAttribute("userType", userType);
+        return "error";
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\LoginController.java:
+package com.southwind.controller;
+
+import com.southwind.entity.Admin;
+import com.southwind.entity.Sysadmin;
+import com.southwind.entity.User;
+import com.southwind.form.LoginForm;
+import com.southwind.result.LoginResult;
+import com.southwind.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+@Controller
+public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
+    @PostMapping("/login")
+    public String login(LoginForm loginForm, Model model, HttpServletRequest request){
+        LoginResult result = this.loginService.login(loginForm);
+        String url = "";
+        ModelAndView modelAndView = new ModelAndView();
+        if(result.getCode().equals(-1) || result.getCode().equals(-2)){
+            url = "login";
+            model.addAttribute("msg", result.getMsg());
+        }
+        if(result.getCode().equals(0)){
+            HttpSession session = request.getSession();
+            switch (loginForm.getType()){
+                case 1:
+                    session.setAttribute("user", (User)result.getObject());
+                    url = "redirect:/user/index";
+                    break;
+                case 2:
+                    session.setAttribute("admin", (Admin)result.getObject());
+                    url = "redirect:/admin/index";
+                    break;
+                case 3:
+                    session.setAttribute("sysadmin", (Sysadmin)result.getObject());
+                    url = "redirect:/sysadmin/index";
+                    break;
+            }
+
+        }
+        return url;
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\RedirectController.java:
+package com.southwind.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class RedirectController {
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url){
+        return url;
+    }
+
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    void returnNoFavicon() {
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\SortController.java:
+package com.southwind.controller;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.southwind.entity.Back;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.Sort;
+import com.southwind.service.BackService;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.service.SortService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/sort")
+public class SortController {
+
+    @Autowired
+    private SortService sortService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private BorrowService borrowService;
+    @Autowired
+    private BackService backService;
+
+    @GetMapping("/list")
+    public String list(Model model){
+        model.addAttribute("list", this.sortService.list());
+        return "sysadmin/addBook";
+    }
+
+    @PostMapping("/search")
+    public String search(String name,Model model){
+        QueryWrapper<Sort> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(name), "name", name);
+        List<Sort> list = this.sortService.list(queryWrapper);
+        model.addAttribute("list", list);
+        return "/sysadmin/sort";
+    }
+
+    @PostMapping("/add")
+    public String add(Sort sort){
+        this.sortService.save(sort);
+        return "redirect:/sysadmin/sortList";
+    }
+
+    @GetMapping("/findById/{id}")
+    public String findById(@PathVariable("id") Integer id,Model model){
+        Sort sort = this.sortService.getById(id);
+        model.addAttribute("sort", sort);
+        return "/sysadmin/updateSort";
+    }
+
+    @PostMapping("/update")
+    public String update(Sort sort){
+        this.sortService.updateById(sort);
+        return "redirect:/sysadmin/sortList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.eq("sid", id);
+        List<Book> bookList = this.bookService.list(bookQueryWrapper);
+        for (Book book : bookList) {
+            QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+            borrowQueryWrapper.eq("bid", book.getId());
+            List<Borrow> borrowList = this.borrowService.list(borrowQueryWrapper);
+            for (Borrow borrow : borrowList) {
+                QueryWrapper<Back> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("brid", borrow.getId());
+                this.backService.remove(queryWrapper);
+                this.borrowService.removeById(borrow.getId());
+            }
+            this.bookService.removeById(book.getId());
+        }
+        this.sortService.removeById(id);
+        return "redirect:/sysadmin/sortList";
+    }
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\SysadminController.java:
+package com.southwind.controller;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.southwind.entity.Admin;
+import com.southwind.entity.Book;
+import com.southwind.entity.Sort;
+import com.southwind.entity.User;
+import com.southwind.service.AdminService;
+import com.southwind.service.BookService;
+import com.southwind.service.SortService;
+import com.southwind.service.UserService;
+import com.southwind.vo.BookVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/sysadmin")
+public class SysadminController {
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private SortService sortService;
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url){
+        return "/sysadmin/"+url;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
+    }
+
+    @GetMapping("/userList")
+    public String userList(Model model){
+        List<User> list = this.userService.list();
+        model.addAttribute("list", list);
+        return "/sysadmin/user";
+    }
+
+    @GetMapping("/sortList")
+    public String sortList(Model model){
+        List<Sort> list = this.sortService.list();
+        model.addAttribute("list", list);
+        return "/sysadmin/sort";
+    }
+
+    @PostMapping("/findByName")
+    public String findByName(String username,Model model){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(username), "username", username);
+        List<User> list = this.userService.list(queryWrapper);
+        model.addAttribute("list", list);
+        return "/sysadmin/user";
+    }
+
+    @GetMapping("/bookList")
+    public String bookList(Model model){
+        List<Book> list = this.bookService.list();
+        List<BookVO> bookVOList = new ArrayList<>();
+        for (Book book : list) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            Sort sort = this.sortService.getById(book.getSid());
+            bookVO.setSname(sort.getName());
+            bookVOList.add(bookVO);
+        }
+        model.addAttribute("list", bookVOList);
+        return "/sysadmin/book";
+    }
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\UserController.java:
+package com.southwind.controller;
+
+import com.southwind.entity.User;
+import com.southwind.form.UserRegisterForm;
+import com.southwind.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import com.southwind.entity.User;
+import com.southwind.form.UserRegisterForm;
+import com.southwind.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url) {
+        return "/user/" + url;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "login";
+    }
+
+    @PostMapping("/add")
+    public String add(User user) {
+        this.userService.save(user);
+        return "redirect:/sysadmin/userList";
+    }
+
+    @GetMapping("/findById/{id}")
+    public String findById(@PathVariable("id") Integer id, Model model) {
+        User user = this.userService.getById(id);
+        model.addAttribute("user", user);
+        return "/sysadmin/updateUser";
+    }
+
+    @PostMapping("/update")
+    public String update(User user) {
+        this.userService.updateById(user);
+        return "redirect:/sysadmin/userList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        this.userService.removeById(id);
+        return "redirect:/sysadmin/userList";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("userRegisterForm", new UserRegisterForm());
+        return "/user/register";
+    }
+
+    @PostMapping("/register")
+    public String register(UserRegisterForm userRegisterForm, Model model) {
+        if (!userRegisterForm.getPassword().equals(userRegisterForm.getConfirmPassword())) {
+            model.addAttribute("message", "两次输入的密码不一致！");
+            return "/user/register";
+        }
+
+        boolean usernameExists = userService.isUsernameExists(userRegisterForm.getUsername());
+        if (usernameExists) {
+            model.addAttribute("message", "用户名已存在，请选择其他用户名！");
+            return "/user/register";
+        }
+
+        User user = new User();
+        user.setUsername(userRegisterForm.getUsername());
+        user.setPassword(userRegisterForm.getPassword());
+        boolean success = userService.save(user);
+        if (success) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("message", "注册失败！");
+            return "/user/register";
+        }
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Admin.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ *
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Admin implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String username;
+
+    private String password;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Back.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Back implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private Integer brid;
+
+    private Integer status = 0;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Book.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 书籍实体类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@TableName("book") // 映射到数据库中的表名
+public class Book implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+
+  @TableId(value = "id", type = IdType.AUTO)
+  private Integer id; // 书籍 ID
+
+  private String name; // 书籍名称
+
+  private Integer sid; // 分类 ID
+
+  private Integer number; // 书籍数量
+
+  private String author; // 作者
+
+  private String publish; // 出版社
+
+  private String edition; // 版本
+
+  private String imagePath; // 图片路径
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Borrow.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Borrow implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private Integer uid;
+
+    private Integer bid;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime startTime;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime endTime;
+
+    private Integer status = 0;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Sort.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Sort implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String name;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Sysadmin.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Sysadmin implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String username;
+
+    private String password;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\User.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class User implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String username;
+
+    private String password;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\form\LoginForm.java:
+package com.southwind.form;
+
+import lombok.Data;
+
+@Data
+public class LoginForm {
+    private String username;
+    private String password;
+    private Integer type;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\form\UserRegisterForm.java:
+package com.southwind.form;
+
+import lombok.Data;
+
+@Data
+public class UserRegisterForm {
+    private String username;
+    private String password;
+    private String confirmPassword;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\handler\MyMetaObjectHandler.java:
+package com.southwind.handler;
+
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Component
+public class MyMetaObjectHandler implements MetaObjectHandler {
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        this.setFieldValByName("startTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName("endTime",LocalDateTime.now(),metaObject);
+    }
+
+    @Override
+    public void updateFill(MetaObject metaObject) {
+
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\AdminMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.AdminMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\BackMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.BackMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\BookMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.BookMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\BorrowMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.BorrowMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\SortMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.SortMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\SysadminMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.SysadminMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\xml\UserMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.UserMapper">
+    <!-- 现有的SQL语句保持不变 -->
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\AdminMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Admin;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface AdminMapper extends BaseMapper<Admin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\BackMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Back;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BackMapper extends BaseMapper<Back> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\BookMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Book;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BookMapper extends BaseMapper<Book> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\BorrowMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Borrow;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BorrowMapper extends BaseMapper<Borrow> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\SortMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Sort;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SortMapper extends BaseMapper<Sort> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\SysadminMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Sysadmin;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SysadminMapper extends BaseMapper<Sysadmin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\UserMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+public interface UserMapper extends BaseMapper<User> {
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\result\LoginResult.java:
+package com.southwind.result;
+
+import lombok.Data;
+
+@Data
+public class LoginResult {
+    private Object object;
+    private String msg;
+    private Integer code;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\AdminServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.southwind.entity.Admin;
+import com.southwind.mapper.AdminMapper;
+import com.southwind.service.AdminService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\BackServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.Back;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.User;
+import com.southwind.mapper.BackMapper;
+import com.southwind.mapper.BookMapper;
+import com.southwind.mapper.BorrowMapper;
+import com.southwind.mapper.UserMapper;
+import com.southwind.service.BackService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.southwind.vo.BackVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class BackServiceImpl extends ServiceImpl<BackMapper, Back> implements BackService {
+
+    @Autowired
+    private BackMapper backMapper;
+    @Autowired
+    private BorrowMapper borrowMapper;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private BookMapper bookMapper;
+
+    @Override
+    public List<BackVO> backList() {
+        QueryWrapper<Back> backQueryWrapper = new QueryWrapper<>();
+        backQueryWrapper.eq("status", 0);
+        List<Back> backList = this.backMapper.selectList(backQueryWrapper);
+        List<BackVO> backVOList = new ArrayList<>();
+        for (Back back : backList) {
+            BackVO backVO = new BackVO();
+            Borrow borrow = this.borrowMapper.selectById(back.getBrid());
+            User user = this.userMapper.selectById(borrow.getUid());
+            backVO.setUserName(user.getUsername());
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            BeanUtils.copyProperties(book, backVO);
+            backVO.setBookName(book.getName());
+            BeanUtils.copyProperties(back, backVO);
+            backVOList.add(backVO);
+        }
+        return backVOList;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\BookServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.southwind.entity.Book;
+import com.southwind.entity.Sort;
+import com.southwind.mapper.BookMapper;
+import com.southwind.mapper.SortMapper;
+import com.southwind.service.BookService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.southwind.vo.BookVO;
+import com.southwind.vo.PageVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
+
+    @Autowired
+    private BookMapper bookMapper;
+    @Autowired
+    private SortMapper sortMapper;
+
+    @Override
+    public PageVO pageList(Integer currentPage) {
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.gt("number", 0);
+        Page<Book> page = new Page<>(currentPage, 5);
+        Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+        PageVO pageVO = new PageVO();
+        pageVO.setCurrentPage(resultPage.getCurrent());
+        pageVO.setTotalPage(resultPage.getPages());
+        List<BookVO> result = new ArrayList<>();
+        for (Book book : resultPage.getRecords()) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            QueryWrapper<Sort> sortQueryWrapper = new QueryWrapper<>();
+            sortQueryWrapper.eq("id", book.getSid());
+            Sort sort = this.sortMapper.selectOne(sortQueryWrapper);
+            bookVO.setSname(sort.getName());
+            result.add(bookVO);
+        }
+        pageVO.setData(result);
+        return pageVO;
+    }
+
+    @Override
+    public PageVO searchByKeyWord(String keyWord,Integer currentPage) {
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.gt("number", 0);
+        bookQueryWrapper.like(StringUtils.isNotBlank(keyWord), "name", keyWord)
+                .or()
+                .like(StringUtils.isNotBlank(keyWord), "author", keyWord)
+                .or()
+                .like(StringUtils.isNotBlank(keyWord), "publish", keyWord);
+        Page<Book> page = new Page<>(currentPage, 5);
+        Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+        PageVO pageVO = new PageVO();
+        pageVO.setCurrentPage(resultPage.getCurrent());
+        pageVO.setTotalPage(resultPage.getPages());
+        List<BookVO> result = new ArrayList<>();
+        for (Book book : resultPage.getRecords()) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            QueryWrapper<Sort> sortQueryWrapper = new QueryWrapper<>();
+            sortQueryWrapper.eq("id", book.getSid());
+            Sort sort = this.sortMapper.selectOne(sortQueryWrapper);
+            bookVO.setSname(sort.getName());
+            result.add(bookVO);
+        }
+        pageVO.setData(result);
+        return pageVO;
+    }
+
+    @Override
+    public PageVO searchBySort(Integer sid, Integer currentPage) {
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.gt("number", 0);
+        bookQueryWrapper.eq("sid",sid);
+        Page<Book> page = new Page<>(currentPage, 5);
+        Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+        PageVO pageVO = new PageVO();
+        pageVO.setCurrentPage(resultPage.getCurrent());
+        pageVO.setTotalPage(resultPage.getPages());
+        List<BookVO> result = new ArrayList<>();
+        for (Book book : resultPage.getRecords()) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            QueryWrapper<Sort> sortQueryWrapper = new QueryWrapper<>();
+            sortQueryWrapper.eq("id", book.getSid());
+            Sort sort = this.sortMapper.selectOne(sortQueryWrapper);
+            bookVO.setSname(sort.getName());
+            result.add(bookVO);
+        }
+        pageVO.setData(result);
+        return pageVO;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\BorrowServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.Sort;
+import com.southwind.entity.User;
+import com.southwind.mapper.BookMapper;
+import com.southwind.mapper.BorrowMapper;
+import com.southwind.mapper.SortMapper;
+import com.southwind.mapper.UserMapper;
+import com.southwind.service.BorrowService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.southwind.vo.AdminBorrowVO;
+import com.southwind.vo.BorrowVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class BorrowServiceImpl extends ServiceImpl<BorrowMapper, Borrow> implements BorrowService {
+
+    @Autowired
+    private BorrowMapper borrowMapper;
+    @Autowired
+    private BookMapper bookMapper;
+    @Autowired
+    private SortMapper sortMapper;
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public void add(Integer uid, Integer bid) {
+        Borrow borrow = new Borrow();
+        borrow.setBid(bid);
+        borrow.setUid(uid);
+        this.borrowMapper.insert(borrow);
+        Book book = this.bookMapper.selectById(bid);
+        book.setNumber(book.getNumber()-1);
+        this.bookMapper.updateById(book);
+    }
+
+    @Override
+    public List<BorrowVO> borrowList(Integer uid) {
+        QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+        borrowQueryWrapper.eq("uid", uid);
+        List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+        List<BorrowVO> borrowVOList = new ArrayList<>();
+        for (Borrow borrow : borrowList) {
+            BorrowVO borrowVO = new BorrowVO();
+            BeanUtils.copyProperties(borrow, borrowVO);
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            BeanUtils.copyProperties(book, borrowVO);
+            borrowVO.setBookName(book.getName());
+            Sort sort = this.sortMapper.selectById(book.getSid());
+            borrowVO.setSortName(sort.getName());
+            borrowVOList.add(borrowVO);
+        }
+        return borrowVOList;
+    }
+
+    @Override
+    public List<BorrowVO> backList(Integer uid) {
+        QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+        borrowQueryWrapper.eq("uid", uid);
+        borrowQueryWrapper.eq("status", 1);
+        List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+        List<BorrowVO> borrowVOList = new ArrayList<>();
+        for (Borrow borrow : borrowList) {
+            BorrowVO borrowVO = new BorrowVO();
+            BeanUtils.copyProperties(borrow, borrowVO);
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            BeanUtils.copyProperties(book, borrowVO);
+            borrowVO.setId(borrow.getId());
+            borrowVO.setBookName(book.getName());
+            borrowVOList.add(borrowVO);
+        }
+        return borrowVOList;
+    }
+
+    @Override
+    public List<AdminBorrowVO> adminBorrowList() {
+        QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+        borrowQueryWrapper.eq("status", 0);
+        List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+        List<AdminBorrowVO> adminBorrowVOList = new ArrayList<>();
+        for (Borrow borrow : borrowList) {
+            AdminBorrowVO adminBorrowVO = new AdminBorrowVO();
+            BeanUtils.copyProperties(borrow, adminBorrowVO);
+            User user = this.userMapper.selectById(borrow.getUid());
+            adminBorrowVO.setUserName(user.getUsername());
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            adminBorrowVO.setBookName(book.getName());
+            BeanUtils.copyProperties(book, adminBorrowVO);
+            Sort sort = this.sortMapper.selectById(book.getSid());
+            adminBorrowVO.setSortName(sort.getName());
+            adminBorrowVO.setId(borrow.getId());
+            adminBorrowVOList.add(adminBorrowVO);
+        }
+        return adminBorrowVOList;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\LoginServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.Admin;
+import com.southwind.entity.Sysadmin;
+import com.southwind.entity.User;
+import com.southwind.form.LoginForm;
+import com.southwind.mapper.AdminMapper;
+import com.southwind.mapper.SysadminMapper;
+import com.southwind.mapper.UserMapper;
+import com.southwind.result.LoginResult;
+import com.southwind.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LoginServiceImpl implements LoginService {
+
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private AdminMapper adminMapper;
+    @Autowired
+    private SysadminMapper sysadminMapper;
+
+    @Override
+    public LoginResult login(LoginForm loginForm) {
+        LoginResult loginResult = new LoginResult();
+        switch (loginForm.getType()){
+            case 1:
+                QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("username", loginForm.getUsername());
+                User user = this.userMapper.selectOne(queryWrapper);
+                if(user == null) {
+                    loginResult.setMsg("用户名不存在");
+                    loginResult.setCode(-1);
+                    return loginResult;
+                }
+                //验证密码
+                if(!user.getPassword().equals(loginForm.getPassword())){
+                    loginResult.setMsg("密码错误");
+                    loginResult.setCode(-2);
+                    return loginResult;
+                }
+                loginResult.setMsg("登录成功");
+                loginResult.setCode(0);
+                loginResult.setObject(user);
+                break;
+            case 2:
+                QueryWrapper<Admin> adminQueryWrapper = new QueryWrapper<>();
+                adminQueryWrapper.eq("username", loginForm.getUsername());
+                Admin admin = this.adminMapper.selectOne(adminQueryWrapper);
+                if(admin == null) {
+                    loginResult.setMsg("用户名不存在");
+                    loginResult.setCode(-1);
+                    return loginResult;
+                }
+                //验证密码
+                if(!admin.getPassword().equals(loginForm.getPassword())){
+                    loginResult.setMsg("密码错误");
+                    loginResult.setCode(-2);
+                    return loginResult;
+                }
+                loginResult.setMsg("登录成功");
+                loginResult.setCode(0);
+                loginResult.setObject(admin);
+                break;
+            case 3:
+                QueryWrapper<Sysadmin> sysadminQueryWrapper = new QueryWrapper<>();
+                sysadminQueryWrapper.eq("username", loginForm.getUsername());
+                Sysadmin sysadmin = this.sysadminMapper.selectOne(sysadminQueryWrapper);
+                if(sysadmin == null) {
+                    loginResult.setMsg("用户名不存在");
+                    loginResult.setCode(-1);
+                    return loginResult;
+                }
+                //验证密码
+                if(!sysadmin.getPassword().equals(loginForm.getPassword())){
+                    loginResult.setMsg("密码错误");
+                    loginResult.setCode(-2);
+                    return loginResult;
+                }
+                loginResult.setMsg("登录成功");
+                loginResult.setCode(0);
+                loginResult.setObject(sysadmin);
+                break;
+        }
+        return loginResult;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\SortServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.southwind.entity.Sort;
+import com.southwind.mapper.SortMapper;
+import com.southwind.service.SortService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class SortServiceImpl extends ServiceImpl<SortMapper, Sort> implements SortService {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\SysadminServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.southwind.entity.Sysadmin;
+import com.southwind.mapper.SysadminMapper;
+import com.southwind.service.SysadminService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class SysadminServiceImpl extends ServiceImpl<SysadminMapper, Sysadmin> implements SysadminService {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\UserServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.User;
+import com.southwind.mapper.UserMapper;
+import com.southwind.service.UserService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
+    @Override
+    public boolean register(User user) {
+        // 检查用户名是否已存在
+        User existingUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
+        if (existingUser != null) {
+            return false; // 用户名已存在
+        }
+        return this.save(user); // 保存用户
+    }
+
+    @Override
+    public boolean isUsernameExists(String username) {
+        User existingUser = this.getOne(new QueryWrapper<User>().eq("username", username));
+        return existingUser != null;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\AdminService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Admin;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface AdminService extends IService<Admin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\BackService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Back;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.southwind.vo.BackVO;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BackService extends IService<Back> {
+    public List<BackVO> backList();
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\BookService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Book;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.southwind.vo.PageVO;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BookService extends IService<Book> {
+    public PageVO pageList(Integer currentPage);
+    public PageVO searchByKeyWord(String keyWord,Integer currentPage);
+    public PageVO searchBySort(Integer sid,Integer currentPage);
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\BorrowService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Borrow;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.southwind.vo.AdminBorrowVO;
+import com.southwind.vo.BorrowVO;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BorrowService extends IService<Borrow> {
+    public void add(Integer uid,Integer bid);
+    public List<BorrowVO> borrowList(Integer uid);
+    public List<BorrowVO> backList(Integer uid);
+    public List<AdminBorrowVO> adminBorrowList();
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\LoginService.java:
+package com.southwind.service;
+
+import com.southwind.form.LoginForm;
+import com.southwind.result.LoginResult;
+
+public interface LoginService {
+    public LoginResult login(LoginForm loginForm);
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\SortService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Sort;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SortService extends IService<Sort> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\SysadminService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Sysadmin;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SysadminService extends IService<Sysadmin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\UserService.java:
+package com.southwind.service;
+
+import com.southwind.entity.User;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+public interface UserService extends IService<User> {
+    boolean register(User user);
+    boolean isUsernameExists(String username);
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\AdminBorrowVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+public class AdminBorrowVO {
+    private Integer id;
+    private String userName;
+    private String bookName;
+    private String sortName;
+    private String author;
+    private String publish;
+    private String edition;
+    private LocalDateTime startTime;
+    private Integer status = 0;
+    private String imagePath; // 添加 imagePath 属性
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\BackVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+@Data
+public class BackVO {
+    private Integer id;
+    private String userName;
+    private String bookName;
+    private String author;
+    private String publish;
+    private String edition;
+    private Integer status;
+    private String imagePath; // 添加 imagePath 属性
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\BookVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+@Data
+public class BookVO {
+    private Integer id;
+    private String name;
+    private String sname;
+    private Integer number;
+    private String author;
+    private String publish;
+    private String edition;
+    private String imagePath; // 添加 imagePath 属性
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\BorrowVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+public class BorrowVO {
+    private Integer id;
+    private String bookName;
+    private String sortName;
+    private String author;
+    private String publish;
+    private String edition;
+    private LocalDateTime startTime;
+    private Integer status = 0;
+    private String imagePath; // 添加 imagePath 属性
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\PageVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+public class PageVO {
+    private Long currentPage;
+    private Long totalPage;
+    private List data;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\LibSpringbootApplication.java:
+package com.southwind;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan("com.southwind.mapper")
+public class LibSpringbootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LibSpringbootApplication.class, args);
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\Main.java:
+package com.southwind;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        AutoGenerator autoGenerator = new AutoGenerator();
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        dataSourceConfig.setDbType(DbType.MYSQL);
+        dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
+        dataSourceConfig.setUsername("root");
+        dataSourceConfig.setPassword("123456");
+        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=UTF-8");
+        autoGenerator.setDataSource(dataSourceConfig);
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setOpen(false);
+        globalConfig.setOutputDir(System.getProperty("user.dir")+"/src/main/java");
+        globalConfig.setAuthor("admin");
+        globalConfig.setServiceName("%sService");
+        autoGenerator.setGlobalConfig(globalConfig);
+        PackageConfig packageConfig = new PackageConfig();
+        packageConfig.setParent("com.southwind");
+        packageConfig.setEntity("entity");
+        packageConfig.setMapper("mapper");
+        packageConfig.setController("controller");
+        packageConfig.setService("service");
+        packageConfig.setServiceImpl("service.impl");
+        autoGenerator.setPackageInfo(packageConfig);
+        StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig.setEntityLombokModel(true);
+        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
+        strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
+
+        List<TableFill> list = new ArrayList<>();
+        TableFill tableFill1 = new TableFill("create_time", FieldFill.INSERT);
+        TableFill tableFill2 = new TableFill("update_time",FieldFill.INSERT_UPDATE);
+        list.add(tableFill1);
+        list.add(tableFill2);
+
+        strategyConfig.setTableFillList(list);
+        autoGenerator.setStrategy(strategyConfig);
+
+        autoGenerator.execute();
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\static\assets\js\common\build.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<project name="lplib.build" default="build" basedir=".">
+	
+	<property name="tools.dir" location="../../tools"/>
+  <property name="build.dir" location="./"/>
+  <property name="des.dir" location="./"/>
+  <property name="charset" value="UTF-8"/>
+	
+	<target name="build" depends="prepare,compress,native2ascii">
+  </target>
+
+  <target name="prepare">
+    <delete>
+      <fileset dir="${des.dir}" includes="**/*-min.js"/>
+    </delete>
+  </target>
+
+  <!-- 用 YUICompressor 压缩 js -->
+  <target name="compress">           
+    <apply executable="java" verbose="true" dest="${des.dir}">
+        <fileset dir="${des.dir}" includes="**/*.js"/>
+        <arg line="-jar"/>
+        <arg path="${tools.dir}/yuicompressor.jar"/>
+        <arg line="--charset utf-8"/>
+        <srcfile/>
+        <arg line="-o"/>
+        <targetfile/>
+        <mapper type="regexp" from="^(.*)\.(js)$" to="\1-min.\2"/>
+    </apply>
+  </target>
+
+  <target name="native2ascii" depends="compress">
+    <mkdir dir="${build.dir}/tmp"/>
+    <move todir="${build.dir}/tmp">
+        <fileset dir="${des.dir}" includes="*-min.js"/>
+    </move>
+    <native2ascii encoding="${charset}"
+                  src="${build.dir}/tmp"
+                  dest="${des.dir}"
+                  includes="*.js"/>
+    <delete dir="${build.dir}/tmp"/>
+
+  </target>
+<!---->
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\static\assets\js\module\build.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<project name="lplib.build" default="build" basedir=".">
+	
+	<property name="tools.dir" location="../../tools"/>
+  <property name="build.dir" location="./"/>
+  <property name="des.dir" location="./"/>
+  <property name="charset" value="UTF-8"/>
+	
+	<target name="build" depends="prepare,compress,native2ascii">
+  </target>
+
+  <target name="prepare">
+    <delete>
+      <fileset dir="${des.dir}" includes="**/*-min.js"/>
+    </delete>
+  </target>
+
+  <!-- 用 YUICompressor 压缩 js -->
+  <target name="compress">           
+    <apply executable="java" verbose="true" dest="${des.dir}">
+        <fileset dir="${des.dir}" includes="**/*.js"/>
+        <arg line="-jar"/>
+        <arg path="${tools.dir}/yuicompressor.jar"/>
+        <arg line="--charset utf-8"/>
+        <srcfile/>
+        <arg line="-o"/>
+        <targetfile/>
+        <mapper type="regexp" from="^(.*)\.(js)$" to="\1-min.\2"/>
+    </apply>
+  </target>
+
+  <target name="native2ascii" depends="compress">
+    <mkdir dir="${build.dir}/tmp"/>
+    <move todir="${build.dir}/tmp">
+        <fileset dir="${des.dir}" includes="*-min.js"/>
+    </move>
+    <native2ascii encoding="${charset}"
+                  src="${build.dir}/tmp"
+                  dest="${des.dir}"
+                  includes="*.js"/>
+    <delete dir="${build.dir}/tmp"/>
+
+  </target>
+<!---->
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\application.yml:
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  thymeleaf:
+    prefix: classpath:/templates/  # 模板文件路径
+    suffix: .html                  # 文件后缀
+    cache: false                   # 新增：关闭模板缓存（开发环境使用）
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8182
+  error:
+    path: /error          # 错误路径配置
+  tomcat:
+    basedir: src/main/resources/static/temp
+
+mybatis-plus:
+  mapper-locations: classpath:/com/southwind/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\test\java\com\southwind\LibSpringbootApplicationTests.java:
+package com.southwind;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class LibSpringbootApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\AdminMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.AdminMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\BackMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.BackMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\BookMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.BookMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\BorrowMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.BorrowMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\SortMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.SortMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\SysadminMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.SysadminMapper">
+
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\com\southwind\mapper\xml\UserMapper.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.southwind.mapper.UserMapper">
+    <!-- 现有的SQL语句保持不变 -->
+</mapper>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\static\assets\js\common\build.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<project name="lplib.build" default="build" basedir=".">
+	
+	<property name="tools.dir" location="../../tools"/>
+  <property name="build.dir" location="./"/>
+  <property name="des.dir" location="./"/>
+  <property name="charset" value="UTF-8"/>
+	
+	<target name="build" depends="prepare,compress,native2ascii">
+  </target>
+
+  <target name="prepare">
+    <delete>
+      <fileset dir="${des.dir}" includes="**/*-min.js"/>
+    </delete>
+  </target>
+
+  <!-- 用 YUICompressor 压缩 js -->
+  <target name="compress">           
+    <apply executable="java" verbose="true" dest="${des.dir}">
+        <fileset dir="${des.dir}" includes="**/*.js"/>
+        <arg line="-jar"/>
+        <arg path="${tools.dir}/yuicompressor.jar"/>
+        <arg line="--charset utf-8"/>
+        <srcfile/>
+        <arg line="-o"/>
+        <targetfile/>
+        <mapper type="regexp" from="^(.*)\.(js)$" to="\1-min.\2"/>
+    </apply>
+  </target>
+
+  <target name="native2ascii" depends="compress">
+    <mkdir dir="${build.dir}/tmp"/>
+    <move todir="${build.dir}/tmp">
+        <fileset dir="${des.dir}" includes="*-min.js"/>
+    </move>
+    <native2ascii encoding="${charset}"
+                  src="${build.dir}/tmp"
+                  dest="${des.dir}"
+                  includes="*.js"/>
+    <delete dir="${build.dir}/tmp"/>
+
+  </target>
+<!---->
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\static\assets\js\module\build.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<project name="lplib.build" default="build" basedir=".">
+	
+	<property name="tools.dir" location="../../tools"/>
+  <property name="build.dir" location="./"/>
+  <property name="des.dir" location="./"/>
+  <property name="charset" value="UTF-8"/>
+	
+	<target name="build" depends="prepare,compress,native2ascii">
+  </target>
+
+  <target name="prepare">
+    <delete>
+      <fileset dir="${des.dir}" includes="**/*-min.js"/>
+    </delete>
+  </target>
+
+  <!-- 用 YUICompressor 压缩 js -->
+  <target name="compress">           
+    <apply executable="java" verbose="true" dest="${des.dir}">
+        <fileset dir="${des.dir}" includes="**/*.js"/>
+        <arg line="-jar"/>
+        <arg path="${tools.dir}/yuicompressor.jar"/>
+        <arg line="--charset utf-8"/>
+        <srcfile/>
+        <arg line="-o"/>
+        <targetfile/>
+        <mapper type="regexp" from="^(.*)\.(js)$" to="\1-min.\2"/>
+    </apply>
+  </target>
+
+  <target name="native2ascii" depends="compress">
+    <mkdir dir="${build.dir}/tmp"/>
+    <move todir="${build.dir}/tmp">
+        <fileset dir="${des.dir}" includes="*-min.js"/>
+    </move>
+    <native2ascii encoding="${charset}"
+                  src="${build.dir}/tmp"
+                  dest="${des.dir}"
+                  includes="*.js"/>
+    <delete dir="${build.dir}/tmp"/>
+
+  </target>
+<!---->
+</project>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\application.yml:
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  thymeleaf:
+    prefix: classpath:/templates/  # 模板文件路径
+    suffix: .html                  # 文件后缀
+    cache: false                   # 新增：关闭模板缓存（开发环境使用）
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8182
+  error:
+    path: /error          # 错误路径配置
+  tomcat:
+    basedir: src/main/resources/static/temp
+
+mybatis-plus:
+  mapper-locations: classpath:/com/southwind/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\pom.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.6</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.southwind</groupId>
+    <artifactId>lib_springboot</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>lib_springboot</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>
+
+

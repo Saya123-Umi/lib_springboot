@@ -1,0 +1,2079 @@
+﻿C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\LibSpringbootApplication.java:
+package com.southwind;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan("com.southwind.mapper")
+public class LibSpringbootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LibSpringbootApplication.class, args);
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\Main.java:
+package com.southwind;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        AutoGenerator autoGenerator = new AutoGenerator();
+        DataSourceConfig dataSourceConfig = new DataSourceConfig();
+        dataSourceConfig.setDbType(DbType.MYSQL);
+        dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
+        dataSourceConfig.setUsername("root");
+        dataSourceConfig.setPassword("123456");
+        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=UTF-8");
+        autoGenerator.setDataSource(dataSourceConfig);
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setOpen(false);
+        globalConfig.setOutputDir(System.getProperty("user.dir")+"/src/main/java");
+        globalConfig.setAuthor("admin");
+        globalConfig.setServiceName("%sService");
+        autoGenerator.setGlobalConfig(globalConfig);
+        PackageConfig packageConfig = new PackageConfig();
+        packageConfig.setParent("com.southwind");
+        packageConfig.setEntity("entity");
+        packageConfig.setMapper("mapper");
+        packageConfig.setController("controller");
+        packageConfig.setService("service");
+        packageConfig.setServiceImpl("service.impl");
+        autoGenerator.setPackageInfo(packageConfig);
+        StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig.setEntityLombokModel(true);
+        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
+        strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
+
+        List<TableFill> list = new ArrayList<>();
+        TableFill tableFill1 = new TableFill("create_time", FieldFill.INSERT);
+        TableFill tableFill2 = new TableFill("update_time",FieldFill.INSERT_UPDATE);
+        list.add(tableFill1);
+        list.add(tableFill2);
+
+        strategyConfig.setTableFillList(list);
+        autoGenerator.setStrategy(strategyConfig);
+
+        autoGenerator.execute();
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\configuration\PageConfiguration.java:
+package com.southwind.configuration;
+
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class PageConfiguration {
+
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+        return new PaginationInterceptor();
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\AdminController.java:
+package com.southwind.controller;
+
+
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.vo.AdminBorrowVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+    @Autowired
+    private BorrowService borrowService;
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url){
+        return "/admin/"+url;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
+    }
+
+    @GetMapping("/borrowList")
+    public String borrowList(Model model){
+        List<AdminBorrowVO> adminBorrowVOList = this.borrowService.adminBorrowList();
+        model.addAttribute("list", adminBorrowVOList);
+        return "/admin/borrow";
+    }
+
+    @GetMapping("/allow")
+    public String allow(Integer id){
+        Borrow borrow = this.borrowService.getById(id);
+        borrow.setStatus(1);
+        this.borrowService.updateById(borrow);
+        return "redirect:/admin/borrowList";
+    }
+
+    @GetMapping("/notAllow")
+    public String notAllow(Integer id){
+        Borrow borrow = this.borrowService.getById(id);
+        borrow.setStatus(2);
+        this.borrowService.updateById(borrow);
+        Book book = this.bookService.getById(borrow.getBid());
+        book.setNumber(book.getNumber()+1);
+        this.bookService.updateById(book);
+        return "redirect:/admin/borrowList";
+    }
+
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\BackController.java:
+package com.southwind.controller;
+
+
+import com.southwind.entity.Back;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.User;
+import com.southwind.service.BackService;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.service.SortService;
+import com.southwind.vo.BackVO;
+import com.southwind.vo.BorrowVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/back")
+public class BackController {
+
+    @Autowired
+    private BorrowService borrowService;
+    @Autowired
+    private BackService backService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private SortService sortService;
+
+    @GetMapping("/list")
+    public String list(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        List<BorrowVO> backList = this.borrowService.backList(user.getId());
+        model.addAttribute("list", backList);
+        return "/user/back";
+    }
+
+    @GetMapping("/add")
+    public String add(Integer id){
+        Back back = new Back();
+        back.setBrid(id);
+        this.backService.save(back);
+        Borrow borrow = this.borrowService.getById(id);
+        borrow.setStatus(3);
+        this.borrowService.updateById(borrow);
+        return "redirect:/back/list";
+    }
+
+    @GetMapping("/adminList")
+    public String adminList(Model model){
+        List<BackVO> backVOList = this.backService.backList();
+        model.addAttribute("list", backVOList);
+        return "/admin/back";
+    }
+
+    @GetMapping("/allow")
+    public String allow(Integer id){
+        Back back = this.backService.getById(id);
+        back.setStatus(1);
+        this.backService.updateById(back);
+        Borrow borrow = this.borrowService.getById(back.getBrid());
+        Book book = this.bookService.getById(borrow.getBid());
+        book.setNumber(book.getNumber()+1);
+        this.bookService.updateById(book);
+        return "redirect:/back/adminList";
+    }
+
+
+
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\BookController.java:
+package com.southwind.controller;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.Sort;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.service.SortService;
+import com.southwind.vo.BookVO;
+import com.southwind.vo.PageVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/book")
+public class BookController {
+
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private SortService sortService;
+    @Autowired
+    private BorrowService borrowService;
+
+    // 相对路径配置
+    private final String tempPath = "static/temp";
+    private final String uploadPath = "static/images";
+
+    @GetMapping("/list/{current}")
+    public String list(@PathVariable("current") Integer current, Model model){
+        PageVO pageVO = this.bookService.pageList(current);
+        model.addAttribute("page", pageVO);
+        model.addAttribute("sortList", this.sortService.list());
+        return "/user/list";
+    }
+
+    @PostMapping("/search")
+    public String search(String keyWord,Integer current,Integer sid,Model model){
+        PageVO pageVO = null;
+        //类别检索
+        if(!sid.equals(0)){
+            pageVO = this.bookService.searchBySort(sid, current);
+        } else {
+            //关键字检索带分页
+            pageVO = this.bookService.searchByKeyWord(keyWord, current);
+        }
+        model.addAttribute("page", pageVO);
+        model.addAttribute("sortList", this.sortService.list());
+        return "/user/list";
+    }
+
+    @PostMapping("/findByKey")
+    public String findByKey(String key,Model model){
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(key), "name", key)
+                .or()
+                .like(StringUtils.isNotBlank(key), "author", key)
+                .or()
+                .like(StringUtils.isNotBlank(key), "publish", key);
+        List<Book> list = this.bookService.list(queryWrapper);
+        List<BookVO> bookVOList = new ArrayList<>();
+        for (Book book : list) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            Sort sort = this.sortService.getById(book.getSid());
+            bookVO.setSname(sort.getName());
+            bookVO.setImagePath(book.getImagePath()); // 确保 imagePath 被复制
+            bookVOList.add(bookVO);
+        }
+        model.addAttribute("list", bookVOList);
+        return "/sysadmin/book";
+    }
+
+    @PostMapping("/add")
+    public String add(Book book, @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request) throws IOException {
+        // 1. 获取临时目录和上传目录的绝对路径
+        String tempDir = request.getServletContext().getRealPath(tempPath);
+        String uploadDir = request.getServletContext().getRealPath(uploadPath);
+
+        // 2. 文件上传到临时目录
+        String tempFileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+        Path tempFile = Paths.get(tempDir, tempFileName);
+        if (!Files.exists(Paths.get(tempDir))) {
+            Files.createDirectories(Paths.get(tempDir));
+        }
+        imageFile.transferTo(tempFile.toFile());
+
+        // 3. 从临时目录移动到目标目录
+        Path targetFile = Paths.get(uploadDir, tempFileName);
+        if (!Files.exists(Paths.get(uploadDir))) {
+            Files.createDirectories(Paths.get(uploadDir));
+        }
+        Files.move(tempFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+
+        // 4. 设置图书的imagePath属性
+        book.setImagePath(tempFileName);
+
+        // 5. 保存图书信息到数据库
+        this.bookService.save(book);
+        return "redirect:/sysadmin/bookList";
+    }
+
+    @GetMapping("/findById/{id}")
+    public String findById(@PathVariable("id") Integer id, Model model){
+        Book book = this.bookService.getById(id);
+        model.addAttribute("book", book);
+        model.addAttribute("list", this.sortService.list());
+        return "/sysadmin/updateBook";
+    }
+
+    @PostMapping("/update")
+    public String update(Book book, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile, HttpServletRequest request) throws IOException {
+        // 1. 获取临时目录和上传目录的绝对路径
+        String tempDir = request.getServletContext().getRealPath(tempPath);
+        String uploadDir = request.getServletContext().getRealPath(uploadPath);
+
+        // 2. 如果有新的图片上传
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // 生成唯一文件名
+            String tempFileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+            Path tempFile = Paths.get(tempDir, tempFileName);
+
+            // 确保临时目录存在
+            if (!Files.exists(Paths.get(tempDir))) {
+                Files.createDirectories(Paths.get(tempDir));
+            }
+
+            // 保存到临时目录
+            imageFile.transferTo(tempFile.toFile());
+
+            // 移动到目标目录
+            Path targetFile = Paths.get(uploadDir, tempFileName);
+
+            // 确保目标目录存在
+            if (!Files.exists(Paths.get(uploadDir))) {
+                Files.createDirectories(Paths.get(uploadDir));
+            }
+
+            Files.move(tempFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+
+            // 设置图书的imagePath属性
+            book.setImagePath(tempFileName);
+        }
+
+        // 3. 更新图书信息到数据库
+        this.bookService.updateById(book);
+        return "redirect:/sysadmin/bookList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("bid", id);
+        this.borrowService.remove(queryWrapper);
+        this.bookService.removeById(id);
+        return "redirect:/sysadmin/bookList";
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\BorrowController.java:
+package com.southwind.controller;
+
+
+import com.southwind.entity.User;
+import com.southwind.service.BorrowService;
+import com.southwind.vo.BorrowVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/borrow")
+public class BorrowController {
+
+    @Autowired
+    private BorrowService borrowService;
+
+    @GetMapping("/add")
+    public String add(Integer bookId, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        this.borrowService.add(user.getId(), bookId);
+        return "redirect:/borrow/list";
+    }
+
+    @GetMapping("/list")
+    public String list(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        List<BorrowVO> borrowVOList = this.borrowService.borrowList(user.getId());
+        model.addAttribute("list", borrowVOList);
+        return "/user/borrow";
+    }
+
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\LoginController.java:
+package com.southwind.controller;
+
+import com.southwind.entity.Admin;
+import com.southwind.entity.Sysadmin;
+import com.southwind.entity.User;
+import com.southwind.form.LoginForm;
+import com.southwind.result.LoginResult;
+import com.southwind.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+@Controller
+public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
+    @PostMapping("/login")
+    public String login(LoginForm loginForm, Model model, HttpServletRequest request){
+        LoginResult result = this.loginService.login(loginForm);
+        String url = "";
+        ModelAndView modelAndView = new ModelAndView();
+        if(result.getCode().equals(-1) || result.getCode().equals(-2)){
+            url = "login";
+            model.addAttribute("msg", result.getMsg());
+        }
+        if(result.getCode().equals(0)){
+            HttpSession session = request.getSession();
+            switch (loginForm.getType()){
+                case 1:
+                    session.setAttribute("user", (User)result.getObject());
+                    url = "redirect:/user/index";
+                    break;
+                case 2:
+                    session.setAttribute("admin", (Admin)result.getObject());
+                    url = "redirect:/admin/index";
+                    break;
+                case 3:
+                    session.setAttribute("sysadmin", (Sysadmin)result.getObject());
+                    url = "redirect:/sysadmin/index";
+                    break;
+            }
+
+        }
+        return url;
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\RedirectController.java:
+package com.southwind.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class RedirectController {
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url){
+        return url;
+    }
+
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    void returnNoFavicon() {
+    }
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\SortController.java:
+package com.southwind.controller;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.southwind.entity.Back;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.Sort;
+import com.southwind.service.BackService;
+import com.southwind.service.BookService;
+import com.southwind.service.BorrowService;
+import com.southwind.service.SortService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/sort")
+public class SortController {
+
+    @Autowired
+    private SortService sortService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private BorrowService borrowService;
+    @Autowired
+    private BackService backService;
+
+    @GetMapping("/list")
+    public String list(Model model){
+        model.addAttribute("list", this.sortService.list());
+        return "sysadmin/addBook";
+    }
+
+    @PostMapping("/search")
+    public String search(String name,Model model){
+        QueryWrapper<Sort> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(name), "name", name);
+        List<Sort> list = this.sortService.list(queryWrapper);
+        model.addAttribute("list", list);
+        return "/sysadmin/sort";
+    }
+
+    @PostMapping("/add")
+    public String add(Sort sort){
+        this.sortService.save(sort);
+        return "redirect:/sysadmin/sortList";
+    }
+
+    @GetMapping("/findById/{id}")
+    public String findById(@PathVariable("id") Integer id,Model model){
+        Sort sort = this.sortService.getById(id);
+        model.addAttribute("sort", sort);
+        return "/sysadmin/updateSort";
+    }
+
+    @PostMapping("/update")
+    public String update(Sort sort){
+        this.sortService.updateById(sort);
+        return "redirect:/sysadmin/sortList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.eq("sid", id);
+        List<Book> bookList = this.bookService.list(bookQueryWrapper);
+        for (Book book : bookList) {
+            QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+            borrowQueryWrapper.eq("bid", book.getId());
+            List<Borrow> borrowList = this.borrowService.list(borrowQueryWrapper);
+            for (Borrow borrow : borrowList) {
+                QueryWrapper<Back> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("brid", borrow.getId());
+                this.backService.remove(queryWrapper);
+                this.borrowService.removeById(borrow.getId());
+            }
+            this.bookService.removeById(book.getId());
+        }
+        this.sortService.removeById(id);
+        return "redirect:/sysadmin/sortList";
+    }
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\SysadminController.java:
+package com.southwind.controller;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.southwind.entity.Admin;
+import com.southwind.entity.Book;
+import com.southwind.entity.Sort;
+import com.southwind.entity.User;
+import com.southwind.service.AdminService;
+import com.southwind.service.BookService;
+import com.southwind.service.SortService;
+import com.southwind.service.UserService;
+import com.southwind.vo.BookVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Controller
+@RequestMapping("/sysadmin")
+public class SysadminController {
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private SortService sortService;
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url){
+        return "/sysadmin/"+url;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
+    }
+
+    @GetMapping("/userList")
+    public String userList(Model model){
+        List<User> list = this.userService.list();
+        model.addAttribute("list", list);
+        return "/sysadmin/user";
+    }
+
+    @GetMapping("/sortList")
+    public String sortList(Model model){
+        List<Sort> list = this.sortService.list();
+        model.addAttribute("list", list);
+        return "/sysadmin/sort";
+    }
+
+    @PostMapping("/findByName")
+    public String findByName(String username,Model model){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(username), "username", username);
+        List<User> list = this.userService.list(queryWrapper);
+        model.addAttribute("list", list);
+        return "/sysadmin/user";
+    }
+
+    @GetMapping("/bookList")
+    public String bookList(Model model){
+        List<Book> list = this.bookService.list();
+        List<BookVO> bookVOList = new ArrayList<>();
+        for (Book book : list) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            Sort sort = this.sortService.getById(book.getSid());
+            bookVO.setSname(sort.getName());
+            bookVOList.add(bookVO);
+        }
+        model.addAttribute("list", bookVOList);
+        return "/sysadmin/book";
+    }
+}
+
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\controller\UserController.java:
+package com.southwind.controller;
+
+import com.southwind.entity.User;
+import com.southwind.form.UserRegisterForm;
+import com.southwind.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import com.southwind.entity.User;
+import com.southwind.form.UserRegisterForm;
+import com.southwind.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.stereotype.Controller;
+
+import javax.servlet.http.HttpSession;
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/{url}")
+    public String redirect(@PathVariable("url") String url) {
+        return "/user/" + url;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "login";
+    }
+
+    @PostMapping("/add")
+    public String add(User user) {
+        this.userService.save(user);
+        return "redirect:/sysadmin/userList";
+    }
+
+    @GetMapping("/findById/{id}")
+    public String findById(@PathVariable("id") Integer id, Model model) {
+        User user = this.userService.getById(id);
+        model.addAttribute("user", user);
+        return "/sysadmin/updateUser";
+    }
+
+    @PostMapping("/update")
+    public String update(User user) {
+        this.userService.updateById(user);
+        return "redirect:/sysadmin/userList";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+        this.userService.removeById(id);
+        return "redirect:/sysadmin/userList";
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("userRegisterForm", new UserRegisterForm());
+        return "/user/register";
+    }
+
+    @PostMapping("/register")
+    public String register(UserRegisterForm userRegisterForm, Model model) {
+        if (!userRegisterForm.getPassword().equals(userRegisterForm.getConfirmPassword())) {
+            model.addAttribute("message", "两次输入的密码不一致！");
+            return "/user/register";
+        }
+
+        boolean usernameExists = userService.isUsernameExists(userRegisterForm.getUsername());
+        if (usernameExists) {
+            model.addAttribute("message", "用户名已存在，请选择其他用户名！");
+            return "/user/register";
+        }
+
+        User user = new User();
+        user.setUsername(userRegisterForm.getUsername());
+        user.setPassword(userRegisterForm.getPassword());
+        boolean success = userService.save(user);
+        if (success) {
+            return "redirect:/login";
+        } else {
+            model.addAttribute("message", "注册失败！");
+            return "/user/register";
+        }
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Admin.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ *
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Admin implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String username;
+
+    private String password;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Back.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Back implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private Integer brid;
+
+    private Integer status = 0;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Book.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 书籍实体类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@TableName("book") // 映射到数据库中的表名
+public class Book implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+
+  @TableId(value = "id", type = IdType.AUTO)
+  private Integer id; // 书籍 ID
+
+  private String name; // 书籍名称
+
+  private Integer sid; // 分类 ID
+
+  private Integer number; // 书籍数量
+
+  private String author; // 作者
+
+  private String publish; // 出版社
+
+  private String edition; // 版本
+
+  private String imagePath; // 图片路径
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Borrow.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Borrow implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private Integer uid;
+
+    private Integer bid;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime startTime;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime endTime;
+
+    private Integer status = 0;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Sort.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Sort implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String name;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\Sysadmin.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class Sysadmin implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String username;
+
+    private String password;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\entity\User.java:
+package com.southwind.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Data
+  @EqualsAndHashCode(callSuper = false)
+    public class User implements Serializable {
+
+    private static final long serialVersionUID=1L;
+
+      @TableId(value = "id", type = IdType.AUTO)
+      private Integer id;
+
+    private String username;
+
+    private String password;
+
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\form\LoginForm.java:
+package com.southwind.form;
+
+import lombok.Data;
+
+@Data
+public class LoginForm {
+    private String username;
+    private String password;
+    private Integer type;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\form\UserRegisterForm.java:
+package com.southwind.form;
+
+import lombok.Data;
+
+@Data
+public class UserRegisterForm {
+    private String username;
+    private String password;
+    private String confirmPassword;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\handler\MyMetaObjectHandler.java:
+package com.southwind.handler;
+
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Component
+public class MyMetaObjectHandler implements MetaObjectHandler {
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        this.setFieldValByName("startTime",LocalDateTime.now(),metaObject);
+        this.setFieldValByName("endTime",LocalDateTime.now(),metaObject);
+    }
+
+    @Override
+    public void updateFill(MetaObject metaObject) {
+
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\AdminMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Admin;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface AdminMapper extends BaseMapper<Admin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\BackMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Back;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BackMapper extends BaseMapper<Back> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\BookMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Book;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BookMapper extends BaseMapper<Book> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\BorrowMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Borrow;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BorrowMapper extends BaseMapper<Borrow> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\SortMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Sort;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SortMapper extends BaseMapper<Sort> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\SysadminMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.Sysadmin;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SysadminMapper extends BaseMapper<Sysadmin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\mapper\UserMapper.java:
+package com.southwind.mapper;
+
+import com.southwind.entity.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+public interface UserMapper extends BaseMapper<User> {
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\result\LoginResult.java:
+package com.southwind.result;
+
+import lombok.Data;
+
+@Data
+public class LoginResult {
+    private Object object;
+    private String msg;
+    private Integer code;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\AdminService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Admin;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface AdminService extends IService<Admin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\BackService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Back;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.southwind.vo.BackVO;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BackService extends IService<Back> {
+    public List<BackVO> backList();
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\BookService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Book;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.southwind.vo.PageVO;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BookService extends IService<Book> {
+    public PageVO pageList(Integer currentPage);
+    public PageVO searchByKeyWord(String keyWord,Integer currentPage);
+    public PageVO searchBySort(Integer sid,Integer currentPage);
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\BorrowService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Borrow;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.southwind.vo.AdminBorrowVO;
+import com.southwind.vo.BorrowVO;
+
+import java.util.List;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface BorrowService extends IService<Borrow> {
+    public void add(Integer uid,Integer bid);
+    public List<BorrowVO> borrowList(Integer uid);
+    public List<BorrowVO> backList(Integer uid);
+    public List<AdminBorrowVO> adminBorrowList();
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\LoginService.java:
+package com.southwind.service;
+
+import com.southwind.form.LoginForm;
+import com.southwind.result.LoginResult;
+
+public interface LoginService {
+    public LoginResult login(LoginForm loginForm);
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\SortService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Sort;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SortService extends IService<Sort> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\SysadminService.java:
+package com.southwind.service;
+
+import com.southwind.entity.Sysadmin;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+public interface SysadminService extends IService<Sysadmin> {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\UserService.java:
+package com.southwind.service;
+
+import com.southwind.entity.User;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+public interface UserService extends IService<User> {
+    boolean register(User user);
+    boolean isUsernameExists(String username);
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\AdminServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.southwind.entity.Admin;
+import com.southwind.mapper.AdminMapper;
+import com.southwind.service.AdminService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\BackServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.Back;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.User;
+import com.southwind.mapper.BackMapper;
+import com.southwind.mapper.BookMapper;
+import com.southwind.mapper.BorrowMapper;
+import com.southwind.mapper.UserMapper;
+import com.southwind.service.BackService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.southwind.vo.BackVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class BackServiceImpl extends ServiceImpl<BackMapper, Back> implements BackService {
+
+    @Autowired
+    private BackMapper backMapper;
+    @Autowired
+    private BorrowMapper borrowMapper;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private BookMapper bookMapper;
+
+    @Override
+    public List<BackVO> backList() {
+        QueryWrapper<Back> backQueryWrapper = new QueryWrapper<>();
+        backQueryWrapper.eq("status", 0);
+        List<Back> backList = this.backMapper.selectList(backQueryWrapper);
+        List<BackVO> backVOList = new ArrayList<>();
+        for (Back back : backList) {
+            BackVO backVO = new BackVO();
+            Borrow borrow = this.borrowMapper.selectById(back.getBrid());
+            User user = this.userMapper.selectById(borrow.getUid());
+            backVO.setUserName(user.getUsername());
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            BeanUtils.copyProperties(book, backVO);
+            backVO.setBookName(book.getName());
+            BeanUtils.copyProperties(back, backVO);
+            backVOList.add(backVO);
+        }
+        return backVOList;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\BookServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.southwind.entity.Book;
+import com.southwind.entity.Sort;
+import com.southwind.mapper.BookMapper;
+import com.southwind.mapper.SortMapper;
+import com.southwind.service.BookService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.southwind.vo.BookVO;
+import com.southwind.vo.PageVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
+
+    @Autowired
+    private BookMapper bookMapper;
+    @Autowired
+    private SortMapper sortMapper;
+
+    @Override
+    public PageVO pageList(Integer currentPage) {
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.gt("number", 0);
+        Page<Book> page = new Page<>(currentPage, 5);
+        Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+        PageVO pageVO = new PageVO();
+        pageVO.setCurrentPage(resultPage.getCurrent());
+        pageVO.setTotalPage(resultPage.getPages());
+        List<BookVO> result = new ArrayList<>();
+        for (Book book : resultPage.getRecords()) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            QueryWrapper<Sort> sortQueryWrapper = new QueryWrapper<>();
+            sortQueryWrapper.eq("id", book.getSid());
+            Sort sort = this.sortMapper.selectOne(sortQueryWrapper);
+            bookVO.setSname(sort.getName());
+            result.add(bookVO);
+        }
+        pageVO.setData(result);
+        return pageVO;
+    }
+
+    @Override
+    public PageVO searchByKeyWord(String keyWord,Integer currentPage) {
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.gt("number", 0);
+        bookQueryWrapper.like(StringUtils.isNotBlank(keyWord), "name", keyWord)
+                .or()
+                .like(StringUtils.isNotBlank(keyWord), "author", keyWord)
+                .or()
+                .like(StringUtils.isNotBlank(keyWord), "publish", keyWord);
+        Page<Book> page = new Page<>(currentPage, 5);
+        Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+        PageVO pageVO = new PageVO();
+        pageVO.setCurrentPage(resultPage.getCurrent());
+        pageVO.setTotalPage(resultPage.getPages());
+        List<BookVO> result = new ArrayList<>();
+        for (Book book : resultPage.getRecords()) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            QueryWrapper<Sort> sortQueryWrapper = new QueryWrapper<>();
+            sortQueryWrapper.eq("id", book.getSid());
+            Sort sort = this.sortMapper.selectOne(sortQueryWrapper);
+            bookVO.setSname(sort.getName());
+            result.add(bookVO);
+        }
+        pageVO.setData(result);
+        return pageVO;
+    }
+
+    @Override
+    public PageVO searchBySort(Integer sid, Integer currentPage) {
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.gt("number", 0);
+        bookQueryWrapper.eq("sid",sid);
+        Page<Book> page = new Page<>(currentPage, 5);
+        Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+        PageVO pageVO = new PageVO();
+        pageVO.setCurrentPage(resultPage.getCurrent());
+        pageVO.setTotalPage(resultPage.getPages());
+        List<BookVO> result = new ArrayList<>();
+        for (Book book : resultPage.getRecords()) {
+            BookVO bookVO = new BookVO();
+            BeanUtils.copyProperties(book, bookVO);
+            QueryWrapper<Sort> sortQueryWrapper = new QueryWrapper<>();
+            sortQueryWrapper.eq("id", book.getSid());
+            Sort sort = this.sortMapper.selectOne(sortQueryWrapper);
+            bookVO.setSname(sort.getName());
+            result.add(bookVO);
+        }
+        pageVO.setData(result);
+        return pageVO;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\BorrowServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.Book;
+import com.southwind.entity.Borrow;
+import com.southwind.entity.Sort;
+import com.southwind.entity.User;
+import com.southwind.mapper.BookMapper;
+import com.southwind.mapper.BorrowMapper;
+import com.southwind.mapper.SortMapper;
+import com.southwind.mapper.UserMapper;
+import com.southwind.service.BorrowService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.southwind.vo.AdminBorrowVO;
+import com.southwind.vo.BorrowVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class BorrowServiceImpl extends ServiceImpl<BorrowMapper, Borrow> implements BorrowService {
+
+    @Autowired
+    private BorrowMapper borrowMapper;
+    @Autowired
+    private BookMapper bookMapper;
+    @Autowired
+    private SortMapper sortMapper;
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public void add(Integer uid, Integer bid) {
+        Borrow borrow = new Borrow();
+        borrow.setBid(bid);
+        borrow.setUid(uid);
+        this.borrowMapper.insert(borrow);
+        Book book = this.bookMapper.selectById(bid);
+        book.setNumber(book.getNumber()-1);
+        this.bookMapper.updateById(book);
+    }
+
+    @Override
+    public List<BorrowVO> borrowList(Integer uid) {
+        QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+        borrowQueryWrapper.eq("uid", uid);
+        List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+        List<BorrowVO> borrowVOList = new ArrayList<>();
+        for (Borrow borrow : borrowList) {
+            BorrowVO borrowVO = new BorrowVO();
+            BeanUtils.copyProperties(borrow, borrowVO);
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            BeanUtils.copyProperties(book, borrowVO);
+            borrowVO.setBookName(book.getName());
+            Sort sort = this.sortMapper.selectById(book.getSid());
+            borrowVO.setSortName(sort.getName());
+            borrowVOList.add(borrowVO);
+        }
+        return borrowVOList;
+    }
+
+    @Override
+    public List<BorrowVO> backList(Integer uid) {
+        QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+        borrowQueryWrapper.eq("uid", uid);
+        borrowQueryWrapper.eq("status", 1);
+        List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+        List<BorrowVO> borrowVOList = new ArrayList<>();
+        for (Borrow borrow : borrowList) {
+            BorrowVO borrowVO = new BorrowVO();
+            BeanUtils.copyProperties(borrow, borrowVO);
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            BeanUtils.copyProperties(book, borrowVO);
+            borrowVO.setId(borrow.getId());
+            borrowVO.setBookName(book.getName());
+            borrowVOList.add(borrowVO);
+        }
+        return borrowVOList;
+    }
+
+    @Override
+    public List<AdminBorrowVO> adminBorrowList() {
+        QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
+        borrowQueryWrapper.eq("status", 0);
+        List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+        List<AdminBorrowVO> adminBorrowVOList = new ArrayList<>();
+        for (Borrow borrow : borrowList) {
+            AdminBorrowVO adminBorrowVO = new AdminBorrowVO();
+            BeanUtils.copyProperties(borrow, adminBorrowVO);
+            User user = this.userMapper.selectById(borrow.getUid());
+            adminBorrowVO.setUserName(user.getUsername());
+            Book book = this.bookMapper.selectById(borrow.getBid());
+            adminBorrowVO.setBookName(book.getName());
+            BeanUtils.copyProperties(book, adminBorrowVO);
+            Sort sort = this.sortMapper.selectById(book.getSid());
+            adminBorrowVO.setSortName(sort.getName());
+            adminBorrowVO.setId(borrow.getId());
+            adminBorrowVOList.add(adminBorrowVO);
+        }
+        return adminBorrowVOList;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\LoginServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.Admin;
+import com.southwind.entity.Sysadmin;
+import com.southwind.entity.User;
+import com.southwind.form.LoginForm;
+import com.southwind.mapper.AdminMapper;
+import com.southwind.mapper.SysadminMapper;
+import com.southwind.mapper.UserMapper;
+import com.southwind.result.LoginResult;
+import com.southwind.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LoginServiceImpl implements LoginService {
+
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private AdminMapper adminMapper;
+    @Autowired
+    private SysadminMapper sysadminMapper;
+
+    @Override
+    public LoginResult login(LoginForm loginForm) {
+        LoginResult loginResult = new LoginResult();
+        switch (loginForm.getType()){
+            case 1:
+                QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("username", loginForm.getUsername());
+                User user = this.userMapper.selectOne(queryWrapper);
+                if(user == null) {
+                    loginResult.setMsg("用户名不存在");
+                    loginResult.setCode(-1);
+                    return loginResult;
+                }
+                //验证密码
+                if(!user.getPassword().equals(loginForm.getPassword())){
+                    loginResult.setMsg("密码错误");
+                    loginResult.setCode(-2);
+                    return loginResult;
+                }
+                loginResult.setMsg("登录成功");
+                loginResult.setCode(0);
+                loginResult.setObject(user);
+                break;
+            case 2:
+                QueryWrapper<Admin> adminQueryWrapper = new QueryWrapper<>();
+                adminQueryWrapper.eq("username", loginForm.getUsername());
+                Admin admin = this.adminMapper.selectOne(adminQueryWrapper);
+                if(admin == null) {
+                    loginResult.setMsg("用户名不存在");
+                    loginResult.setCode(-1);
+                    return loginResult;
+                }
+                //验证密码
+                if(!admin.getPassword().equals(loginForm.getPassword())){
+                    loginResult.setMsg("密码错误");
+                    loginResult.setCode(-2);
+                    return loginResult;
+                }
+                loginResult.setMsg("登录成功");
+                loginResult.setCode(0);
+                loginResult.setObject(admin);
+                break;
+            case 3:
+                QueryWrapper<Sysadmin> sysadminQueryWrapper = new QueryWrapper<>();
+                sysadminQueryWrapper.eq("username", loginForm.getUsername());
+                Sysadmin sysadmin = this.sysadminMapper.selectOne(sysadminQueryWrapper);
+                if(sysadmin == null) {
+                    loginResult.setMsg("用户名不存在");
+                    loginResult.setCode(-1);
+                    return loginResult;
+                }
+                //验证密码
+                if(!sysadmin.getPassword().equals(loginForm.getPassword())){
+                    loginResult.setMsg("密码错误");
+                    loginResult.setCode(-2);
+                    return loginResult;
+                }
+                loginResult.setMsg("登录成功");
+                loginResult.setCode(0);
+                loginResult.setObject(sysadmin);
+                break;
+        }
+        return loginResult;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\SortServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.southwind.entity.Sort;
+import com.southwind.mapper.SortMapper;
+import com.southwind.service.SortService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class SortServiceImpl extends ServiceImpl<SortMapper, Sort> implements SortService {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\SysadminServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.southwind.entity.Sysadmin;
+import com.southwind.mapper.SysadminMapper;
+import com.southwind.service.SysadminService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author admin
+ * @since 2023-03-07
+ */
+@Service
+public class SysadminServiceImpl extends ServiceImpl<SysadminMapper, Sysadmin> implements SysadminService {
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\service\impl\UserServiceImpl.java:
+package com.southwind.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.southwind.entity.User;
+import com.southwind.mapper.UserMapper;
+import com.southwind.service.UserService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
+    @Override
+    public boolean register(User user) {
+        // 检查用户名是否已存在
+        User existingUser = this.getOne(new QueryWrapper<User>().eq("username", user.getUsername()));
+        if (existingUser != null) {
+            return false; // 用户名已存在
+        }
+        return this.save(user); // 保存用户
+    }
+
+    @Override
+    public boolean isUsernameExists(String username) {
+        User existingUser = this.getOne(new QueryWrapper<User>().eq("username", username));
+        return existingUser != null;
+    }
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\AdminBorrowVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+public class AdminBorrowVO {
+    private Integer id;
+    private String userName;
+    private String bookName;
+    private String sortName;
+    private String author;
+    private String publish;
+    private String edition;
+    private LocalDateTime startTime;
+    private Integer status = 0;
+    private String imagePath; // 添加 imagePath 属性
+
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\BackVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+@Data
+public class BackVO {
+    private Integer id;
+    private String userName;
+    private String bookName;
+    private String author;
+    private String publish;
+    private String edition;
+    private Integer status;
+    private String imagePath; // 添加 imagePath 属性
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\BookVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+@Data
+public class BookVO {
+    private Integer id;
+    private String name;
+    private String sname;
+    private Integer number;
+    private String author;
+    private String publish;
+    private String edition;
+    private String imagePath; // 添加 imagePath 属性
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\BorrowVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
+public class BorrowVO {
+    private Integer id;
+    private String bookName;
+    private String sortName;
+    private String author;
+    private String publish;
+    private String edition;
+    private LocalDateTime startTime;
+    private Integer status = 0;
+    private String imagePath; // 添加 imagePath 属性
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\java\com\southwind\vo\PageVO.java:
+package com.southwind.vo;
+
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+public class PageVO {
+    private Long currentPage;
+    private Long totalPage;
+    private List data;
+}
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\test\java\com\southwind\LibSpringbootApplicationTests.java:
+package com.southwind;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class LibSpringbootApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
+
+

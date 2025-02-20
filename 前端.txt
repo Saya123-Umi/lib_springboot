@@ -1,0 +1,5402 @@
+﻿C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\static\js\artDialog\index.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>artDialog</title>
+<meta name="keywords" content="artDialog,javascript,dialog,jQuery" />
+<meta name="description" content="artDialog是一个精巧的web对话框组件，压缩后只有十多KB，并且不依赖其他框架。" />
+<script>
+// skin demo
+(function() {
+	var _skin, _jQuery;
+	var _search = window.location.search;
+	if (_search) {
+		_skin = _search.split('demoSkin=')[1];
+		_jQuery = _search.indexOf('jQuery=true') !== -1;
+		if (_jQuery) document.write('<scr'+'ipt src="jquery-1.6.2.min.js"></sc'+'ript>');
+	};
+	
+	document.write('<scr'+'ipt src="artDialog.source.js?skin=' + (_skin || 'default') +'"></sc'+'ript>');
+	window._isDemoSkin = !!_skin;
+})();
+</script>
+<script src="./plugins/iframeTools.source.js"></script>
+<script src="./_doc/demo.js"></script>
+<script src="./_doc/highlight/highlight.pack.js"></script>
+<script src="./_doc/highlight/languages/javascript.js"></script>
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+</script>
+<link href="./_doc/demo.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./_doc/highlight/styles/magula.css" />
+</head>
+
+<body>
+<div id="doc">
+  <div id="header">
+    <h1 id="logo"><a href="index.html">artDialog</a></h1>
+    <ul id="nav" class="nav">
+      <li><a href="index.html" class="home">首页</a></li>
+      <li><a href="./_doc/API.html" class="api">文档</a></li>
+      <li><a href="./_doc/down.html" class="down">下载</a></li>
+      <li><a href="./_doc/log.html" class="log">更新</a></li>
+      <li><a href="./_doc/labs.html" class="labs">实验</a></li>
+      <li><a href="./_doc/license.html" class="license">授权</a></li>
+      |
+      <li><a href="#" id="nav-skin">皮肤</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div class="tips" style="margin:4px 5px; padding:8px; background:#EEF7F5; text-align:left; color:#000; border-radius:3px; border:1px solid #D7EAE2; ">artDialog是一个基于javascript编写的对话框组件，它拥有精致的界面与友好的接口</div>
+    <dl class="about">
+      <dt>自适应内容</dt>
+      <dd>artDialog的特殊UI框架能够适应内容变化，甚至连外部程序动态插入的内容它仍然能自适应，因此你不必去考虑消息内容尺寸使用它。它的消息容器甚至能够根据宽度让文本居中或居左对齐——这一切全是XHTML+CSS原生实现。</dd>
+      <dt>完善的接口</dt>
+      <dd>它的接口完善，可以轻易与外部程序配合使用。如异步写入消息、控制位置、尺寸、显示与隐藏、关闭等。</dd>
+      <dt>细致的体验</dt>
+      <dd>如果不是在输入状态，它支持Esc快捷键关闭；可指定在元素附近弹出，让操作更便捷；智能给按钮添加焦点；黄金比例垂直居中；超大响应区域特别为ipad等触屏设备优化；预先缓存皮肤图片更快响应……</dd>
+      <dt>跨平台兼容</dt>
+      <dd>兼容：IE6+、Firefox、Chrome、Safari、Opera以及iPad等移动设备。并且IE6下也能支持现代浏览器的静止定位(<a href="http://www.planeart.cn/?p=877" target="_blank" title="阅读作者ie6Fixed相关博文" style="text-decoration:underline">fixed</a>)、<!--[if gte IE 7]><!-->覆盖下拉控件<!--<![endif]--><!--[if lt IE 7]><select><option>覆盖下拉控件</option></select><![endif]-->、alpha通道png背景。</dd>
+    </dl>
+    <h2>快速入门</h2>
+    <h3>一、使用传统的参数</h3>
+    <p>art.dialog(content, ok, cancel)</p>
+    <div id="demoCode01">
+      <pre><code class=" javascript">art.dialog('简单愉悦的接口，强大的表现力，优雅的内部实现', function(){alert('yes');});</code></pre>
+    </div>
+    <p class="buttons">
+      <button class="runCode" id="btn1" title="btn1" name="demoCode01">运行&raquo;</button>
+    </p>
+    <h3>二、使用字面量传参</h3>
+    <p>art.dialog(options)</p>
+    <div id="demoCode02">
+      <pre><code class=" javascript">var dialog = art.dialog({
+    title: '欢迎',
+	content: '欢迎使用artDialog对话框组件！',
+	icon: 'succeed',
+    follow: document.getElementById('btn2'),
+    ok: function(){
+        this.title('警告').content('请注意artDialog两秒后将关闭！').lock().time(2);
+        return false;
+    }
+});
+</code></pre>
+    </div>
+    <p class="buttons">
+      <button class="runCode" id="btn2" title="btn2" name="demoCode02">运行&raquo;</button>
+    </p>
+    <p>更多配置参数用法请查阅API文档： <a href="./_doc/API.html#options">./_doc/API.html#options</a></p>
+    <h3>三、扩展方法</h3>
+    <p>需要对弹出后的对话框操作？artDialog简单实用的扩展方法可以使这一切变得简单。</p>
+    <p>如在ajax异步操作中，我们可以先定义一个变量引用对话框返回的扩展方法：</p>
+    <pre><code class=" javascript">var myDialog = art.dialog();// 初始化一个带有loading图标的空对话框
+jQuery.ajax({
+	url: 'http://web5.qq.com/content?id=1',
+    success: function (data) {
+        myDialog.content(data);// 填充对话框内容
+    }
+});
+</code></pre>
+    <p>如果需要使用程序控制关闭，可以使用"close"方法关闭对话框：</p>
+    <pre><code class=" javascript">myDialog.close();</code></pre>
+    <p>更多扩展方法用法请查阅API文档： <a href="./_doc/API.html#API">./_doc/API.html#API</a></p>
+    <h2>插件：框架应用工具</h2>
+    <p>artDialog针对CMS类的框架应用提供了专属插件，如穿越框架、iframe、AJAX、跨框架传值操作等。</p>
+    <p>例： 使用open方法嵌入页面，并使用data方法在各个iframe间传递数据：</p>
+    <div id="demoCode04-3">
+      <pre><code class="javascript">var val = document.getElementById('demoInput04-3').value;
+art.dialog.data('test', val);
+art.dialog.data('homeDemoPath', './_doc/');
+
+// 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+// document.getElementById('aInput').value = art.dialog.data('test');
+art.dialog.open('./_doc/iframeA.html');
+</code></pre>
+    </div>
+    <p class="buttons"> 请输入测试文字：
+      <input id="demoInput04-3" title="demoInput04-3" type="text" value="精于心，简于形" style="padding:4px; width:16em; margin-right:10px" />
+      <button class="runCode" name="demoCode04-3">运行&raquo;</button>
+    </p>
+    <p>插件更多功能请查阅API文档： <a target="_blank" href="./iframeTop.html">./iframeTop.html</a></p>
+    <h2>jQuery + artDialog</h2>
+    <p>artDialog提供了一个jQuery版本，功能与标准版一致，调用只需要把art前缀改成jQuery的命名空间。</p>
+    <pre><code class=" javascript">// 普通调用
+$.dialog({content:'hello world!'});
+
+// 使用选择器方式，此时自动使用绑定了live click事件，同时启用follow模式
+$('#main .test').dialog({content: 'hello world'});</code></pre>
+<p>(最低兼容jquery1.3.2，但框架应用插件需要jquery1.4+运行<a href="#?" title="jQuery版本小于1.4不能获取iframe内部尺寸，导致open方法无法自适应内容尺寸">[?]</a>)</p>
+    <h2>联系</h2>
+
+
+<div style="margin:4px 0; padding:5px; background:#EEF7F5; text-align:left; color:#000; border-radius:3px; border:1px solid #D7EAE2;" class="tips"><span style="color:#DFB113">注意！</span>artDialog4+即将停止维护，在框架满天飞的时代结束后，其历史使命已经完成。新版本<a href="https://github.com/aui/artDialog" style="text-decoration:underline;">artDialog 5+</a>很小，却依然动人。若要迁移，请抛弃iframe，使用ajax技术。</div>
+
+    <p>如果你对artDialog有什么意见建议可以用下面任意一种联系方式找到作者。artDialog一直在不断完善自身，这个愉悦的过程中感谢有你的参与～</p>
+    <p><strong>提交BUG必备项</strong>：1、浏览器名称，版本 2、artDialog版本号（只支持4+版本） 3、简明扼要的描述信息 4、建议提取一份BUG DEMO，这样解决问题的概率增加300%</p>
+    <p>如果对使用问题有疑惑，可以前往由 artDialog 爱好者建立的QQ群寻求帮助（前提是先自己阅读文档）： 44030323 </p>
+    <p>作者：糖饼<br />
+      邮箱：<span id="myEmail"></span> <span style="color:#990">(仅用作bug提交)</span><br />
+      网站：<a href="http://www.planeart.cn" target="_blank">PlaneArt.Cn</a><br />
+      微博：<a href="http://t.qq.com/tangbin">t.qq.com/tangbin</a></p>
+    <h2>捐赠</h2>
+    <p>artDialog就是你一直想要的对话框么？哇～那么我非常期待您能够热情的提供15元或者其他金额的捐赠鼓励～正如您支持其他开源项目一样。</p>
+    <p>支付宝: <a href="https://me.alipay.com/planeart" target="_blank">https://me.alipay.com/planeart</a></p>
+    <p>您因如果使用artDialog而受益或者感到愉悦，您还可以这样帮助artDialog成长：</p>
+    <p> 1、共同参与并完善artDialog或用blog/微博/Twitter把它分享它给更多的人。</p>
+    <p> 2、如artDialog有幸被用在你的项目，请您联系我，我后续将在artDialog主页展示您项目/企业的LOGO（目前有盛大phpCMS、腾讯、中国电信等企业使用它）。</p>
+  </div>
+  <div id="footer"></div>
+</div>
+<script>
+(function(){
+	var myMail = 1987 + '.' + 'tangbin' + '@' + 'gmail.com';
+	myMail = '<a href="mailto:' + myMail + '">' + myMail + '</a>';
+	document.getElementById('myEmail').innerHTML = myMail;
+	
+
+})();
+</script>
+<script>_isDemoSkin && window._demoSkin && _demoSkin();</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\static\m\index.html:
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>您访问的网页出错啦！</title>
+
+		<meta name="description" content="Some ideas for modern button styles and effects" />
+		<meta name="keywords" content="button, effect, hover, style, inspiration, web design" />
+		<meta name="author" content="Codrops" />
+   		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8, target-densitydpi=low-dpi" />  
+
+		<link href="img/15.0904011.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/15.0904011.ico" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.beattext.js"></script>
+		<script type="text/javascript" src="js/easying.js"></script>
+		<link rel="stylesheet" href="css/style.css" />
+		  
+		  <script type="text/javascript">
+  		var system ={};  
+    	var p = navigator.platform;       
+        system.win = p.indexOf("Win") == 0;  
+        system.mac = p.indexOf("Mac") == 0;  
+       system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);     
+       if(system.win||system.mac||system.xll){//如果是电脑跳转到
+               window.location.href="../index.html";  
+       }else{  //如果是手机,跳转到
+              window.location.href="#";  
+        }//上面代码是判断是手机端还是PC端
+ </script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+		$('p#roloadText').beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});
+		});
+		</script>
+	</head>
+	<body>
+		
+		<div class="logo" id="a" onclick="a();" title="点击我有惊喜！">
+				<img src="img/20171216094159_QaLXP.jpeg">
+			</div>
+			<br /><br />
+			<div class="container">
+		<p id="roloadText">网页维护中...</p>
+	</div>
+<center>
+		<div class="body_buttom_r_gg">
+			<center>
+			<h2 class="gg_gg">
+				网站维护公告：
+			</h2>
+			<font class="gg_font3">距离网站开启日倒计时：</font><br /><br />
+</center>
+			<div id="CountMsg" class="HotDate"> 
+					<span id="t_d" class="gg_sj">00天</span> 
+					<span id="t_h" class="gg_sj">00时</span> 
+					<span id="t_m" class="gg_sj">00分</span> 
+					<span id="t_s" class="gg_sj">00秒</span> 
+			</div> 
+			<script type="text/javascript"> 
+				function getRTime(){ 
+				var EndTime= new Date('2024/2/18 20:18:00'); //截止时间 
+				var NowTime = new Date(); 
+				var t =EndTime.getTime() - NowTime.getTime(); 
+				var d=Math.floor(t/1000/60/60/24); 
+				var h=Math.floor(t/1000/60/60%24); 
+				var m=Math.floor(t/1000/60%60); 
+				var s=Math.floor(t/1000%60); 
+				document.getElementById("t_d").innerHTML = d + "天"; 
+				document.getElementById("t_h").innerHTML = h + "时"; 
+				document.getElementById("t_m").innerHTML = m + "分"; 
+				document.getElementById("t_s").innerHTML = s + "秒"; 
+				} 
+				setInterval(getRTime,1000); 
+		</script> 
+			</center>
+</div>		
+<audio autoplay loop id="music">
+<source src="../music/music.mp3" type="audio/mpeg">
+</audio>
+<script>   
+   function a(){
+     var audio = document.getElementById('music'); 
+     if(audio.paused){                 
+         audio.play();//audio.play();// 播放  
+     }
+     else{
+          audio.pause();// 暂停
+     } 
+   }
+</script>
+	</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\error.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 头部元信息保持不变 -->
+    <meta charset="utf-8" />
+    <title>您访问的网页出错啦！</title>
+    <meta name="description" content="404 页面未找到" />
+    <meta name="keywords" content="404, 页面未找到" />
+    <meta name="author" content="Your Name" />
+    <link th:href="@{/img/15.0904011.ico}" rel="shortcut icon" type="image/x-icon" />
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.beattext.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easying.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/button.css}" />
+    <link rel="stylesheet" th:href="@{/css/reset.css}" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // 原有JavaScript逻辑保持不变
+            $('p#roloadText').beatText({
+                isAuth: true,
+                beatHeight: "1em",
+                isRotate: false,
+                upTime: 100,
+                downTime: 100
+            });
+
+            const randomNum = Math.floor(Math.random() * 6) + 1;
+            const paddedNum = randomNum.toString().padStart(2, '0');
+            const bgUrl = `https://bang-dream.com/img/error/bgd_404_${paddedNum}.jpg`;
+            $('body').css({
+                'background': `url('${bgUrl}') no-repeat center center fixed`,
+                'background-size': 'cover'
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 保持原有结构 -->
+<div class="logo" id="a" onclick="a();" title="点击我有惊喜！">
+    <img th:src="@{/img/20171216094159_QaLXP.jpeg}">
+</div>
+<br /><br />
+<div class="container">
+    <p id="roloadText">404！网页君找不到这个网页了哦...</p>
+</div>
+
+<!-- 修改按钮容器样式 -->
+<div class="box bg-1" style="display: flex; justify-content: center; align-items: center;">
+    <!-- 新增登录状态判断 -->
+    <a th:if="${userType == null || userType == 'guest'}"
+       href="/login"
+       class="button button--antiman button--round-l button--text-medium"
+       style="display: inline-flex; align-items: center; justify-content: center; width: 200px;">
+        <span>返回登录</span>
+    </a>
+    <a th:unless="${userType == null || userType == 'guest'}"
+       th:href="${userType == 'user' ? '/user/index' :
+                userType == 'admin' ? '/admin/index' :
+                userType == 'sysadmin' ? '/sysadmin/index' : '/login'}"
+       class="button button--antiman button--round-l button--text-medium"
+       style="display: inline-flex; align-items: center; justify-content: center; width: 200px;">
+        <span>返回首页</span>
+    </a>
+</div>
+
+<div class="body_buttom">
+    <audio autoplay loop id="music">
+        <source th:src="@{/music/music.mp3}" type="audio/mpeg">
+    </audio>
+    <script>
+        function a() {
+            var audio = document.getElementById('music');
+            audio.paused ? audio.play() : audio.pause();
+        }
+    </script>
+</div>
+
+<!-- 修改后的样式 -->
+<style>
+    /* 原有全局样式保持不变 */
+    body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+    }
+    .container p {
+        text-align: center;
+        padding: 10px auto;
+        font-size: 30px;
+        color: darksalmon;
+    }
+    .beat-char {
+        line-height: 3.4em;
+        position: relative;
+        display: inline-block;
+        background: transparent;
+    }
+    .rotate {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -webkit-transition-duration: 0.7s;
+    }
+    .logo {
+        width: 200px;
+        height: 200px;
+        margin: 120px auto 0px;
+        border-radius: 200px;
+        border: 5px solid;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        transition: 1s all;
+    }
+    .logo img {
+        width: 200px;
+        height: 200px;
+        margin: 0px auto 0px;
+        background: #fff;
+        border-radius: 200px;
+    }
+    .logo:hover {
+        transform: rotate(360deg);
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+    }
+    .body_buttom {
+        width: 100%;
+        height: 290px;
+        position: fixed;
+        bottom: 0px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* 新增按钮居中样式 */
+    .box.bg-1 {
+        padding: 20px 0;
+    }
+    .button--antiman {
+        margin: 0 10px;
+        padding: 15px 30px;
+        text-align: center;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        height: 50px;
+        transition: all 0.3s ease;
+    }
+    .button--antiman span {
+        position: relative;
+        z-index: 2;
+        padding: 0 10px;
+    }
+    a.button--antiman {
+        text-decoration: none;
+        margin-left: 0 !important; /* 移除原有左边距 */
+    }
+</style>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\login.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>二次元の小站</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <style>
+        /* 新增错误提示样式 */
+        .error-message {
+            color: #ff4d4f;
+            margin: 10px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 原有样式保持不变 */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 450px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        .bg-container {
+            flex: 1;
+            background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+            position: relative;
+            opacity: 0;
+            animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+        }
+
+        .login-form-box {
+            width: 100%;
+            transform: translateY(-30px);
+        }
+
+        .login-title {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: 15px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .login-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 15px;
+            transform-origin: left center;
+        }
+
+        select.form-control {
+            height: 46px;
+            line-height: 46px;
+            padding-top: 0;
+            padding-bottom: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            transform: scale(1.03);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            width: 160px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .bg-container {
+                display: none;
+                animation: none;
+            }
+            .login-container {
+                width: 100%;
+                padding: 0 20px;
+                animation: none;
+                opacity: 1;
+            }
+            .btn-primary {
+                width: 120px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#frmLogin').bootstrapValidator({
+                feedbackIcons:{
+                    valid:'glyphicon glyphicon-ok',
+                    invalid:'glyphicon glyphicon-remove',
+                    validating:'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+                    password: { validators: { notEmpty: { message: '密码不能为空' } } }
+                }
+            });
+
+            $('.form-control').on('focus', function() {
+                $(this).css({
+                    'transform': 'scale(1.03)',
+                    'z-index': 1
+                });
+            }).on('blur', function() {
+                $(this).css({
+                    'transform': 'scale(1)',
+                    'z-index': 'auto'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 左侧登录区 -->
+<div class="login-container">
+    <div class="login-form-box">
+        <h2 class="login-title">📖 书斋登录</h2>
+
+        <!-- 新增错误提示 -->
+        <div class="error-message" th:text="${msg}"></div>
+
+        <form action="/login" method="post" id="frmLogin">
+            <div class="form-group">
+                <input type="text" name="username"
+                       class="form-control"
+                       placeholder="用户名"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password"
+                       class="form-control"
+                       placeholder="密码"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <select name="type" class="form-control">
+                    <option value="0">- 选择身份 -</option>
+                    <option value="1" selected>普通用户</option>
+                    <option value="2">管理员</option>
+                    <option value="3">系统管理员</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">登录次元</button>
+                    <a href="/user/register" class="btn btn-primary">注册用户</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\register.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>用户注册</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/mycss.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+  <style>
+    /* 新增错误提示样式 */
+    .error-message {
+      color: #ff4d4f;
+      margin: 10px 0;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 原有样式保持不变 */
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      font-family: 'Microsoft YaHei', sans-serif;
+      background: #f8f9fa;
+      overflow: hidden;
+    }
+
+    .register-container {
+      width: 450px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+      opacity: 0;
+      animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    .bg-container {
+      flex: 1;
+      background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+      position: relative;
+      opacity: 0;
+      animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+    }
+
+    .register-form-box {
+      width: 100%;
+      transform: translateY(-30px);
+    }
+
+    .register-title {
+      color: #ff6b6b;
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 15px;
+      padding-left: 8px;
+      position: relative;
+    }
+
+    .register-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 40px;
+      height: 3px;
+      background: #ff6b6b;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 2px solid #eee;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 12px 15px;
+      transform-origin: left center;
+    }
+
+    select.form-control {
+      height: 46px;
+      line-height: 46px;
+      padding-top: 0;
+      padding-bottom: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+    }
+
+    .form-control:focus {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+      width: 160px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .bg-container {
+        display: none;
+        animation: none;
+      }
+      .register-container {
+        width: 100%;
+        padding: 0 20px;
+        animation: none;
+        opacity: 1;
+      }
+      .btn-primary {
+        width: 120px;
+        padding: 10px 15px;
+      }
+    }
+  </style>
+  <script>
+    $(function(){
+      $('#frmRegister').bootstrapValidator({
+        feedbackIcons:{
+          valid:'glyphicon glyphicon-ok',
+          invalid:'glyphicon glyphicon-remove',
+          validating:'glyphicon glyphicon-refresh'
+        },
+        fields:{
+          username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+          password: { validators: { notEmpty: { message: '密码不能为空' } } },
+          confirmPassword: { validators: { notEmpty: { message: '确认密码不能为空' }, identical: { field: 'password', message: '两次输入的密码不一致' } } }
+        }
+      });
+
+      $('.form-control').on('focus', function() {
+        $(this).css({
+          'transform': 'scale(1.03)',
+          'z-index': 1
+        });
+      }).on('blur', function() {
+        $(this).css({
+          'transform': 'scale(1)',
+          'z-index': 'auto'
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+<!-- 左侧注册区 -->
+<div class="register-container">
+  <div class="register-form-box">
+    <h2 class="register-title">📖 书斋注册</h2>
+
+    <!-- 新增错误提示 -->
+    <div class="error-message" th:text="${message}"></div>
+
+    <form action="/user/register" method="post" id="frmRegister">
+      <div class="form-group">
+        <input type="text" name="username"
+               class="form-control"
+               placeholder="用户名"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="password"
+               class="form-control"
+               placeholder="密码"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="confirmPassword"
+               class="form-control"
+               placeholder="确认密码"
+               required>
+      </div>
+
+      <div class="form-group" style="margin-top: 30px;">
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">注册</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\admin\back.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>归还处理</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>申请人</th>
+        <th>书籍名称</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="back:${list}">
+        <td th:text="${back.userName}"></td>
+        <td th:text="${back.bookName}"></td>
+        <td th:text="${back.author}"></td>
+        <td th:text="${back.publish}"></td>
+        <td th:text="${back.edition}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled>
+                未归还
+            </button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/back/allow?id='+${back.id}">确认归还</a>
+        </td>
+    </tr>
+</table>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\admin\borrow.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>借书处理</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 50px; /* 限制最大宽度 */
+            max-height: 70px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>借阅读者</th>
+        <th>书籍封面</th>
+        <th>所借书籍</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>申请时间</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="borrow:${list}">
+        <td th:text="${borrow.userName}"></td>
+        <td>
+            <img th:if="${borrow.imagePath}" th:src="@{'/static/images/' + ${borrow.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${borrow.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${borrow.bookName}"></td>
+        <td th:text="${borrow.sortName}"></td>
+        <td th:text="${borrow.author}"></td>
+        <td th:text="${borrow.publish}"></td>
+        <td th:text="${borrow.edition}"></td>
+        <td th:text="${borrow.startTime}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled>
+                待审批
+            </button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/admin/allow?id='+${borrow.id}">通过</a>
+            <a type="button" class="btn btn-danger" th:href="'/admin/notAllow?id='+${borrow.id}">不通过</a>
+        </td>
+    </tr>
+</table>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\admin\index.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <img src="/assets/img/logo.png" style="height: 30px;">
+        图书管理系统
+        <span>Library Management System</span>
+    </div>
+    <div class="dl-log">
+        欢迎您：<span class="dl-log-user" th:text="${session.admin.username}"></span><a href="/admin/logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>	<!-- 	<li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li> -->
+
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<div class="footer">
+    版权所有
+</div>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="/assets/js/common/main.js"></script>
+<script type="text/javascript" src="/assets/js/config-min.js"></script>
+<script>
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[{text:'书籍处理',items:[{id:'12',text:'借书处理',href:'/admin/borrowList'},{id:'3',text:'归还处理',href:'/back/adminList'}]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\addBook.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>添加书籍</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/book/add" method="post" class="definewidth m20" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">书籍名称</td>
+            <td><input type="text" name="name"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍类别</td>
+            <td>
+                <select class="form-control" name="sid">
+                    <option th:each="sort:${list}" th:text="${sort.name}" th:value="${sort.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">作者</td>
+            <td><input type="text" name="author"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">出版社</td>
+            <td><input type="text" name="publish"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">版本</td>
+            <td><input type="text" name="edition"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍数量</td>
+            <td><input type="text" name="number"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍封面</td>
+            <td>
+                <input type="file" name="imageFile" accept="image/*"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">添加</button> &nbsp;&nbsp;
+                <a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/book">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\addSort.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/sort/add"
+      method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">类别名称</td>
+            <td><input type="text" name="name" /></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button id="btn" type="submit" class="btn btn-primary"
+                        >添加</button> &nbsp;&nbsp;<a type="button"
+                                                                 class="btn btn-success" name="backid" id="backid"
+                                                                 href="/sysadmin/sortList">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\addUser.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/user/add" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td class="tableleft">用户账号</td>
+            <td><input id="code" type="text" name="username" onchange="checkCode()"/>
+                &nbsp;&nbsp; <span id="showMsg" style="color:red"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">用户密码</td>
+            <td><input type="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button id="btn" type="submit" class="btn btn-primary">添加</button> &nbsp;&nbsp;<a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/userList">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    function checkCode(){
+        var code=$("#code").val();
+        $.ajax({
+            type:"get",
+            url:"${pageContext.request.contextPath }/sysadmin/checkCode",
+            data:{"code":code},
+            success:function(data) {
+                if(data==1)
+                {
+                    $("#showMsg").html("账户已存在，请重新输入");
+                    $("#btn").attr("disabled", true);
+                }
+                else{
+                    $("#showMsg").html("");
+                    $("#btn").attr("disabled", false);
+                }
+            }
+        });
+    }
+</script>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\book.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 80px; /* 限制最大宽度 */
+            max-height: 100px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+
+        /* 调整表格单元格内边距 */
+        .table td {
+            padding: 8px; /* 适当增加内边距 */
+            vertical-align: middle; /* 垂直居中 */
+        }
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" id="form"
+      action="/book/findByKey" method="post">
+    书籍关键字： <input type="text" name="key" id="username"
+                       class="abc input-default" placeholder="书籍关键字" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>
+    &nbsp;&nbsp; <a type="button" class="btn btn-primary"
+                    href="/sort/list">增加书籍</a>&nbsp;&nbsp;
+    <input id="CurrentPage" type="hidden" name="currentPage" value="1" />
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>书籍数量</th>
+        <th>封面</th> <!-- 添加图片列 -->
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="book:${list}">
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.sname}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publish}"></td>
+        <td th:text="${book.edition}"></td>
+        <td th:text="${book.number}"></td>
+        <td>
+            <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Book Image" class="book-image"/>
+        </td> <!-- 显示图片 -->
+        <td>
+            <a type="button" class="btn btn-success"
+               th:href="'/book/findById/'+${book.id}">修改</a>
+            <a type="button" class="btn btn-danger"
+               th:href="'/book/delete/'+${book.id}">删除</a>
+        </td>
+    </tr>
+</table>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\index.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <img src="/assets/img/logo.png" style="height: 30px;">
+        图书管理系统
+        <span>Library Management System</span>
+    </div>
+    <div class="dl-log">
+        欢迎您：<span class="dl-log-user" th:text="${session.sysadmin.username}"></span><a href="/sysadmin/logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>		<!-- <li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li> -->
+
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<div class="footer">
+    版权所有
+</div>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="/assets/js/common/main.js"></script>
+<script type="text/javascript" src="/assets/js/config-min.js"></script>
+<script>
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[{text:'系统管理',items:[
+                    {id:'3',text:'用户管理',href:'/sysadmin/userList'},
+                    {id:'12',text:'书籍管理',href:'/sysadmin/bookList'},
+                    {id:'13',text:'类别管理',href:'/sysadmin/sortList'},
+                ]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\sort.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+
+        });
+    </script>
+</head>
+<body>
+<form class="form-inline definewidth m20"
+      action="/sort/search" method="post">
+    图书类别：
+    <input type="text" name="name" class="abc input-default" placeholder="类别名称" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button> &nbsp;&nbsp;
+    <a type="button" class="btn btn-primary" href="/sysadmin/addSort">
+        增加类别
+    </a>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>图书类别</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="sort:${list}">
+        <td th:text="${sort.id}"></td>
+        <td th:text="${sort.name}"></td>
+        <td>
+            <a type="button" class="btn btn-success"
+               th:href="'/sort/findById/'+${sort.id}">修改</a>
+            <a type="button" class="btn btn-danger"
+               th:href="'/sort/delete/'+${sort.id}">删除</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\updateBook.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>修改书籍</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/book/update" method="post" class="definewidth m20" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${book.id}"/>
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">书籍ID</td>
+            <td><input type="text" name="id" readonly th:value="${book.id}"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">书籍名称</td>
+            <td><input type="text" name="name" th:value="${book.name}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍类别</td>
+            <td>
+                <select class="form-control" name="sid">
+                    <option th:each="sort:${list}" th:text="${sort.name}"
+                            th:selected="${sort.id == book.sid}"
+                            th:value="${sort.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">作者</td>
+            <td><input type="text" name="author" th:value="${book.author}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">出版社</td>
+            <td><input type="text" name="publish" th:value="${book.publish}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">版本</td>
+            <td><input type="text" name="edition" th:value="${book.edition}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍数量</td>
+            <td><input type="text" name="number" th:value="${book.number}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍封面</td>
+            <td>
+                <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Current Book Image" width="50" height="70"/><br/>
+                <input type="file" name="imageFile" accept="image/*"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">更改</button> &nbsp;&nbsp;<a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/bookList">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+
+    });
+</script>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\updateSort.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/sort/update" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">类别ID</td>
+            <td><input type="text" name="id" th:value="${sort.id}" readonly/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">类别名称</td>
+            <td><input type="text" name="name" th:value="${sort.name}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">修改</button> &nbsp;&nbsp;
+                <a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/sortList">返回列表</a>
+            </td>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+
+    });
+</script>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\updateUser.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+
+
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="/user/update" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td class="tableleft">用户ID</td>
+            <td><input type="text" name="id" readonly th:value="${user.id}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">用户账号</td>
+            <td><input type="text" name="username" th:value="${user.username}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">用户密码</td>
+            <td><input type="text" name="password" th:value="${user.password}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">修改</button> &nbsp;&nbsp;<a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/userList">返回列表</a>
+            </td>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+
+    });
+</script>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\sysadmin\user.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<form class="form-inline definewidth m20" action="/sysadmin/findByName" method="post">
+    用户名称：
+    <input type="text" name="username" id="username"class="abc input-default" placeholder="用户姓名" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <a type="button" class="btn btn-primary" href="/sysadmin/addUser">增加用户</a>&nbsp;&nbsp;
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>用户名称</th>
+        <th>用户账号</th>
+        <th>用户密码</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="user:${list}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/user/findById/'+${user.id}">修改</a>
+            <a type="button" class="btn btn-danger" th:href="'/user/delete/'+${user.id}">删除</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user\back.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍归还</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        .book-image {
+            max-width: 50px;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            vertical-align: middle;
+        }
+        /* 新增按钮样式 */
+        .return-all-btn {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>借书ID</th>
+        <th>书籍封面</th>
+        <th>书籍名称</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>申请时间</th>
+        <th>还书状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="back:${list}">
+        <td th:text="${back.id}"></td>
+        <td>
+            <img th:if="${back.imagePath}" th:src="@{'/static/images/' + ${back.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${back.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${back.bookName}"></td>
+        <td th:text="${back.author}"></td>
+        <td th:text="${back.publish}"></td>
+        <td th:text="${back.edition}"></td>
+        <td th:text="${back.startTime}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled>未归还</button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/back/add?id='+${back.id}">归还</a>
+        </td>
+    </tr>
+</table>
+<!-- 新增归还全部按钮 -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <a href="/back/addAll" class="btn btn-primary return-all-btn">一键归还全部</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user\borrow.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍借阅</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 50px; /* 限制最大宽度 */
+            max-height: 70px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+    </style>
+
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍封面</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>申请时间</th>
+        <th>借书状态</th>
+    </tr>
+    </thead>
+    <tr th:each="borrow:${list}">
+        <td th:text="${borrow.bookName}"></td>
+        <td>
+            <img th:if="${borrow.imagePath}" th:src="@{'/static/images/' + ${borrow.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${borrow.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${borrow.sortName}"></td>
+        <td th:text="${borrow.author}"></td>
+        <td th:text="${borrow.publish}"></td>
+        <td th:text="${borrow.edition}"></td>
+        <td th:text="${borrow.startTime}"></td>
+        <td>
+            <button type="button" th:if="${borrow.status == 0}" class="btn btn-default disabled" disabled>待确认</button>
+            <button type="button" th:if="${borrow.status == 1}" class="btn btn-default disabled" disabled>审批通过</button>
+            <button type="button" th:if="${borrow.status == 2}" class="btn btn-default disabled" disabled>审批未通过</button>
+            <button type="button" th:if="${borrow.status == 3}" class="btn btn-default disabled" disabled>归还待审批</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user\index.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <img src="/assets/img/OIP.jpg" style="height: 40px;">
+        图书管理系统
+        <span>Library Management System</span>
+    </div>
+    <div class="dl-log">
+        欢迎您：<span class="dl-log-user" th:text="${session.user.username}"></span><a href="/user/logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>		<!-- <li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li> -->
+
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<div class="footer">
+    版权所有
+</div>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="/assets/js/common/main.js"></script>
+<script type="text/javascript" src="/assets/js/config-min.js"></script>
+<script>-
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[{text:'书籍管理',items:[
+                    {id:'12',text:'书籍查询',href:'/book/list/1'},
+                    {id:'3',text:'书籍借阅',href:'/borrow/list'},
+                    {id:'4',text:'书籍归还',href:'/back/list'}
+                ]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user\list.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍查询</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <script>
+        $(function() {
+            var cp = parseInt($("#curPage").val());
+            var tp = parseInt($("#tolPage").val());
+            $("#pagination2").pagination({
+                currentPage: cp,
+                totalPage: tp,
+                isShow: false,
+                count: 5,
+                prevPageText: "< 上一页",
+                nextPageText: "下一页 >",
+                callback: function(current) {
+                    location.href = '/book/list/' + current;
+                }
+            });
+        });
+    </script>
+    <style>
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 80px; /* 限制最大宽度 */
+            max-height: 100px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+
+        /* 调整表格单元格内边距 */
+        .table td, .table th {
+            padding: 16px; /* 增加内边距，使内容更宽松 */
+            vertical-align: middle; /* 垂直居中 */
+            font-size: 18px; /* 字体放大一倍 */
+        }
+
+        /* 表格行悬停效果 */
+        .table tbody tr {
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .table tbody tr:hover {
+            transform: scale(1.05); /* 放大效果 */
+            background-color: #ffc0cb; /* 粉红色 */
+        }
+
+        /* 分页控件基础样式 */
+        .ui-pagination-container a {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 4px;
+            transition: all 0.3s ease; /* 添加过渡效果 */
+            transform-origin: center; /* 设置缩放中心 */
+        }
+
+        /* 鼠标悬停效果 */
+        .ui-pagination-container a:hover {
+            color: #fff;
+            background-color: #ad1457;
+            border-color: #ad1457;
+        }
+
+        /* 当前页码样式 */
+        .ui-pagination-container a.active {
+            background-color: #c2185b !important;
+            border-color: #c2185b !important;
+            color: #fff !important;
+            transform: scale(1.1); /* 略微放大 */
+        }
+
+        /* 上一页/下一页 按钮样式 */
+        .ui-pagination-container a:contains("上一页"),
+        .ui-pagination-container a:contains("下一页") {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+        }
+
+        .ui-pagination-container a:contains("上一页"):hover,
+        .ui-pagination-container a:contains("下一页"):hover {
+            color: #fff;
+            background-color: #ad1457;
+            border-color: #ad1457;
+        }
+
+        /* 点击时的填充动画 */
+        .ui-pagination-container a:active {
+            background-color: #f48fb1; /* 淡粉色 */
+            transition: background-color 0.5s ease; /* 0.5秒的过渡效果 */
+        }
+
+        /* 表格悬停效果 */
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* 按钮样式 */
+        .btn-success {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #4cae4c;
+            border-color: #398439;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<form id="form" class="form-inline definewidth m20"
+      action="/book/search" method="post">
+    书籍关键字： <input type="text" name="keyWord" id="username"
+                       class="abc input-default" placeholder="书籍关键字">&nbsp;&nbsp;
+    <input type="hidden" value="1" name="current"/>
+    书籍类别:<select class="form-control" name="sid">
+    <option value="0">---请选择类别---</option>
+    <option th:each="sort:${sortList}" th:text="${sort.name}" th:value="${sort.id}"></option>
+</select>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>
+    &nbsp;&nbsp;
+    <input id="CurrentPage" type="hidden" name="currentPage" value="1" />
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍封面</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book:${page.data}">
+        <td th:text="${book.name}"></td>
+        <td>
+            <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Book Image" class="book-image"/>
+        </td>
+        <td th:text="${book.sname}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publish}"></td>
+        <td th:text="${book.edition}"></td>
+        <td><a type="button" class="btn btn-success" th:href="'/borrow/add?bookId='+${book.id}">借阅</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<input th:value="${page.currentPage}" type="hidden" id="curPage"/>
+<input th:value="${page.totalPage}" type="hidden" id="tolPage"/>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user\login.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>二次元の小站</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <style>
+        /* 新增错误提示样式 */
+        .error-message {
+            color: #ff4d4f;
+            margin: 10px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 原有样式保持不变 */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 450px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        .bg-container {
+            flex: 1;
+            background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+            position: relative;
+            opacity: 0;
+            animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+        }
+
+        .login-form-box {
+            width: 100%;
+            transform: translateY(-30px);
+        }
+
+        .login-title {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: 15px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .login-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 15px;
+            transform-origin: left center;
+        }
+
+        select.form-control {
+            height: 46px;
+            line-height: 46px;
+            padding-top: 0;
+            padding-bottom: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            transform: scale(1.03);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            width: 160px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .bg-container {
+                display: none;
+                animation: none;
+            }
+            .login-container {
+                width: 100%;
+                padding: 0 20px;
+                animation: none;
+                opacity: 1;
+            }
+            .btn-primary {
+                width: 120px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#frmLogin').bootstrapValidator({
+                feedbackIcons:{
+                    valid:'glyphicon glyphicon-ok',
+                    invalid:'glyphicon glyphicon-remove',
+                    validating:'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+                    password: { validators: { notEmpty: { message: '密码不能为空' } } }
+                }
+            });
+
+            $('.form-control').on('focus', function() {
+                $(this).css({
+                    'transform': 'scale(1.03)',
+                    'z-index': 1
+                });
+            }).on('blur', function() {
+                $(this).css({
+                    'transform': 'scale(1)',
+                    'z-index': 'auto'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 左侧登录区 -->
+<div class="login-container">
+    <div class="login-form-box">
+        <h2 class="login-title">📖 书斋登录</h2>
+
+        <!-- 新增错误提示 -->
+        <div class="error-message" th:text="${msg}"></div>
+
+        <form action="/login" method="post" id="frmLogin">
+            <div class="form-group">
+                <input type="text" name="username"
+                       class="form-control"
+                       placeholder="用户名"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password"
+                       class="form-control"
+                       placeholder="密码"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <select name="type" class="form-control">
+                    <option value="0">- 选择身份 -</option>
+                    <option value="1" selected>普通用户</option>
+                    <option value="2">管理员</option>
+                    <option value="3">系统管理员</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">登录次元</button>
+                    <a href="/user/register" class="btn btn-primary">注册用户</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\src\main\resources\templates\user\register.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>用户注册</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/mycss.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+  <style>
+    /* 新增错误提示样式 */
+    .error-message {
+      color: #ff4d4f;
+      margin: 10px 0;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 原有样式保持不变 */
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      font-family: 'Microsoft YaHei', sans-serif;
+      background: #f8f9fa;
+      overflow: hidden;
+    }
+
+    .register-container {
+      width: 450px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+      opacity: 0;
+      animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    .bg-container {
+      flex: 1;
+      background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+      position: relative;
+      opacity: 0;
+      animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+    }
+
+    .register-form-box {
+      width: 100%;
+      transform: translateY(-30px);
+    }
+
+    .register-title {
+      color: #ff6b6b;
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 15px;
+      padding-left: 8px;
+      position: relative;
+    }
+
+    .register-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 40px;
+      height: 3px;
+      background: #ff6b6b;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 2px solid #eee;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 12px 15px;
+      transform-origin: left center;
+    }
+
+    select.form-control {
+      height: 46px;
+      line-height: 46px;
+      padding-top: 0;
+      padding-bottom: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+    }
+
+    .form-control:focus {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+      width: 160px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .bg-container {
+        display: none;
+        animation: none;
+      }
+      .register-container {
+        width: 100%;
+        padding: 0 20px;
+        animation: none;
+        opacity: 1;
+      }
+      .btn-primary {
+        width: 120px;
+        padding: 10px 15px;
+      }
+    }
+  </style>
+  <script>
+    $(function(){
+      $('#frmRegister').bootstrapValidator({
+        feedbackIcons:{
+          valid:'glyphicon glyphicon-ok',
+          invalid:'glyphicon glyphicon-remove',
+          validating:'glyphicon glyphicon-refresh'
+        },
+        fields:{
+          username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+          password: { validators: { notEmpty: { message: '密码不能为空' } } },
+          confirmPassword: { validators: { notEmpty: { message: '确认密码不能为空' }, identical: { field: 'password', message: '两次输入的密码不一致' } } }
+        }
+      });
+
+      $('.form-control').on('focus', function() {
+        $(this).css({
+          'transform': 'scale(1.03)',
+          'z-index': 1
+        });
+      }).on('blur', function() {
+        $(this).css({
+          'transform': 'scale(1)',
+          'z-index': 'auto'
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+<!-- 左侧注册区 -->
+<div class="register-container">
+  <div class="register-form-box">
+    <h2 class="register-title">📖 书斋注册</h2>
+
+    <!-- 新增错误提示 -->
+    <div class="error-message" th:text="${message}"></div>
+
+    <form action="/user/register" method="post" id="frmRegister">
+      <div class="form-group">
+        <input type="text" name="username"
+               class="form-control"
+               placeholder="用户名"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="password"
+               class="form-control"
+               placeholder="密码"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="confirmPassword"
+               class="form-control"
+               placeholder="确认密码"
+               required>
+      </div>
+
+      <div class="form-group" style="margin-top: 30px;">
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">注册</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\static\js\artDialog\index.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>artDialog</title>
+<meta name="keywords" content="artDialog,javascript,dialog,jQuery" />
+<meta name="description" content="artDialog是一个精巧的web对话框组件，压缩后只有十多KB，并且不依赖其他框架。" />
+<script>
+// skin demo
+(function() {
+	var _skin, _jQuery;
+	var _search = window.location.search;
+	if (_search) {
+		_skin = _search.split('demoSkin=')[1];
+		_jQuery = _search.indexOf('jQuery=true') !== -1;
+		if (_jQuery) document.write('<scr'+'ipt src="jquery-1.6.2.min.js"></sc'+'ript>');
+	};
+	
+	document.write('<scr'+'ipt src="artDialog.source.js?skin=' + (_skin || 'default') +'"></sc'+'ript>');
+	window._isDemoSkin = !!_skin;
+})();
+</script>
+<script src="./plugins/iframeTools.source.js"></script>
+<script src="./_doc/demo.js"></script>
+<script src="./_doc/highlight/highlight.pack.js"></script>
+<script src="./_doc/highlight/languages/javascript.js"></script>
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+</script>
+<link href="./_doc/demo.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./_doc/highlight/styles/magula.css" />
+</head>
+
+<body>
+<div id="doc">
+  <div id="header">
+    <h1 id="logo"><a href="index.html">artDialog</a></h1>
+    <ul id="nav" class="nav">
+      <li><a href="index.html" class="home">首页</a></li>
+      <li><a href="./_doc/API.html" class="api">文档</a></li>
+      <li><a href="./_doc/down.html" class="down">下载</a></li>
+      <li><a href="./_doc/log.html" class="log">更新</a></li>
+      <li><a href="./_doc/labs.html" class="labs">实验</a></li>
+      <li><a href="./_doc/license.html" class="license">授权</a></li>
+      |
+      <li><a href="#" id="nav-skin">皮肤</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div class="tips" style="margin:4px 5px; padding:8px; background:#EEF7F5; text-align:left; color:#000; border-radius:3px; border:1px solid #D7EAE2; ">artDialog是一个基于javascript编写的对话框组件，它拥有精致的界面与友好的接口</div>
+    <dl class="about">
+      <dt>自适应内容</dt>
+      <dd>artDialog的特殊UI框架能够适应内容变化，甚至连外部程序动态插入的内容它仍然能自适应，因此你不必去考虑消息内容尺寸使用它。它的消息容器甚至能够根据宽度让文本居中或居左对齐——这一切全是XHTML+CSS原生实现。</dd>
+      <dt>完善的接口</dt>
+      <dd>它的接口完善，可以轻易与外部程序配合使用。如异步写入消息、控制位置、尺寸、显示与隐藏、关闭等。</dd>
+      <dt>细致的体验</dt>
+      <dd>如果不是在输入状态，它支持Esc快捷键关闭；可指定在元素附近弹出，让操作更便捷；智能给按钮添加焦点；黄金比例垂直居中；超大响应区域特别为ipad等触屏设备优化；预先缓存皮肤图片更快响应……</dd>
+      <dt>跨平台兼容</dt>
+      <dd>兼容：IE6+、Firefox、Chrome、Safari、Opera以及iPad等移动设备。并且IE6下也能支持现代浏览器的静止定位(<a href="http://www.planeart.cn/?p=877" target="_blank" title="阅读作者ie6Fixed相关博文" style="text-decoration:underline">fixed</a>)、<!--[if gte IE 7]><!-->覆盖下拉控件<!--<![endif]--><!--[if lt IE 7]><select><option>覆盖下拉控件</option></select><![endif]-->、alpha通道png背景。</dd>
+    </dl>
+    <h2>快速入门</h2>
+    <h3>一、使用传统的参数</h3>
+    <p>art.dialog(content, ok, cancel)</p>
+    <div id="demoCode01">
+      <pre><code class=" javascript">art.dialog('简单愉悦的接口，强大的表现力，优雅的内部实现', function(){alert('yes');});</code></pre>
+    </div>
+    <p class="buttons">
+      <button class="runCode" id="btn1" title="btn1" name="demoCode01">运行&raquo;</button>
+    </p>
+    <h3>二、使用字面量传参</h3>
+    <p>art.dialog(options)</p>
+    <div id="demoCode02">
+      <pre><code class=" javascript">var dialog = art.dialog({
+    title: '欢迎',
+	content: '欢迎使用artDialog对话框组件！',
+	icon: 'succeed',
+    follow: document.getElementById('btn2'),
+    ok: function(){
+        this.title('警告').content('请注意artDialog两秒后将关闭！').lock().time(2);
+        return false;
+    }
+});
+</code></pre>
+    </div>
+    <p class="buttons">
+      <button class="runCode" id="btn2" title="btn2" name="demoCode02">运行&raquo;</button>
+    </p>
+    <p>更多配置参数用法请查阅API文档： <a href="./_doc/API.html#options">./_doc/API.html#options</a></p>
+    <h3>三、扩展方法</h3>
+    <p>需要对弹出后的对话框操作？artDialog简单实用的扩展方法可以使这一切变得简单。</p>
+    <p>如在ajax异步操作中，我们可以先定义一个变量引用对话框返回的扩展方法：</p>
+    <pre><code class=" javascript">var myDialog = art.dialog();// 初始化一个带有loading图标的空对话框
+jQuery.ajax({
+	url: 'http://web5.qq.com/content?id=1',
+    success: function (data) {
+        myDialog.content(data);// 填充对话框内容
+    }
+});
+</code></pre>
+    <p>如果需要使用程序控制关闭，可以使用"close"方法关闭对话框：</p>
+    <pre><code class=" javascript">myDialog.close();</code></pre>
+    <p>更多扩展方法用法请查阅API文档： <a href="./_doc/API.html#API">./_doc/API.html#API</a></p>
+    <h2>插件：框架应用工具</h2>
+    <p>artDialog针对CMS类的框架应用提供了专属插件，如穿越框架、iframe、AJAX、跨框架传值操作等。</p>
+    <p>例： 使用open方法嵌入页面，并使用data方法在各个iframe间传递数据：</p>
+    <div id="demoCode04-3">
+      <pre><code class="javascript">var val = document.getElementById('demoInput04-3').value;
+art.dialog.data('test', val);
+art.dialog.data('homeDemoPath', './_doc/');
+
+// 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+// document.getElementById('aInput').value = art.dialog.data('test');
+art.dialog.open('./_doc/iframeA.html');
+</code></pre>
+    </div>
+    <p class="buttons"> 请输入测试文字：
+      <input id="demoInput04-3" title="demoInput04-3" type="text" value="精于心，简于形" style="padding:4px; width:16em; margin-right:10px" />
+      <button class="runCode" name="demoCode04-3">运行&raquo;</button>
+    </p>
+    <p>插件更多功能请查阅API文档： <a target="_blank" href="./iframeTop.html">./iframeTop.html</a></p>
+    <h2>jQuery + artDialog</h2>
+    <p>artDialog提供了一个jQuery版本，功能与标准版一致，调用只需要把art前缀改成jQuery的命名空间。</p>
+    <pre><code class=" javascript">// 普通调用
+$.dialog({content:'hello world!'});
+
+// 使用选择器方式，此时自动使用绑定了live click事件，同时启用follow模式
+$('#main .test').dialog({content: 'hello world'});</code></pre>
+<p>(最低兼容jquery1.3.2，但框架应用插件需要jquery1.4+运行<a href="#?" title="jQuery版本小于1.4不能获取iframe内部尺寸，导致open方法无法自适应内容尺寸">[?]</a>)</p>
+    <h2>联系</h2>
+
+
+<div style="margin:4px 0; padding:5px; background:#EEF7F5; text-align:left; color:#000; border-radius:3px; border:1px solid #D7EAE2;" class="tips"><span style="color:#DFB113">注意！</span>artDialog4+即将停止维护，在框架满天飞的时代结束后，其历史使命已经完成。新版本<a href="https://github.com/aui/artDialog" style="text-decoration:underline;">artDialog 5+</a>很小，却依然动人。若要迁移，请抛弃iframe，使用ajax技术。</div>
+
+    <p>如果你对artDialog有什么意见建议可以用下面任意一种联系方式找到作者。artDialog一直在不断完善自身，这个愉悦的过程中感谢有你的参与～</p>
+    <p><strong>提交BUG必备项</strong>：1、浏览器名称，版本 2、artDialog版本号（只支持4+版本） 3、简明扼要的描述信息 4、建议提取一份BUG DEMO，这样解决问题的概率增加300%</p>
+    <p>如果对使用问题有疑惑，可以前往由 artDialog 爱好者建立的QQ群寻求帮助（前提是先自己阅读文档）： 44030323 </p>
+    <p>作者：糖饼<br />
+      邮箱：<span id="myEmail"></span> <span style="color:#990">(仅用作bug提交)</span><br />
+      网站：<a href="http://www.planeart.cn" target="_blank">PlaneArt.Cn</a><br />
+      微博：<a href="http://t.qq.com/tangbin">t.qq.com/tangbin</a></p>
+    <h2>捐赠</h2>
+    <p>artDialog就是你一直想要的对话框么？哇～那么我非常期待您能够热情的提供15元或者其他金额的捐赠鼓励～正如您支持其他开源项目一样。</p>
+    <p>支付宝: <a href="https://me.alipay.com/planeart" target="_blank">https://me.alipay.com/planeart</a></p>
+    <p>您因如果使用artDialog而受益或者感到愉悦，您还可以这样帮助artDialog成长：</p>
+    <p> 1、共同参与并完善artDialog或用blog/微博/Twitter把它分享它给更多的人。</p>
+    <p> 2、如artDialog有幸被用在你的项目，请您联系我，我后续将在artDialog主页展示您项目/企业的LOGO（目前有盛大phpCMS、腾讯、中国电信等企业使用它）。</p>
+  </div>
+  <div id="footer"></div>
+</div>
+<script>
+(function(){
+	var myMail = 1987 + '.' + 'tangbin' + '@' + 'gmail.com';
+	myMail = '<a href="mailto:' + myMail + '">' + myMail + '</a>';
+	document.getElementById('myEmail').innerHTML = myMail;
+	
+
+})();
+</script>
+<script>_isDemoSkin && window._demoSkin && _demoSkin();</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\static\m\index.html:
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>您访问的网页出错啦！</title>
+
+		<meta name="description" content="Some ideas for modern button styles and effects" />
+		<meta name="keywords" content="button, effect, hover, style, inspiration, web design" />
+		<meta name="author" content="Codrops" />
+   		<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8, target-densitydpi=low-dpi" />  
+
+		<link href="img/15.0904011.ico" mce_href="favicon.ico" rel="shortcut icon" type="img/15.0904011.ico" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.beattext.js"></script>
+		<script type="text/javascript" src="js/easying.js"></script>
+		<link rel="stylesheet" href="css/style.css" />
+		  
+		  <script type="text/javascript">
+  		var system ={};  
+    	var p = navigator.platform;       
+        system.win = p.indexOf("Win") == 0;  
+        system.mac = p.indexOf("Mac") == 0;  
+       system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);     
+       if(system.win||system.mac||system.xll){//如果是电脑跳转到
+               window.location.href="../index.html";  
+       }else{  //如果是手机,跳转到
+              window.location.href="#";  
+        }//上面代码是判断是手机端还是PC端
+ </script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+		$('p#roloadText').beatText({isAuth:true,beatHeight:"1em",isRotate:false,upTime:100,downTime:100});
+		});
+		</script>
+	</head>
+	<body>
+		
+		<div class="logo" id="a" onclick="a();" title="点击我有惊喜！">
+				<img src="img/20171216094159_QaLXP.jpeg">
+			</div>
+			<br /><br />
+			<div class="container">
+		<p id="roloadText">网页维护中...</p>
+	</div>
+<center>
+		<div class="body_buttom_r_gg">
+			<center>
+			<h2 class="gg_gg">
+				网站维护公告：
+			</h2>
+			<font class="gg_font3">距离网站开启日倒计时：</font><br /><br />
+</center>
+			<div id="CountMsg" class="HotDate"> 
+					<span id="t_d" class="gg_sj">00天</span> 
+					<span id="t_h" class="gg_sj">00时</span> 
+					<span id="t_m" class="gg_sj">00分</span> 
+					<span id="t_s" class="gg_sj">00秒</span> 
+			</div> 
+			<script type="text/javascript"> 
+				function getRTime(){ 
+				var EndTime= new Date('2024/2/18 20:18:00'); //截止时间 
+				var NowTime = new Date(); 
+				var t =EndTime.getTime() - NowTime.getTime(); 
+				var d=Math.floor(t/1000/60/60/24); 
+				var h=Math.floor(t/1000/60/60%24); 
+				var m=Math.floor(t/1000/60%60); 
+				var s=Math.floor(t/1000%60); 
+				document.getElementById("t_d").innerHTML = d + "天"; 
+				document.getElementById("t_h").innerHTML = h + "时"; 
+				document.getElementById("t_m").innerHTML = m + "分"; 
+				document.getElementById("t_s").innerHTML = s + "秒"; 
+				} 
+				setInterval(getRTime,1000); 
+		</script> 
+			</center>
+</div>		
+<audio autoplay loop id="music">
+<source src="../music/music.mp3" type="audio/mpeg">
+</audio>
+<script>   
+   function a(){
+     var audio = document.getElementById('music'); 
+     if(audio.paused){                 
+         audio.play();//audio.play();// 播放  
+     }
+     else{
+          audio.pause();// 暂停
+     } 
+   }
+</script>
+	</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\error.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 头部元信息保持不变 -->
+    <meta charset="utf-8" />
+    <title>您访问的网页出错啦！</title>
+    <meta name="description" content="404 页面未找到" />
+    <meta name="keywords" content="404, 页面未找到" />
+    <meta name="author" content="Your Name" />
+    <link th:href="@{/img/15.0904011.ico}" rel="shortcut icon" type="image/x-icon" />
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.beattext.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easying.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/button.css}" />
+    <link rel="stylesheet" th:href="@{/css/reset.css}" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // 原有JavaScript逻辑保持不变
+            $('p#roloadText').beatText({
+                isAuth: true,
+                beatHeight: "1em",
+                isRotate: false,
+                upTime: 100,
+                downTime: 100
+            });
+
+            const randomNum = Math.floor(Math.random() * 6) + 1;
+            const paddedNum = randomNum.toString().padStart(2, '0');
+            const bgUrl = `https://bang-dream.com/img/error/bgd_404_${paddedNum}.jpg`;
+            $('body').css({
+                'background': `url('${bgUrl}') no-repeat center center fixed`,
+                'background-size': 'cover'
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 保持原有结构 -->
+<div class="logo" id="a" onclick="a();" title="点击我有惊喜！">
+    <img th:src="@{/img/20171216094159_QaLXP.jpeg}">
+</div>
+<br /><br />
+<div class="container">
+    <p id="roloadText">404！网页君找不到这个网页了哦...</p>
+</div>
+
+<!-- 修改按钮容器样式 -->
+<div class="box bg-1" style="display: flex; justify-content: center; align-items: center;">
+    <!-- 新增登录状态判断 -->
+    <a th:if="${userType == null || userType == 'guest'}"
+       href="/login"
+       class="button button--antiman button--round-l button--text-medium"
+       style="display: inline-flex; align-items: center; justify-content: center; width: 200px;">
+        <span>返回登录</span>
+    </a>
+    <a th:unless="${userType == null || userType == 'guest'}"
+       th:href="${userType == 'user' ? '/user/index' :
+                userType == 'admin' ? '/admin/index' :
+                userType == 'sysadmin' ? '/sysadmin/index' : '/login'}"
+       class="button button--antiman button--round-l button--text-medium"
+       style="display: inline-flex; align-items: center; justify-content: center; width: 200px;">
+        <span>返回首页</span>
+    </a>
+</div>
+
+<div class="body_buttom">
+    <audio autoplay loop id="music">
+        <source th:src="@{/music/music.mp3}" type="audio/mpeg">
+    </audio>
+    <script>
+        function a() {
+            var audio = document.getElementById('music');
+            audio.paused ? audio.play() : audio.pause();
+        }
+    </script>
+</div>
+
+<!-- 修改后的样式 -->
+<style>
+    /* 原有全局样式保持不变 */
+    body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+    }
+    .container p {
+        text-align: center;
+        padding: 10px auto;
+        font-size: 30px;
+        color: darksalmon;
+    }
+    .beat-char {
+        line-height: 3.4em;
+        position: relative;
+        display: inline-block;
+        background: transparent;
+    }
+    .rotate {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -webkit-transition-duration: 0.7s;
+    }
+    .logo {
+        width: 200px;
+        height: 200px;
+        margin: 120px auto 0px;
+        border-radius: 200px;
+        border: 5px solid;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        transition: 1s all;
+    }
+    .logo img {
+        width: 200px;
+        height: 200px;
+        margin: 0px auto 0px;
+        background: #fff;
+        border-radius: 200px;
+    }
+    .logo:hover {
+        transform: rotate(360deg);
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+    }
+    .body_buttom {
+        width: 100%;
+        height: 290px;
+        position: fixed;
+        bottom: 0px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* 新增按钮居中样式 */
+    .box.bg-1 {
+        padding: 20px 0;
+    }
+    .button--antiman {
+        margin: 0 10px;
+        padding: 15px 30px;
+        text-align: center;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        height: 50px;
+        transition: all 0.3s ease;
+    }
+    .button--antiman span {
+        position: relative;
+        z-index: 2;
+        padding: 0 10px;
+    }
+    a.button--antiman {
+        text-decoration: none;
+        margin-left: 0 !important; /* 移除原有左边距 */
+    }
+</style>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\login.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>二次元の小站</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <style>
+        /* 新增错误提示样式 */
+        .error-message {
+            color: #ff4d4f;
+            margin: 10px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 原有样式保持不变 */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 450px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        .bg-container {
+            flex: 1;
+            background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+            position: relative;
+            opacity: 0;
+            animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+        }
+
+        .login-form-box {
+            width: 100%;
+            transform: translateY(-30px);
+        }
+
+        .login-title {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: 15px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .login-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 15px;
+            transform-origin: left center;
+        }
+
+        select.form-control {
+            height: 46px;
+            line-height: 46px;
+            padding-top: 0;
+            padding-bottom: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            transform: scale(1.03);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            width: 160px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .bg-container {
+                display: none;
+                animation: none;
+            }
+            .login-container {
+                width: 100%;
+                padding: 0 20px;
+                animation: none;
+                opacity: 1;
+            }
+            .btn-primary {
+                width: 120px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#frmLogin').bootstrapValidator({
+                feedbackIcons:{
+                    valid:'glyphicon glyphicon-ok',
+                    invalid:'glyphicon glyphicon-remove',
+                    validating:'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+                    password: { validators: { notEmpty: { message: '密码不能为空' } } }
+                }
+            });
+
+            $('.form-control').on('focus', function() {
+                $(this).css({
+                    'transform': 'scale(1.03)',
+                    'z-index': 1
+                });
+            }).on('blur', function() {
+                $(this).css({
+                    'transform': 'scale(1)',
+                    'z-index': 'auto'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 左侧登录区 -->
+<div class="login-container">
+    <div class="login-form-box">
+        <h2 class="login-title">📖 书斋登录</h2>
+
+        <!-- 新增错误提示 -->
+        <div class="error-message" th:text="${msg}"></div>
+
+        <form action="/login" method="post" id="frmLogin">
+            <div class="form-group">
+                <input type="text" name="username"
+                       class="form-control"
+                       placeholder="用户名"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password"
+                       class="form-control"
+                       placeholder="密码"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <select name="type" class="form-control">
+                    <option value="0">- 选择身份 -</option>
+                    <option value="1" selected>普通用户</option>
+                    <option value="2">管理员</option>
+                    <option value="3">系统管理员</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">登录次元</button>
+                    <a href="/user/register" class="btn btn-primary">注册用户</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\register.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>用户注册</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/mycss.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+  <style>
+    /* 新增错误提示样式 */
+    .error-message {
+      color: #ff4d4f;
+      margin: 10px 0;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 原有样式保持不变 */
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      font-family: 'Microsoft YaHei', sans-serif;
+      background: #f8f9fa;
+      overflow: hidden;
+    }
+
+    .register-container {
+      width: 450px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+      opacity: 0;
+      animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    .bg-container {
+      flex: 1;
+      background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+      position: relative;
+      opacity: 0;
+      animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+    }
+
+    .register-form-box {
+      width: 100%;
+      transform: translateY(-30px);
+    }
+
+    .register-title {
+      color: #ff6b6b;
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 15px;
+      padding-left: 8px;
+      position: relative;
+    }
+
+    .register-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 40px;
+      height: 3px;
+      background: #ff6b6b;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 2px solid #eee;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 12px 15px;
+      transform-origin: left center;
+    }
+
+    select.form-control {
+      height: 46px;
+      line-height: 46px;
+      padding-top: 0;
+      padding-bottom: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+    }
+
+    .form-control:focus {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+      width: 160px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .bg-container {
+        display: none;
+        animation: none;
+      }
+      .register-container {
+        width: 100%;
+        padding: 0 20px;
+        animation: none;
+        opacity: 1;
+      }
+      .btn-primary {
+        width: 120px;
+        padding: 10px 15px;
+      }
+    }
+  </style>
+  <script>
+    $(function(){
+      $('#frmRegister').bootstrapValidator({
+        feedbackIcons:{
+          valid:'glyphicon glyphicon-ok',
+          invalid:'glyphicon glyphicon-remove',
+          validating:'glyphicon glyphicon-refresh'
+        },
+        fields:{
+          username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+          password: { validators: { notEmpty: { message: '密码不能为空' } } },
+          confirmPassword: { validators: { notEmpty: { message: '确认密码不能为空' }, identical: { field: 'password', message: '两次输入的密码不一致' } } }
+        }
+      });
+
+      $('.form-control').on('focus', function() {
+        $(this).css({
+          'transform': 'scale(1.03)',
+          'z-index': 1
+        });
+      }).on('blur', function() {
+        $(this).css({
+          'transform': 'scale(1)',
+          'z-index': 'auto'
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+<!-- 左侧注册区 -->
+<div class="register-container">
+  <div class="register-form-box">
+    <h2 class="register-title">📖 书斋注册</h2>
+
+    <!-- 新增错误提示 -->
+    <div class="error-message" th:text="${message}"></div>
+
+    <form action="/user/register" method="post" id="frmRegister">
+      <div class="form-group">
+        <input type="text" name="username"
+               class="form-control"
+               placeholder="用户名"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="password"
+               class="form-control"
+               placeholder="密码"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="confirmPassword"
+               class="form-control"
+               placeholder="确认密码"
+               required>
+      </div>
+
+      <div class="form-group" style="margin-top: 30px;">
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">注册</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\admin\back.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>归还处理</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>申请人</th>
+        <th>书籍名称</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="back:${list}">
+        <td th:text="${back.userName}"></td>
+        <td th:text="${back.bookName}"></td>
+        <td th:text="${back.author}"></td>
+        <td th:text="${back.publish}"></td>
+        <td th:text="${back.edition}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled>
+                未归还
+            </button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/back/allow?id='+${back.id}">确认归还</a>
+        </td>
+    </tr>
+</table>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\admin\borrow.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>借书处理</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 50px; /* 限制最大宽度 */
+            max-height: 70px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>借阅读者</th>
+        <th>书籍封面</th>
+        <th>所借书籍</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>申请时间</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="borrow:${list}">
+        <td th:text="${borrow.userName}"></td>
+        <td>
+            <img th:if="${borrow.imagePath}" th:src="@{'/static/images/' + ${borrow.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${borrow.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${borrow.bookName}"></td>
+        <td th:text="${borrow.sortName}"></td>
+        <td th:text="${borrow.author}"></td>
+        <td th:text="${borrow.publish}"></td>
+        <td th:text="${borrow.edition}"></td>
+        <td th:text="${borrow.startTime}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled>
+                待审批
+            </button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/admin/allow?id='+${borrow.id}">通过</a>
+            <a type="button" class="btn btn-danger" th:href="'/admin/notAllow?id='+${borrow.id}">不通过</a>
+        </td>
+    </tr>
+</table>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\admin\index.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <img src="/assets/img/logo.png" style="height: 30px;">
+        图书管理系统
+        <span>Library Management System</span>
+    </div>
+    <div class="dl-log">
+        欢迎您：<span class="dl-log-user" th:text="${session.admin.username}"></span><a href="/admin/logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>	<!-- 	<li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li> -->
+
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<div class="footer">
+    版权所有
+</div>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="/assets/js/common/main.js"></script>
+<script type="text/javascript" src="/assets/js/config-min.js"></script>
+<script>
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[{text:'书籍处理',items:[{id:'12',text:'借书处理',href:'/admin/borrowList'},{id:'3',text:'归还处理',href:'/back/adminList'}]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\addBook.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>添加书籍</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/book/add" method="post" class="definewidth m20" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">书籍名称</td>
+            <td><input type="text" name="name"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍类别</td>
+            <td>
+                <select class="form-control" name="sid">
+                    <option th:each="sort:${list}" th:text="${sort.name}" th:value="${sort.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">作者</td>
+            <td><input type="text" name="author"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">出版社</td>
+            <td><input type="text" name="publish"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">版本</td>
+            <td><input type="text" name="edition"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍数量</td>
+            <td><input type="text" name="number"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍封面</td>
+            <td>
+                <input type="file" name="imageFile" accept="image/*"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">添加</button> &nbsp;&nbsp;
+                <a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/book">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\addSort.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/sort/add"
+      method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">类别名称</td>
+            <td><input type="text" name="name" /></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button id="btn" type="submit" class="btn btn-primary"
+                        >添加</button> &nbsp;&nbsp;<a type="button"
+                                                                 class="btn btn-success" name="backid" id="backid"
+                                                                 href="/sysadmin/sortList">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\addUser.html:
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/user/add" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td class="tableleft">用户账号</td>
+            <td><input id="code" type="text" name="username" onchange="checkCode()"/>
+                &nbsp;&nbsp; <span id="showMsg" style="color:red"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">用户密码</td>
+            <td><input type="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button id="btn" type="submit" class="btn btn-primary">添加</button> &nbsp;&nbsp;<a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/userList">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    function checkCode(){
+        var code=$("#code").val();
+        $.ajax({
+            type:"get",
+            url:"${pageContext.request.contextPath }/sysadmin/checkCode",
+            data:{"code":code},
+            success:function(data) {
+                if(data==1)
+                {
+                    $("#showMsg").html("账户已存在，请重新输入");
+                    $("#btn").attr("disabled", true);
+                }
+                else{
+                    $("#showMsg").html("");
+                    $("#btn").attr("disabled", false);
+                }
+            }
+        });
+    }
+</script>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\book.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 80px; /* 限制最大宽度 */
+            max-height: 100px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+
+        /* 调整表格单元格内边距 */
+        .table td {
+            padding: 8px; /* 适当增加内边距 */
+            vertical-align: middle; /* 垂直居中 */
+        }
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" id="form"
+      action="/book/findByKey" method="post">
+    书籍关键字： <input type="text" name="key" id="username"
+                       class="abc input-default" placeholder="书籍关键字" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>
+    &nbsp;&nbsp; <a type="button" class="btn btn-primary"
+                    href="/sort/list">增加书籍</a>&nbsp;&nbsp;
+    <input id="CurrentPage" type="hidden" name="currentPage" value="1" />
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>书籍数量</th>
+        <th>封面</th> <!-- 添加图片列 -->
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="book:${list}">
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.sname}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publish}"></td>
+        <td th:text="${book.edition}"></td>
+        <td th:text="${book.number}"></td>
+        <td>
+            <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Book Image" class="book-image"/>
+        </td> <!-- 显示图片 -->
+        <td>
+            <a type="button" class="btn btn-success"
+               th:href="'/book/findById/'+${book.id}">修改</a>
+            <a type="button" class="btn btn-danger"
+               th:href="'/book/delete/'+${book.id}">删除</a>
+        </td>
+    </tr>
+</table>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\index.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main-min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <img src="/assets/img/logo.png" style="height: 30px;">
+        图书管理系统
+        <span>Library Management System</span>
+    </div>
+    <div class="dl-log">
+        欢迎您：<span class="dl-log-user" th:text="${session.sysadmin.username}"></span><a href="/sysadmin/logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>		<!-- <li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li> -->
+
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<div class="footer">
+    版权所有
+</div>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="/assets/js/common/main.js"></script>
+<script type="text/javascript" src="/assets/js/config-min.js"></script>
+<script>
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[{text:'系统管理',items:[
+                    {id:'3',text:'用户管理',href:'/sysadmin/userList'},
+                    {id:'12',text:'书籍管理',href:'/sysadmin/bookList'},
+                    {id:'13',text:'类别管理',href:'/sysadmin/sortList'},
+                ]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\sort.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+
+        });
+    </script>
+</head>
+<body>
+<form class="form-inline definewidth m20"
+      action="/sort/search" method="post">
+    图书类别：
+    <input type="text" name="name" class="abc input-default" placeholder="类别名称" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button> &nbsp;&nbsp;
+    <a type="button" class="btn btn-primary" href="/sysadmin/addSort">
+        增加类别
+    </a>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>图书类别</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="sort:${list}">
+        <td th:text="${sort.id}"></td>
+        <td th:text="${sort.name}"></td>
+        <td>
+            <a type="button" class="btn btn-success"
+               th:href="'/sort/findById/'+${sort.id}">修改</a>
+            <a type="button" class="btn btn-danger"
+               th:href="'/sort/delete/'+${sort.id}">删除</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\updateBook.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>修改书籍</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/book/update" method="post" class="definewidth m20" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${book.id}"/>
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">书籍ID</td>
+            <td><input type="text" name="id" readonly th:value="${book.id}"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">书籍名称</td>
+            <td><input type="text" name="name" th:value="${book.name}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍类别</td>
+            <td>
+                <select class="form-control" name="sid">
+                    <option th:each="sort:${list}" th:text="${sort.name}"
+                            th:selected="${sort.id == book.sid}"
+                            th:value="${sort.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">作者</td>
+            <td><input type="text" name="author" th:value="${book.author}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">出版社</td>
+            <td><input type="text" name="publish" th:value="${book.publish}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">版本</td>
+            <td><input type="text" name="edition" th:value="${book.edition}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍数量</td>
+            <td><input type="text" name="number" th:value="${book.number}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">书籍封面</td>
+            <td>
+                <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Current Book Image" width="50" height="70"/><br/>
+                <input type="file" name="imageFile" accept="image/*"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">更改</button> &nbsp;&nbsp;<a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/bookList">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+
+    });
+</script>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\updateSort.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="/sort/update" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td width="10%" class="tableleft">类别ID</td>
+            <td><input type="text" name="id" th:value="${sort.id}" readonly/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">类别名称</td>
+            <td><input type="text" name="name" th:value="${sort.name}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">修改</button> &nbsp;&nbsp;
+                <a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/sortList">返回列表</a>
+            </td>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+
+    });
+</script>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\updateUser.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+
+
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="/user/update" method="post" class="definewidth m20">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td class="tableleft">用户ID</td>
+            <td><input type="text" name="id" readonly th:value="${user.id}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">用户账号</td>
+            <td><input type="text" name="username" th:value="${user.username}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">用户密码</td>
+            <td><input type="text" name="password" th:value="${user.password}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button type="submit" class="btn btn-primary">修改</button> &nbsp;&nbsp;<a type="button" class="btn btn-success" name="backid" id="backid" href="/sysadmin/userList">返回列表</a>
+            </td>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#backid').click(function(){
+            window.location.href="index.html";
+        });
+
+    });
+</script>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\sysadmin\user.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<form class="form-inline definewidth m20" action="/sysadmin/findByName" method="post">
+    用户名称：
+    <input type="text" name="username" id="username"class="abc input-default" placeholder="用户姓名" value="">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <a type="button" class="btn btn-primary" href="/sysadmin/addUser">增加用户</a>&nbsp;&nbsp;
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>用户名称</th>
+        <th>用户账号</th>
+        <th>用户密码</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="user:${list}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/user/findById/'+${user.id}">修改</a>
+            <a type="button" class="btn btn-danger" th:href="'/user/delete/'+${user.id}">删除</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\user\back.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍归还</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        .book-image {
+            max-width: 50px;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            vertical-align: middle;
+        }
+        /* 新增按钮样式 */
+        .return-all-btn {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>借书ID</th>
+        <th>书籍封面</th>
+        <th>书籍名称</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>申请时间</th>
+        <th>还书状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="back:${list}">
+        <td th:text="${back.id}"></td>
+        <td>
+            <img th:if="${back.imagePath}" th:src="@{'/static/images/' + ${back.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${back.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${back.bookName}"></td>
+        <td th:text="${back.author}"></td>
+        <td th:text="${back.publish}"></td>
+        <td th:text="${back.edition}"></td>
+        <td th:text="${back.startTime}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled>未归还</button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-success" th:href="'/back/add?id='+${back.id}">归还</a>
+        </td>
+    </tr>
+</table>
+<!-- 新增归还全部按钮 -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <a href="/back/addAll" class="btn btn-primary return-all-btn">一键归还全部</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\user\borrow.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍借阅</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+        @media (max-width: 980px) {
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 50px; /* 限制最大宽度 */
+            max-height: 70px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+    </style>
+
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍封面</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>申请时间</th>
+        <th>借书状态</th>
+    </tr>
+    </thead>
+    <tr th:each="borrow:${list}">
+        <td th:text="${borrow.bookName}"></td>
+        <td>
+            <img th:if="${borrow.imagePath}" th:src="@{'/static/images/' + ${borrow.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${borrow.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${borrow.sortName}"></td>
+        <td th:text="${borrow.author}"></td>
+        <td th:text="${borrow.publish}"></td>
+        <td th:text="${borrow.edition}"></td>
+        <td th:text="${borrow.startTime}"></td>
+        <td>
+            <button type="button" th:if="${borrow.status == 0}" class="btn btn-default disabled" disabled>待确认</button>
+            <button type="button" th:if="${borrow.status == 1}" class="btn btn-default disabled" disabled>审批通过</button>
+            <button type="button" th:if="${borrow.status == 2}" class="btn btn-default disabled" disabled>审批未通过</button>
+            <button type="button" th:if="${borrow.status == 3}" class="btn btn-default disabled" disabled>归还待审批</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\user\index.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="dl-title">
+        <img src="/assets/img/OIP.jpg" style="height: 40px;">
+        图书管理系统
+        <span>Library Management System</span>
+    </div>
+    <div class="dl-log">
+        欢迎您：<span class="dl-log-user" th:text="${session.user.username}"></span><a href="/user/logout" title="退出系统" class="dl-log-quit">[退出]</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected"><div class="nav-item-inner nav-home">系统管理</div></li>		<!-- <li class="nav-item dl-selected"><div class="nav-item-inner nav-order">业务管理</div></li> -->
+
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+<div class="footer">
+    版权所有
+</div>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bui-min.js"></script>
+<script type="text/javascript" src="/assets/js/common/main.js"></script>
+<script type="text/javascript" src="/assets/js/config-min.js"></script>
+<script>-
+    BUI.use('common/main',function(){
+        var config = [{id:'1',menu:[{text:'书籍管理',items:[
+                    {id:'12',text:'书籍查询',href:'/book/list/1'},
+                    {id:'3',text:'书籍借阅',href:'/borrow/list'},
+                    {id:'4',text:'书籍归还',href:'/back/list'}
+                ]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+</script>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\user\list.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>书籍查询</title>
+    <link rel="stylesheet" type="text/css" href="/css/jquery.pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/jquery.pagination.min.js"></script>
+    <script>
+        $(function() {
+            var cp = parseInt($("#curPage").val());
+            var tp = parseInt($("#tolPage").val());
+            $("#pagination2").pagination({
+                currentPage: cp,
+                totalPage: tp,
+                isShow: false,
+                count: 5,
+                prevPageText: "< 上一页",
+                nextPageText: "下一页 >",
+                callback: function(current) {
+                    location.href = '/book/list/' + current;
+                }
+            });
+        });
+    </script>
+    <style>
+        /* 调整图片显示 */
+        .book-image {
+            max-width: 80px; /* 限制最大宽度 */
+            max-height: 100px; /* 限制最大高度 */
+            width: auto;
+            height: auto;
+            vertical-align: middle; /* 垂直居中 */
+        }
+
+        /* 调整表格单元格内边距 */
+        .table td, .table th {
+            padding: 16px; /* 增加内边距，使内容更宽松 */
+            vertical-align: middle; /* 垂直居中 */
+            font-size: 18px; /* 字体放大一倍 */
+        }
+
+        /* 表格行悬停效果 */
+        .table tbody tr {
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .table tbody tr:hover {
+            transform: scale(1.05); /* 放大效果 */
+            background-color: #ffc0cb; /* 粉红色 */
+        }
+
+        /* 分页控件基础样式 */
+        .ui-pagination-container a {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 4px;
+            transition: all 0.3s ease; /* 添加过渡效果 */
+            transform-origin: center; /* 设置缩放中心 */
+        }
+
+        /* 鼠标悬停效果 */
+        .ui-pagination-container a:hover {
+            color: #fff;
+            background-color: #ad1457;
+            border-color: #ad1457;
+        }
+
+        /* 当前页码样式 */
+        .ui-pagination-container a.active {
+            background-color: #c2185b !important;
+            border-color: #c2185b !important;
+            color: #fff !important;
+            transform: scale(1.1); /* 略微放大 */
+        }
+
+        /* 上一页/下一页 按钮样式 */
+        .ui-pagination-container a:contains("上一页"),
+        .ui-pagination-container a:contains("下一页") {
+            color: #fff;
+            background-color: #e91e63;
+            border-color: #e91e63;
+        }
+
+        .ui-pagination-container a:contains("上一页"):hover,
+        .ui-pagination-container a:contains("下一页"):hover {
+            color: #fff;
+            background-color: #ad1457;
+            border-color: #ad1457;
+        }
+
+        /* 点击时的填充动画 */
+        .ui-pagination-container a:active {
+            background-color: #f48fb1; /* 淡粉色 */
+            transition: background-color 0.5s ease; /* 0.5秒的过渡效果 */
+        }
+
+        /* 表格悬停效果 */
+        .table-hover tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* 按钮样式 */
+        .btn-success {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #4cae4c;
+            border-color: #398439;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<form id="form" class="form-inline definewidth m20"
+      action="/book/search" method="post">
+    书籍关键字： <input type="text" name="keyWord" id="username"
+                       class="abc input-default" placeholder="书籍关键字">&nbsp;&nbsp;
+    <input type="hidden" value="1" name="current"/>
+    书籍类别:<select class="form-control" name="sid">
+    <option value="0">---请选择类别---</option>
+    <option th:each="sort:${sortList}" th:text="${sort.name}" th:value="${sort.id}"></option>
+</select>&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>
+    &nbsp;&nbsp;
+    <input id="CurrentPage" type="hidden" name="currentPage" value="1" />
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>书籍名称</th>
+        <th>书籍封面</th>
+        <th>书籍类别</th>
+        <th>作者</th>
+        <th>出版社</th>
+        <th>版本</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book:${page.data}">
+        <td th:text="${book.name}"></td>
+        <td>
+            <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Book Image" class="book-image"/>
+        </td>
+        <td th:text="${book.sname}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publish}"></td>
+        <td th:text="${book.edition}"></td>
+        <td><a type="button" class="btn btn-success" th:href="'/borrow/add?bookId='+${book.id}">借阅</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<input th:value="${page.currentPage}" type="hidden" id="curPage"/>
+<input th:value="${page.totalPage}" type="hidden" id="tolPage"/>
+<center>
+    <div class="box">
+        <div id="pagination2" class="page fl"></div>
+    </div>
+</center>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\user\login.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>二次元の小站</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <style>
+        /* 新增错误提示样式 */
+        .error-message {
+            color: #ff4d4f;
+            margin: 10px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 原有样式保持不变 */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 450px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        .bg-container {
+            flex: 1;
+            background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+            position: relative;
+            opacity: 0;
+            animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+        }
+
+        .login-form-box {
+            width: 100%;
+            transform: translateY(-30px);
+        }
+
+        .login-title {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: 15px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .login-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 15px;
+            transform-origin: left center;
+        }
+
+        select.form-control {
+            height: 46px;
+            line-height: 46px;
+            padding-top: 0;
+            padding-bottom: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            transform: scale(1.03);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            width: 160px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .bg-container {
+                display: none;
+                animation: none;
+            }
+            .login-container {
+                width: 100%;
+                padding: 0 20px;
+                animation: none;
+                opacity: 1;
+            }
+            .btn-primary {
+                width: 120px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#frmLogin').bootstrapValidator({
+                feedbackIcons:{
+                    valid:'glyphicon glyphicon-ok',
+                    invalid:'glyphicon glyphicon-remove',
+                    validating:'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+                    password: { validators: { notEmpty: { message: '密码不能为空' } } }
+                }
+            });
+
+            $('.form-control').on('focus', function() {
+                $(this).css({
+                    'transform': 'scale(1.03)',
+                    'z-index': 1
+                });
+            }).on('blur', function() {
+                $(this).css({
+                    'transform': 'scale(1)',
+                    'z-index': 'auto'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 左侧登录区 -->
+<div class="login-container">
+    <div class="login-form-box">
+        <h2 class="login-title">📖 书斋登录</h2>
+
+        <!-- 新增错误提示 -->
+        <div class="error-message" th:text="${msg}"></div>
+
+        <form action="/login" method="post" id="frmLogin">
+            <div class="form-group">
+                <input type="text" name="username"
+                       class="form-control"
+                       placeholder="用户名"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password"
+                       class="form-control"
+                       placeholder="密码"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <select name="type" class="form-control">
+                    <option value="0">- 选择身份 -</option>
+                    <option value="1" selected>普通用户</option>
+                    <option value="2">管理员</option>
+                    <option value="3">系统管理员</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">登录次元</button>
+                    <a href="/user/register" class="btn btn-primary">注册用户</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+
+C:\work\副本\lib_springboot\辅副本\lib_springboot\target\classes\templates\user\register.html:
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>用户注册</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/mycss.css">
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+  <style>
+    /* 新增错误提示样式 */
+    .error-message {
+      color: #ff4d4f;
+      margin: 10px 0;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 原有样式保持不变 */
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      font-family: 'Microsoft YaHei', sans-serif;
+      background: #f8f9fa;
+      overflow: hidden;
+    }
+
+    .register-container {
+      width: 450px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+      opacity: 0;
+      animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    }
+
+    .bg-container {
+      flex: 1;
+      background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+      position: relative;
+      opacity: 0;
+      animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+    }
+
+    .register-form-box {
+      width: 100%;
+      transform: translateY(-30px);
+    }
+
+    .register-title {
+      color: #ff6b6b;
+      font-size: 32px;
+      text-align: left;
+      margin-bottom: 15px;
+      padding-left: 8px;
+      position: relative;
+    }
+
+    .register-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 40px;
+      height: 3px;
+      background: #ff6b6b;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 2px solid #eee;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 12px 15px;
+      transform-origin: left center;
+    }
+
+    select.form-control {
+      height: 46px;
+      line-height: 46px;
+      padding-top: 0;
+      padding-bottom: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+    }
+
+    .form-control:focus {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      transition: all 0.3s ease;
+      margin: 0 10px;
+      width: 160px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .bg-container {
+        display: none;
+        animation: none;
+      }
+      .register-container {
+        width: 100%;
+        padding: 0 20px;
+        animation: none;
+        opacity: 1;
+      }
+      .btn-primary {
+        width: 120px;
+        padding: 10px 15px;
+      }
+    }
+  </style>
+  <script>
+    $(function(){
+      $('#frmRegister').bootstrapValidator({
+        feedbackIcons:{
+          valid:'glyphicon glyphicon-ok',
+          invalid:'glyphicon glyphicon-remove',
+          validating:'glyphicon glyphicon-refresh'
+        },
+        fields:{
+          username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+          password: { validators: { notEmpty: { message: '密码不能为空' } } },
+          confirmPassword: { validators: { notEmpty: { message: '确认密码不能为空' }, identical: { field: 'password', message: '两次输入的密码不一致' } } }
+        }
+      });
+
+      $('.form-control').on('focus', function() {
+        $(this).css({
+          'transform': 'scale(1.03)',
+          'z-index': 1
+        });
+      }).on('blur', function() {
+        $(this).css({
+          'transform': 'scale(1)',
+          'z-index': 'auto'
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+<!-- 左侧注册区 -->
+<div class="register-container">
+  <div class="register-form-box">
+    <h2 class="register-title">📖 书斋注册</h2>
+
+    <!-- 新增错误提示 -->
+    <div class="error-message" th:text="${message}"></div>
+
+    <form action="/user/register" method="post" id="frmRegister">
+      <div class="form-group">
+        <input type="text" name="username"
+               class="form-control"
+               placeholder="用户名"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="password"
+               class="form-control"
+               placeholder="密码"
+               required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="confirmPassword"
+               class="form-control"
+               placeholder="确认密码"
+               required>
+      </div>
+
+      <div class="form-group" style="margin-top: 30px;">
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">注册</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
+
+

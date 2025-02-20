@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: root
+  thymeleaf:
+    prefix: classpath:/templates/  # 模板文件路径
+    suffix: .html                  # 文件后缀
+    cache: false                   # 新增：关闭模板缓存（开发环境使用）
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8182
+  error:
+    path: /error          # 错误路径配置
+  tomcat:
+    basedir: src/main/resources/static/temp
+
+mybatis-plus:
+  mapper-locations: classpath:/com/southwind/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>二次元の小站</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycss.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <style>
+        /* 新增错误提示样式 */
+        .error-message {
+            color: #ff4d4f;
+            margin: 10px 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 原有样式保持不变 */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f8f9fa;
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 450px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.05);
+            z-index: 2;
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+        }
+
+        .bg-container {
+            flex: 1;
+            background: url('https://api.suyanw.cn/api/comic/api.php') no-repeat center/cover;
+            position: relative;
+            opacity: 0;
+            animation: slideInRight 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s forwards;
+        }
+
+        .login-form-box {
+            width: 100%;
+            transform: translateY(-30px);
+        }
+
+        .login-title {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: 15px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .login-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 40px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 12px 15px;
+            transform-origin: left center;
+        }
+
+        select.form-control {
+            height: 46px;
+            line-height: 46px;
+            padding-top: 0;
+            padding-bottom: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b6b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/12px;
+        }
+
+        .form-control:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            transform: scale(1.03);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            width: 160px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .bg-container {
+                display: none;
+                animation: none;
+            }
+            .login-container {
+                width: 100%;
+                padding: 0 20px;
+                animation: none;
+                opacity: 1;
+            }
+            .btn-primary {
+                width: 120px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#frmLogin').bootstrapValidator({
+                feedbackIcons:{
+                    valid:'glyphicon glyphicon-ok',
+                    invalid:'glyphicon glyphicon-remove',
+                    validating:'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    username:{ validators:{ notEmpty:{ message:'用户名不能为空' } } },
+                    password: { validators: { notEmpty: { message: '密码不能为空' } } }
+                }
+            });
+
+            $('.form-control').on('focus', function() {
+                $(this).css({
+                    'transform': 'scale(1.03)',
+                    'z-index': 1
+                });
+            }).on('blur', function() {
+                $(this).css({
+                    'transform': 'scale(1)',
+                    'z-index': 'auto'
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- 左侧登录区 -->
+<div class="login-container">
+    <div class="login-form-box">
+        <h2 class="login-title">📖 书斋登录</h2>
+
+        <!-- 新增错误提示 -->
+        <div class="error-message" th:text="${msg}"></div>
+
+        <form action="/login" method="post" id="frmLogin">
+            <div class="form-group">
+                <input type="text" name="username"
+                       class="form-control"
+                       placeholder="用户名"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password"
+                       class="form-control"
+                       placeholder="密码"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <select name="type" class="form-control">
+                    <option value="0">- 选择身份 -</option>
+                    <option value="1" selected>普通用户</option>
+                    <option value="2">管理员</option>
+                    <option value="3">系统管理员</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">登录次元</button>
+                    <a href="/user/register" class="btn btn-primary">注册用户</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 右侧背景图 -->
+<div class="bg-container"></div>
+</body>
+</html>
