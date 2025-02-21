@@ -32,30 +32,43 @@ public class BackServiceImpl extends ServiceImpl<BackMapper, Back> implements Ba
 
     @Autowired
     private BackMapper backMapper;
+
     @Autowired
     private BorrowMapper borrowMapper;
+
     @Autowired
     private UserMapper userMapper;
+
     @Autowired
     private BookMapper bookMapper;
 
     @Override
     public List<BackVO> backList() {
         QueryWrapper<Back> backQueryWrapper = new QueryWrapper<>();
-        backQueryWrapper.eq("status", 0);
+        backQueryWrapper.eq("status", 0); // 假设0表示未归还状态
+
         List<Back> backList = this.backMapper.selectList(backQueryWrapper);
+
         List<BackVO> backVOList = new ArrayList<>();
+
         for (Back back : backList) {
             BackVO backVO = new BackVO();
+
             Borrow borrow = this.borrowMapper.selectById(back.getBrid());
             User user = this.userMapper.selectById(borrow.getUid());
+
             backVO.setUserName(user.getUsername());
+
             Book book = this.bookMapper.selectById(borrow.getBid());
+
             BeanUtils.copyProperties(book, backVO);
             backVO.setBookName(book.getName());
+
             BeanUtils.copyProperties(back, backVO);
+
             backVOList.add(backVO);
         }
-        return backVOList;
+
+        return backVOList; // 返回归还记录列表
     }
 }

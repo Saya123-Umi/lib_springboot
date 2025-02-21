@@ -16,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,24 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author admin
- * @since 2023-03-07
- */
 @Controller
 @RequestMapping("/book")
 public class BookController {
 
     @Autowired
     private BookService bookService;
+
     @Autowired
     private SortService sortService;
+
     @Autowired
     private BorrowService borrowService;
 
@@ -53,7 +45,7 @@ public class BookController {
     private final String uploadPath = "static/images";
 
     @GetMapping("/list/{current}")
-    public String list(@PathVariable("current") Integer current, Model model){
+    public String list(@PathVariable("current") Integer current, Model model) {
         PageVO pageVO = this.bookService.pageList(current);
         model.addAttribute("page", pageVO);
         model.addAttribute("sortList", this.sortService.list());
@@ -61,40 +53,27 @@ public class BookController {
     }
 
     @PostMapping("/search")
-    public String search(String keyWord,Integer current,Integer sid,Model model){
-        PageVO pageVO = null;
-        //类别检索
-        if(!sid.equals(0)){
+    public String search(String keyWord, Integer current, Integer sid, Model model) {
+        PageVO pageVO;
+
+        // 类别检索
+        if (!sid.equals(0)) {
             pageVO = this.bookService.searchBySort(sid, current);
         } else {
-            //关键字检索带分页
-            pageVO = this.bookService.searchByKeyWord(keyWord, current);
+            // 关键字检索带分页
+            pageVO = this.bookService.searchByKeyWord(keyWord, current); // 使用更新后的方法
         }
+
         model.addAttribute("page", pageVO);
         model.addAttribute("sortList", this.sortService.list());
+
         return "/user/list";
     }
 
-    @PostMapping("/findByKey")
-    public String findByKey(String key,Model model){
-        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank(key), "name", key)
-                .or()
-                .like(StringUtils.isNotBlank(key), "author", key)
-                .or()
-                .like(StringUtils.isNotBlank(key), "publish", key);
-        List<Book> list = this.bookService.list(queryWrapper);
-        List<BookVO> bookVOList = new ArrayList<>();
-        for (Book book : list) {
-            BookVO bookVO = new BookVO();
-            BeanUtils.copyProperties(book, bookVO);
-            Sort sort = this.sortService.getById(book.getSid());
-            bookVO.setSname(sort.getName());
-            bookVO.setImagePath(book.getImagePath()); // 确保 imagePath 被复制
-            bookVOList.add(bookVO);
-        }
-        model.addAttribute("list", bookVOList);
-        return "/sysadmin/book";
+    @GetMapping("/autocomplete")
+    @ResponseBody
+    public List<String> autocomplete(@RequestParam String key) {
+        return bookService.findBooksByKeyword(key); // 仅返回书籍名称匹配的结果
     }
 
     @PostMapping("/add")
@@ -106,16 +85,20 @@ public class BookController {
         // 2. 文件上传到临时目录
         String tempFileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
         Path tempFile = Paths.get(tempDir, tempFileName);
+
         if (!Files.exists(Paths.get(tempDir))) {
             Files.createDirectories(Paths.get(tempDir));
         }
+
         imageFile.transferTo(tempFile.toFile());
 
         // 3. 从临时目录移动到目标目录
         Path targetFile = Paths.get(uploadDir, tempFileName);
+
         if (!Files.exists(Paths.get(uploadDir))) {
             Files.createDirectories(Paths.get(uploadDir));
         }
+
         Files.move(tempFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
 
         // 4. 设置图书的imagePath属性
@@ -123,14 +106,16 @@ public class BookController {
 
         // 5. 保存图书信息到数据库
         this.bookService.save(book);
+
         return "redirect:/sysadmin/bookList";
     }
 
     @GetMapping("/findById/{id}")
-    public String findById(@PathVariable("id") Integer id, Model model){
+    public String findById(@PathVariable("id") Integer id, Model model) {
         Book book = this.bookService.getById(id);
         model.addAttribute("book", book);
         model.addAttribute("list", this.sortService.list());
+
         return "/sysadmin/updateBook";
     }
 
@@ -170,15 +155,19 @@ public class BookController {
 
         // 3. 更新图书信息到数据库
         this.bookService.updateById(book);
+
         return "redirect:/sysadmin/bookList";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public String delete(@PathVariable("id") Integer id) {
         QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("bid", id);
+
         this.borrowService.remove(queryWrapper);
+
         this.bookService.removeById(id);
+
         return "redirect:/sysadmin/bookList";
     }
 }

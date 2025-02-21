@@ -16,8 +16,11 @@ import java.util.List;
  * @since 2023-03-07
  */
 public interface BorrowService extends IService<Borrow> {
-    public void add(Integer uid,Integer bid);
-    public List<BorrowVO> borrowList(Integer uid);
-    public List<BorrowVO> backList(Integer uid);
-    public List<AdminBorrowVO> adminBorrowList();
+    void add(Integer uid, Integer bid);
+
+    List<BorrowVO> borrowList(Integer uid);
+
+    List<BorrowVO> backList(Integer uid);
+
+    List<AdminBorrowVO> adminBorrowList();
 }

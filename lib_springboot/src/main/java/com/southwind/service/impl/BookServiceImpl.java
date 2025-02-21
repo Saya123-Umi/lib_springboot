@@ -31,6 +31,7 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
 
     @Autowired
     private BookMapper bookMapper;
+
     @Autowired
     private SortMapper sortMapper;
 
@@ -40,9 +41,11 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
         bookQueryWrapper.gt("number", 0);
         Page<Book> page = new Page<>(currentPage, 5);
         Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+
         PageVO pageVO = new PageVO();
         pageVO.setCurrentPage(resultPage.getCurrent());
         pageVO.setTotalPage(resultPage.getPages());
+
         List<BookVO> result = new ArrayList<>();
         for (Book book : resultPage.getRecords()) {
             BookVO bookVO = new BookVO();
@@ -58,19 +61,18 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     }
 
     @Override
-    public PageVO searchByKeyWord(String keyWord,Integer currentPage) {
+    public PageVO searchByKeyWord(String keyWord, Integer currentPage) {
         QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
         bookQueryWrapper.gt("number", 0);
-        bookQueryWrapper.like(StringUtils.isNotBlank(keyWord), "name", keyWord)
-                .or()
-                .like(StringUtils.isNotBlank(keyWord), "author", keyWord)
-                .or()
-                .like(StringUtils.isNotBlank(keyWord), "publish", keyWord);
+        bookQueryWrapper.like(StringUtils.isNotBlank(keyWord), "name", keyWord); // 仅根据书籍名称匹配
+
         Page<Book> page = new Page<>(currentPage, 5);
         Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+
         PageVO pageVO = new PageVO();
         pageVO.setCurrentPage(resultPage.getCurrent());
         pageVO.setTotalPage(resultPage.getPages());
+
         List<BookVO> result = new ArrayList<>();
         for (Book book : resultPage.getRecords()) {
             BookVO bookVO = new BookVO();
@@ -89,12 +91,15 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     public PageVO searchBySort(Integer sid, Integer currentPage) {
         QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
         bookQueryWrapper.gt("number", 0);
-        bookQueryWrapper.eq("sid",sid);
+        bookQueryWrapper.eq("sid", sid);
+
         Page<Book> page = new Page<>(currentPage, 5);
         Page<Book> resultPage = this.bookMapper.selectPage(page, bookQueryWrapper);
+
         PageVO pageVO = new PageVO();
         pageVO.setCurrentPage(resultPage.getCurrent());
         pageVO.setTotalPage(resultPage.getPages());
+
         List<BookVO> result = new ArrayList<>();
         for (Book book : resultPage.getRecords()) {
             BookVO bookVO = new BookVO();
@@ -107,5 +112,21 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
         }
         pageVO.setData(result);
         return pageVO;
+    }
+
+    @Override
+    public List<String> findBooksByKeyword(String key) {
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(key), "name", key); // 仅根据书籍名称匹配
+
+        List<Book> books = this.list(queryWrapper);
+
+        List<String> bookNames = new ArrayList<>();
+
+        for (Book book : books) {
+            bookNames.add(book.getName());
+        }
+
+        return bookNames; // 返回匹配的书籍名称列表
     }
 }
