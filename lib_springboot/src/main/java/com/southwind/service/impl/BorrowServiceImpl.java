@@ -91,23 +91,39 @@ public class BorrowServiceImpl extends ServiceImpl<BorrowMapper, Borrow> impleme
 
     @Override
     public List<AdminBorrowVO> adminBorrowList() {
+        // 构建查询条件（移除状态过滤条件）
         QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
-        borrowQueryWrapper.eq("status", 0);
         List<Borrow> borrowList = this.borrowMapper.selectList(borrowQueryWrapper);
+
         List<AdminBorrowVO> adminBorrowVOList = new ArrayList<>();
+
         for (Borrow borrow : borrowList) {
             AdminBorrowVO adminBorrowVO = new AdminBorrowVO();
+
+            // 基础借阅记录数据
             BeanUtils.copyProperties(borrow, adminBorrowVO);
+
+            // 关联用户信息
             User user = this.userMapper.selectById(borrow.getUid());
             adminBorrowVO.setUserName(user.getUsername());
+
+            // 关联书籍信息
             Book book = this.bookMapper.selectById(borrow.getBid());
-            adminBorrowVO.setBookName(book.getName());
             BeanUtils.copyProperties(book, adminBorrowVO);
+            adminBorrowVO.setBookName(book.getName());
+            adminBorrowVO.setImagePath(book.getImagePath()); // 新增封面路径
+
+            // 关联分类信息
             Sort sort = this.sortMapper.selectById(book.getSid());
             adminBorrowVO.setSortName(sort.getName());
-            adminBorrowVO.setId(borrow.getId());
+
+            // 时间格式化（可选）
+            adminBorrowVO.setStartTime(borrow.getStartTime());
+
             adminBorrowVOList.add(adminBorrowVO);
         }
+
         return adminBorrowVOList;
     }
+
 }

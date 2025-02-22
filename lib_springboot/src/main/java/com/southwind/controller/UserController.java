@@ -89,15 +89,6 @@ public class UserController {
             return "redirect:/sysadmin/userList";
         }
 
-        // 删除用户所有关联的归还记录
-        QueryWrapper<Back> backQuery = new QueryWrapper<>();
-        backQuery.inSql("brid", "SELECT id FROM borrow WHERE uid=" + id);
-        this.backService.remove(backQuery);
-
-        // 删除用户所有借阅记录
-        QueryWrapper<Borrow> borrowQuery = new QueryWrapper<>();
-        borrowQuery.eq("uid", id);
-        this.borrowService.remove(borrowQuery);
 
         // 最后删除用户
         this.userService.removeById(id);
