@@ -13,9 +13,11 @@ import com.southwind.vo.PageVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -24,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -160,14 +163,26 @@ public class BookController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("bid", id);
+    @Transactional
+    public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttrs) {
+        // 检查是否存在未完成的借阅记录
+        List<Borrow> borrowList = this.borrowService.list(
+                new QueryWrapper<Borrow>()
+                        .eq("bid", id)
+                        .in("status", Arrays.asList(0, 1, 3)) // 0-待审批 1-已通过 3-归还申请中
+        );
 
-        this.borrowService.remove(queryWrapper);
+        if (!borrowList.isEmpty()) {
+            redirectAttrs.addFlashAttribute("error", "存在未归还的借阅记录，无法删除书籍");
+            return "redirect:/sysadmin/bookList";
+        }
 
+        // 删除关联的借阅记录
+        this.borrowService.remove(new QueryWrapper<Borrow>().eq("bid", id));
         this.bookService.removeById(id);
 
+        redirectAttrs.addFlashAttribute("success", "书籍删除成功");
         return "redirect:/sysadmin/bookList";
     }
+
 }

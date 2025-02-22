@@ -12,6 +12,7 @@ import com.southwind.service.SortService;
 import com.southwind.vo.BackVO;
 import com.southwind.vo.BorrowVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,18 +71,34 @@ public class BackController {
     }
 
     @GetMapping("/allow")
+    @Transactional // 添加事务注解
     public String allow(Integer id) {
+        // 获取归还记录
         Back back = this.backService.getById(id);
-        back.setStatus(1); // 假设1表示已允许归还
+        if(back.getStatus() != 0) {
+            throw new IllegalStateException("该申请已处理过");
+        }
+
+        // 更新归还记录状态
+        back.setStatus(1);
         this.backService.updateById(back);
 
+        // 获取关联借阅记录
         Borrow borrow = this.borrowService.getById(back.getBrid());
-        Book book = this.bookService.getById(borrow.getBid());
-        book.setNumber(book.getNumber() + 1); // 增加书籍数量
-        this.bookService.updateById(book);
+
+        // 关键修复点↓↓↓
+        borrow.setStatus(4); // 设置已归还状态
+        this.borrowService.updateById(borrow);
+
+        // 使用原子操作更新库存
+        this.bookService.update()
+                .setSql("number = number + 1")
+                .eq("id", borrow.getBid())
+                .update();
 
         return "redirect:/back/adminList";
     }
+
 
     // 新增一键归还全部功能
     @GetMapping("/addAll")
