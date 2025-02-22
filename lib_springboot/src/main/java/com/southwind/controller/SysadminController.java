@@ -7,8 +7,10 @@ import com.southwind.entity.Admin;
 import com.southwind.entity.Book;
 import com.southwind.entity.Sort;
 import com.southwind.entity.User;
-import com.southwind.service.*;
-import com.southwind.vo.AdminBorrowVO;
+import com.southwind.service.AdminService;
+import com.southwind.service.BookService;
+import com.southwind.service.SortService;
+import com.southwind.service.UserService;
 import com.southwind.vo.BookVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +44,6 @@ public class SysadminController {
     private BookService bookService;
     @Autowired
     private SortService sortService;
-    @Autowired
-   private BorrowService borrowService;
-
 
     @GetMapping("/{url}")
     public String redirect(@PathVariable("url") String url){
@@ -93,15 +92,6 @@ public class SysadminController {
         }
         model.addAttribute("list", bookVOList);
         return "/sysadmin/book";
-    }
-
-    // 在SysadminController类中添加
-    // SysadminController.java 新增方法
-    @GetMapping("/borrowList")
-    public String borrowList(Model model) {
-        List<AdminBorrowVO> adminBorrowVOList = this.borrowService.adminBorrowList();
-        model.addAttribute("list", adminBorrowVOList);
-        return "/sysadmin/borrow";
     }
 }
 

@@ -22,7 +22,5 @@ public interface BorrowService extends IService<Borrow> {
 
     List<BorrowVO> backList(Integer uid);
 
-    // 在BorrowService接口中声明
     List<AdminBorrowVO> adminBorrowList();
-
 }
