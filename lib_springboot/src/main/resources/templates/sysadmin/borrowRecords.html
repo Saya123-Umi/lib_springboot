@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>借阅记录管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        .book-image {
+            max-width: 50px;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>借书ID</th>
+        <th>用户ID</th>
+        <th>书籍名称</th>
+        <th>书籍封面</th>
+        <th>借阅时间</th>
+        <th>归还时间</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tr th:each="borrow:${borrowList}">
+        <td th:text="${borrow.id}"></td>
+        <td th:text="${borrow.user.id}"></td>
+        <td th:text="${borrow.book.name}"></td>
+        <td>
+            <img th:if="${borrow.book.imagePath}" th:src="@{'/static/images/' + ${borrow.book.imagePath}}" alt="Book Image" class="book-image"/>
+            <span th:unless="${borrow.book.imagePath}">暂无封面</span>
+        </td>
+        <td th:text="${borrow.startTime}"></td>
+        <td th:text="${borrow.endTime}"></td>
+        <td>
+            <button type="button" th:class="${borrow.status == 0} ? 'btn btn-warning' : ( ${borrow.status == 1} ? 'btn btn-success' : 'btn btn-danger' )"
+                    disabled>
+                <span th:text="${borrow.status == 0} ? '待确认' : ( ${borrow.status == 1} ? '已借出' : '已归还' )"></span>
+            </button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-primary" th:href="'/sysadmin/updateBorrow/' + ${borrow.id}">修改</a>
+            <a type="button" class="btn btn-danger" th:href="'/sysadmin/deleteBorrow/' + ${borrow.id}">删除</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

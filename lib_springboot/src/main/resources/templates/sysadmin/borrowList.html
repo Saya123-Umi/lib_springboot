@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>借阅记录管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/ckform.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>借阅ID</th>
+        <th>用户</th>
+        <th>书籍</th>
+        <th>借阅时间</th>
+        <th>归还时间</th>
+        <th>借阅状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="borrow:${list}">
+        <td th:text="${borrow.id}"></td>
+        <td th:text="${borrow.userUsername}"></td>
+        <td th:text="${borrow.bookName}"></td>
+        <td th:text="${#dates.format(borrow.startTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#dates.format(borrow.endTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td>
+            <button type="button" class="btn btn-default disabled" disabled th:if="${borrow.status == 0}">待确认</button>
+            <button type="button" class="btn btn-success disabled" disabled th:if="${borrow.status == 1}">已借出</button>
+            <button type="button" class="btn btn-warning disabled" disabled th:if="${borrow.status == 2}">已归还</button>
+        </td>
+        <td>
+            <a type="button" class="btn btn-info" th:href="'/sysadmin/borrow/update?id=' + ${borrow.id}">修改</a>
+            <a type="button" class="btn btn-danger" th:href="'/sysadmin/borrow/delete?id=' + ${borrow.id}">删除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

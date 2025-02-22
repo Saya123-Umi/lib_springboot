@@ -71,7 +71,7 @@ public class BackController {
     }
 
     @GetMapping("/allow")
-    @Transactional // 添加事务注解
+    @Transactional
     public String allow(Integer id) {
         // 获取归还记录
         Back back = this.backService.getById(id);
@@ -79,15 +79,23 @@ public class BackController {
             throw new IllegalStateException("该申请已处理过");
         }
 
+        // 获取关联借阅记录
+        Borrow borrow = this.borrowService.getById(back.getBrid());
+
+        // 新增状态校验(核心修复)
+        if (borrow == null) {
+            throw new IllegalArgumentException("借阅记录不存在");
+        }
+        if (borrow.getStatus() != 3) { // 必须处于"归还中"状态
+            throw new IllegalStateException("无效的归还状态：" + borrow.getStatus());
+        }
+
         // 更新归还记录状态
         back.setStatus(1);
         this.backService.updateById(back);
 
-        // 获取关联借阅记录
-        Borrow borrow = this.borrowService.getById(back.getBrid());
-
-        // 关键修复点↓↓↓
-        borrow.setStatus(4); // 设置已归还状态
+        // 更新借阅记录状态
+        borrow.setStatus(4); // 已归还状态
         this.borrowService.updateById(borrow);
 
         // 使用原子操作更新库存
@@ -98,8 +106,6 @@ public class BackController {
 
         return "redirect:/back/adminList";
     }
-
-
     // 新增一键归还全部功能
     @GetMapping("/addAll")
     public String addAll(HttpSession session) {
