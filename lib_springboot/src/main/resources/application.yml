@@ -12,9 +12,13 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  session:  # 添加会话管理配置
+    store-type: jdbc  # 使用基于 JDBC 的会话存储
+    jdbc:
+      initialize-schema: always  # 自动初始化会话表（如果不存在）
   devtools:
     restart:
-          enabled: false
+      enabled: false
 
 server:
   port: 8182
@@ -27,5 +31,3 @@ mybatis-plus:
   mapper-locations: classpath:/com/southwind/mapper/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-# 关闭热重启功能

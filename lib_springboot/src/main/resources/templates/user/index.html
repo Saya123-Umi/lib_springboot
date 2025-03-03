@@ -6,6 +6,7 @@
     <link href="/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/oh-my-live2d@latest"></script>
 </head>
 <body>
 
@@ -50,5 +51,21 @@
         });
     });
 </script>
+<div id="live2d-container"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        OML2D.loadOml2d({
+            parentElement: document.getElementById("live2d-container"),
+            models: [
+                {
+                    path: "/models/朱元璋/朱元璋.model3.json",
+                    position: [-10, 20]
+                }
+            ]
+        });
+    });
+</script>
+
 </body>
 </html>
