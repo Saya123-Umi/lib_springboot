@@ -71,4 +71,33 @@ public class BackServiceImpl extends ServiceImpl<BackMapper, Back> implements Ba
 
         return backVOList; // 返回归还记录列表
     }
+    
+    @Override
+    public void allowAll() {
+        // 查询所有待归还的记录（假设 status=0 表示待归还）
+        QueryWrapper<Back> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", 0);
+        List<Back> backList = backMapper.selectList(queryWrapper);
+
+        // 遍历待归还记录，更新状态
+        for (Back back : backList) {
+            // 更新 Back 表状态（假设 status=1 表示已归还）
+            back.setStatus(1);
+            backMapper.updateById(back);
+
+            // 更新 Borrow 表状态（假设 status=4 表示已归还）
+            Borrow borrow = borrowMapper.selectById(back.getBrid());
+            if (borrow != null) {
+                borrow.setStatus(4);
+                borrowMapper.updateById(borrow);
+            }
+
+            // 更新 Book 表库存
+            Book book = bookMapper.selectById(borrow.getBid());
+            if (book != null) {
+                book.setNumber(book.getNumber() + 1); // 库存加 1
+                bookMapper.updateById(book);
+            }
+        }
+    }
 }

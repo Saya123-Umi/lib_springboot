@@ -78,24 +78,18 @@ public class SortController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id){
-        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
-        bookQueryWrapper.eq("sid", id);
-        List<Book> bookList = this.bookService.list(bookQueryWrapper);
-        for (Book book : bookList) {
-            QueryWrapper<Borrow> borrowQueryWrapper = new QueryWrapper<>();
-            borrowQueryWrapper.eq("bid", book.getId());
-            List<Borrow> borrowList = this.borrowService.list(borrowQueryWrapper);
-            for (Borrow borrow : borrowList) {
-                QueryWrapper<Back> queryWrapper = new QueryWrapper<>();
-                queryWrapper.eq("brid", borrow.getId());
-                this.backService.remove(queryWrapper);
-                this.borrowService.removeById(borrow.getId());
-            }
-            this.bookService.removeById(book.getId());
+    public String delete(@PathVariable("id") Integer id) {
+        // 检查是否有书籍属于该类别
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("sid", id);
+        if (bookService.count(queryWrapper) > 0) {
+            // 有书籍属于该类别，阻止删除操作
+            return "redirect:/sysadmin/sortList?error=该类别下还有书籍，无法删除！";
+        } else {
+            // 没有书籍属于该类别，执行删除操作
+            this.sortService.removeById(id);
+            return "redirect:/sysadmin/sortList";
         }
-        this.sortService.removeById(id);
-        return "redirect:/sysadmin/sortList";
     }
 }
 

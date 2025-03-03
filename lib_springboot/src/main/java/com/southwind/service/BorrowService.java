@@ -23,4 +23,7 @@ public interface BorrowService extends IService<Borrow> {
     List<BorrowVO> backList(Integer uid);
 
     List<AdminBorrowVO> adminBorrowList();
+    List<Borrow> findByUid(Integer uid);
+    void allowAll();
+    void notAllowAll();
 }

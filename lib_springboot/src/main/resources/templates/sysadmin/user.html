@@ -25,16 +25,16 @@
             }
         }
     </style>
-
 </head>
 <body>
 <form class="form-inline definewidth m20" action="/sysadmin/findByName" method="post">
     用户名称：
-    <input type="text" name="username" id="username"class="abc input-default" placeholder="用户姓名" value="">&nbsp;&nbsp;
+    <input type="text" name="username" id="username" class="abc input-default" placeholder="用户姓名" value="">&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
     <a type="button" class="btn btn-primary" href="/sysadmin/addUser">增加用户</a>&nbsp;&nbsp;
 </form>
-<table class="table table-bordered table-hover definewidth m10">
+
+<div th:if="${param.error}" th:text="${param.error}" class="alert alert-danger" role="alert"></div> <table class="table table-bordered table-hover definewidth m10">
     <thead>
     <tr>
         <th>用户名称</th>
@@ -48,11 +48,10 @@
         <td th:text="${user.username}"></td>
         <td th:text="${user.password}"></td>
         <td>
-            <a type="button" class="btn btn-success" th:href="'/user/findById/'+${user.id}">修改</a>
-            <a type="button" class="btn btn-danger" th:href="'/user/delete/'+${user.id}">删除</a>
+            <a type="button" class="btn btn-success" th:href="'/user/findById/' + ${user.id}">修改</a>
+            <a type="button" class="btn btn-danger" th:href="'/user/delete/' + ${user.id}">删除</a>
         </td>
     </tr>
 </table>
-
 </body>
 </html>

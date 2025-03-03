@@ -131,4 +131,9 @@ public class BackController {
 
         return "redirect:/back/list"; // 返回到借阅列表页面
     }
+    @GetMapping("/allowAll")
+    public String allowAll() {
+        backService.allowAll();
+        return "redirect:/back/adminList"; // 重定向回归还列表页面
+    }
 }

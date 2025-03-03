@@ -110,4 +110,32 @@ public class BorrowServiceImpl extends ServiceImpl<BorrowMapper, Borrow> impleme
         }
         return adminBorrowVOList;
     }
+    @Override
+    public List<Borrow> findByUid(Integer uid) {
+        return borrowMapper.findByUid(uid);
+    }
+    @Override
+    public void allowAll() {
+        QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", 0);
+        List<Borrow> borrowList = borrowMapper.selectList(queryWrapper);
+        for (Borrow borrow : borrowList) {
+            borrow.setStatus(1);
+            borrowMapper.updateById(borrow);
+        }
+    }
+
+    @Override
+    public void notAllowAll() {
+        QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", 0);
+        List<Borrow> borrowList = borrowMapper.selectList(queryWrapper);
+        for (Borrow borrow : borrowList) {
+            borrow.setStatus(2);
+            borrowMapper.updateById(borrow);
+            Book book = bookMapper.selectById(borrow.getBid());
+            book.setNumber(book.getNumber() + 1);
+            bookMapper.updateById(book);
+        }
+    }
 }

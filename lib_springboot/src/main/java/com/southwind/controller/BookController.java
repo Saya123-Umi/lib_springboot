@@ -161,13 +161,17 @@ public class BookController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
+        // 检查书籍是否有未归还的借阅记录
         QueryWrapper<Borrow> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("bid", id);
-
-        this.borrowService.remove(queryWrapper);
-
-        this.bookService.removeById(id);
-
-        return "redirect:/sysadmin/bookList";
+        queryWrapper.ne("status", 4); // 4 表示已归还
+        if (borrowService.count(queryWrapper) > 0) {
+            // 书籍有未归还的借阅记录，阻止删除操作
+            return "redirect:/sysadmin/bookList?error=该书籍有未归还的借阅记录，无法删除！";
+        } else {
+            // 书籍没有未归还的借阅记录，执行删除操作
+            this.bookService.removeById(id);
+            return "redirect:/sysadmin/bookList";
+        }
     }
 }

@@ -70,6 +70,16 @@ public class AdminController {
         this.bookService.updateById(book);
         return "redirect:/admin/borrowList";
     }
+    @GetMapping("/allowAll")
+    public String allowAll() {
+        borrowService.allowAll();
+        return "redirect:/admin/borrowList";
+    }
 
+    @GetMapping("/notAllowAll")
+    public String notAllowAll() {
+        borrowService.notAllowAll();
+        return "redirect:/admin/borrowList";
+    }
 }
 

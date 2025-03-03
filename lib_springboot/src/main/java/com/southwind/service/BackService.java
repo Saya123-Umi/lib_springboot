@@ -16,4 +16,5 @@ import java.util.List;
  */
 public interface BackService extends IService<Back> {
     List<BackVO> backList(); // 获取所有归还记录
+    void allowAll();
 }

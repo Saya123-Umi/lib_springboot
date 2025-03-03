@@ -12,6 +12,9 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  devtools:
+    restart:
+          enabled: false
 
 server:
   port: 8182
@@ -24,3 +27,5 @@ mybatis-plus:
   mapper-locations: classpath:/com/southwind/mapper/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 关闭热重启功能

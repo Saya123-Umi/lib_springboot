@@ -53,7 +53,8 @@
                     href="/sort/list">增加书籍</a>&nbsp;&nbsp;
     <input id="CurrentPage" type="hidden" name="currentPage" value="1" />
 </form>
-<table class="table table-bordered table-hover definewidth m10">
+
+<div th:if="${param.error}" th:text="${param.error}" class="alert alert-danger" role="alert"></div> <table class="table table-bordered table-hover definewidth m10">
     <thead>
     <tr>
         <th>书籍名称</th>
@@ -62,8 +63,7 @@
         <th>出版社</th>
         <th>版本</th>
         <th>书籍数量</th>
-        <th>封面</th> <!-- 添加图片列 -->
-        <th>操作</th>
+        <th>封面</th> <th>操作</th>
     </tr>
     </thead>
     <tr th:each="book:${list}">
@@ -75,13 +75,12 @@
         <td th:text="${book.number}"></td>
         <td>
             <img th:src="@{'/static/images/' + ${book.imagePath}}" alt="Book Image" class="book-image"/>
-        </td> <!-- 显示图片 -->
-        <td>
-            <a type="button" class="btn btn-success"
-               th:href="'/book/findById/'+${book.id}">修改</a>
-            <a type="button" class="btn btn-danger"
-               th:href="'/book/delete/'+${book.id}">删除</a>
-        </td>
+        </td> <td>
+        <a type="button" class="btn btn-success"
+           th:href="'/book/findById/'+${book.id}">修改</a>
+        <a type="button" class="btn btn-danger"
+           th:href="'/book/delete/'+${book.id}">删除</a>
+    </td>
     </tr>
 </table>
 <center>

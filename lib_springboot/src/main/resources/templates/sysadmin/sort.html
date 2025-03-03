@@ -41,6 +41,9 @@
         增加类别
     </a>
 </form>
+
+<div th:if="${param.error}" th:text="${param.error}" class="alert alert-danger" role="alert"></div>
+
 <table class="table table-bordered table-hover definewidth m10">
     <thead>
     <tr>
