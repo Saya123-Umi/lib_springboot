@@ -1,0 +1,18 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "丰川祥子.moc3",
+		"Textures": [
+			"丰川祥子.4096/texture_00.png"
+		],
+		"Physics": "丰川祥子.physics3.json",
+		"DisplayInfo": "丰川祥子.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		}
+	]
+}
